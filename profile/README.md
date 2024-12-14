@@ -1,4 +1,8 @@
 ## 🧙 Symfony-X
+
+### What!?
+
+Symfony-X is an attempt to make Symfony  THE web app FRAMEWORK for AI Development.
 <!--
 
 **Here are some ideas to get you started:**
