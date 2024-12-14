@@ -8,6 +8,9 @@ SYMFONY-X is an attempt to make Symfony THE FRAMEWORK FOR AI Development.
 
 Why not, for real!?
 
+### How!?
+
+Optimized AI (via Training, Fine Tuning, RAG (Graph), etc) for Symfony-X. It makes sense.
 <!--
 
 **Here are some ideas to get you started:**
