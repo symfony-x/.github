@@ -6,7 +6,11 @@ SYMFONY-X is an attempt to make Symfony THE FRAMEWORK FOR AI web app development
 
 ### Why!?
 
-Why not, for real!?
+Symfony is mature.
+
+Symfony is configurable.
+
+Symfony is extensible.
 
 ### How!?
 
