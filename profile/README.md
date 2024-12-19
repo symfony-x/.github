@@ -2,7 +2,7 @@
 
 ### What!?
 
-SYMFONY-X is an attempt to make Symfony THE FRAMEWORK FOR AI Development.
+SYMFONY-X is an attempt to make Symfony THE FRAMEWORK FOR AI web app development.
 
 ### Why!?
 
