@@ -19,6 +19,21 @@ Symfony is mature.
 ### How!?
 
 Optimized AI (via Training, Fine Tuning, RAG (Graph), etc) for Symfony LAST Stack. It makes sense.
+
+### When!?
+
+Plans are for three repos...
+
+symfony-x/symfony-x - super basic LAST Stack template
+
+symfony-x/symfony-x2 - forked from symfony-x, useful for websites 
+
+symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards.
+
+### Where!?
+
+Local, Executable, or Cloud (AWS)
+
 <!--
 
 **Here are some ideas to get you started:**
