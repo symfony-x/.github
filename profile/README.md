@@ -32,7 +32,7 @@ symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards.
 
 ### Where!?
 
-Local, Executable, or Cloud (AWS)
+Dev and Prod for local, Binary Executable, or Cloud (AWS).
 
 <!--
 
