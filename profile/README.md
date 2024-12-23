@@ -28,7 +28,7 @@ symfony-x/symfony-x - super basic LAST Stack template
 
 symfony-x/symfony-x2 - forked from symfony-x, useful for websites 
 
-symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards.
+symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards. AI development environment. (several weeks away)
 
 ### Where!?
 
