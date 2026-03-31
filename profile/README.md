@@ -22,18 +22,21 @@ Optimized AI (via Training, Fine Tuning, RAG (Graph), etc) for Symfony LAST Stac
 
 ### When!?
 
-Plans are for three repos...
+Plans are for three traditional and one AI driven Symfony-X repos...
 
 symfony-x/symfony-x - super basic LAST Stack template
 
 symfony-x/symfony-x2 - forked from symfony-x, useful for websites 
 
-symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards. AI development environment. (several weeks away)
+symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards. AI services included environment. 
+
+symfony-x/symfony-XL - Fully Automated Software Factory for Symfony web apps.
+
 
 ### Where!?
 
 <!-- Dev + Prod for local, Binary Executable, or Cloud (AWS). -->
-Development (local) or Production anywhere (local, binary exec, or cloud (AWS, etc.))
+Development (local) or Production anywhere (local, binary exec, or cloud (Google Cloud,AWS, etc.))
 <!--
 
 **Here are some ideas to get you started:**
