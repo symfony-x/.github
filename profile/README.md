@@ -22,7 +22,7 @@ Optimized AI (via Training, Fine Tuning, LoRAs for agets, RAG (Graph), etc) for 
 
 ### When!?
 
-These Three Repos are for Noobs, Education, and DIY developers that aren't fully DIY developers...
+#### These Three Repos are for Noobs, Education, and DIY developers that aren't fully DIY developers...
 
 symfony-x/symfony-x - super basic LAST Stack template
 
@@ -31,7 +31,7 @@ symfony-x/symfony-x2 - forked from symfony-x, useful for websites
 symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards. AI services included environment. 
 
 
-This is for developers that are either lazy, lack confidence, or are under extreme time constraints...
+#### This is for developers that are either lazy, lack confidence, or are under extreme time constraints...
 
 symfony-x/symfony-XL - Fully Automated Software Factory for Symfony web apps.
 
