@@ -2,7 +2,7 @@
 
 ### What!?
 
-SYMFONY-X is an attempt to make Symfony THE FRAMEWORK FOR AI web app development.
+SYMFONY-X is an attempt to make Symfony THE FRAMEWORK FOR AI driven web app development.
 
 ---
 
@@ -18,11 +18,11 @@ Symfony is mature.
 
 ### How!?
 
-Optimized AI (via Training, Fine Tuning, RAG (Graph), etc) for Symfony LAST Stack. It makes sense.
+Optimized AI (via Training, Fine Tuning, LoRAs for agets, RAG (Graph), etc) for Symfony LAST Stack coding. It makes sense.
 
 ### When!?
 
-Plans are for three traditional and one AI driven Symfony-X repos...
+These Three Repos are for Noobs, Education, and DIY developers that aren't fully DIY developers...
 
 symfony-x/symfony-x - super basic LAST Stack template
 
@@ -30,7 +30,11 @@ symfony-x/symfony-x2 - forked from symfony-x, useful for websites
 
 symfony-x/symfony-xxx - forked from symfony-x2, adds users and dashboards. AI services included environment. 
 
+
+This is for developers that are either lazy, lack confidence, or are under extreme time constraints...
+
 symfony-x/symfony-XL - Fully Automated Software Factory for Symfony web apps.
+
 
 
 ### Where!?
