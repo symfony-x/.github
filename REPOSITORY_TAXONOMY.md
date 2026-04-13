@@ -1,5 +1,3 @@
-# File: .github/REPOSITORY_TAXONOMY.md
-
 # Symfony-X Repository Taxonomy
 
 This document defines the repository structure, classification tiers, and governance policies for Symfony-X.
