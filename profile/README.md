@@ -230,4 +230,4 @@ They remain available for reference but should not be used for new projects.
 
 ## 🧭 Motto
 
-**Stay close to Symfony. Constrain where it matters. Eliminate slop.**
+**Stay close to Symfony. Constrain where it matters. Eliminate AI slop.**
