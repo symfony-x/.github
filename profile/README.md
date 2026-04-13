@@ -10,11 +10,12 @@
 
 Symfony-X aims to make Symfony the best platform for **AI-driven application development** by:
 
-* reducing architectural ambiguity
-* enforcing consistent patterns
-* providing generator-driven workflows
-* enabling modular, composable feature installation
-* keeping everything aligned with Symfony best practices
+- reducing architectural ambiguity
+- enforcing consistent patterns
+- providing generator-driven workflows
+- enabling modular, composable feature installation
+- delivering complete features with default UX
+- keeping everything aligned with Symfony best practices
 
 Symfony-X is not a new framework.
 
@@ -26,221 +27,106 @@ It is:
 
 ## 🧠 Core Principles
 
-* **Symfony first** — follow official best practices by default
-* **LAST stack** — HTML-first, server-driven UI
-* **Explicit over magical** — no hidden lifecycle ownership
-* **Generators over guesswork** — CLI-driven development
-* **Composable features** — install capabilities via packages
-* **AI-friendly structure** — predictable, machine-legible architecture
+- **Symfony first** — follow official best practices by default
+- **LAST stack** — HTML-first, server-driven UI (Live, AssetMapper, Stimulus, Turbo)
+- **Tailwind baseline** — consistent UI foundation across all features
+- **Explicit over magical** — no hidden lifecycle ownership
+- **Generators over guesswork** — CLI-driven development
+- **Feature modules over fragments** — install complete systems, not partial capabilities
+- **AI-friendly structure** — predictable, machine-legible architecture
 
 ---
 
 ## 🧱 Platform Architecture
 
-Symfony-X is built from three layers:
+Symfony-X is built from two primary layers:
 
-### 1. Skeleton (Base Application)
+### 1. Foundation (Platform Layer)
 
-👉 `symfony-x/skeleton`
+Defines how Symfony-X works. Mostly invisible to Application Users.
 
-The canonical starting point.
+- symfony-x/skeleton
+- symfony-x/ui
+- symfony-x/maker
+- symfony-x/dev-tools
+- symfony-x/recipes
+
+---
+
+### 2. Feature Modules (Installable Features)
+
+Install complete, working feature systems with default UX.
+
+- symfony-x/user
+- symfony-x/user-oauth
+- symfony-x/admin
+
+Future modules may include AI, billing, async, and realtime capabilities.
+
+---
+
+## 🧩 Feature Module Philosophy
+
+Each Feature Module MUST:
+
+- be installable independently
+- provide a complete working feature
+- include backend, config, routes, UI, and default UX
+- include recipe automation
+
+No half-features.
+
+---
+
+## 🧱 Skeleton
+
+symfony-x/skeleton is the canonical starting point.
 
 Includes:
+- Symfony 8
+- LAST stack
+- Tailwind
+- dev tooling
 
-* Symfony 8 baseline
-* AssetMapper, Stimulus, Turbo, Tailwind
-* minimal Docker setup
-* Symfony-X constitution and policies
-* zero optional product features
-
----
-
-### 2. Packages (Features)
-
-Install capabilities as needed:
-
-* `symfony-x/ui` → UI components, form theme, Stimulus wrappers
-* `symfony-x/maker` → generators and scaffolding
-* `symfony-x/doctrine-pack` → database support
-* `symfony-x/async-pack` → Messenger-based async workflows
-* `symfony-x/mercure-pack` → realtime updates
-* `symfony-x/auth-pack` → authentication and users
-* `symfony-x/dashboard-pack` → authenticated user dashboard
-* `symfony-x/oauth-pack` → optional OAuth/social login
-* `symfony-x/user-system-pack` → combined auth + dashboard (+ optional OAuth)
-* `symfony-x/admin-pack` → internal/admin tooling (optional)
-* `symfony-x/ai-pack` → AI integrations (optional)
-
-> Features are installed intentionally — not baked into the base.
+Excludes:
+- Doctrine
+- user system
+- business features
 
 ---
 
-### 3. Recipes (Automation)
+## 🔁 Recipes
 
-👉 `symfony-x/recipes`
+symfony-x/recipes automates installation:
 
-Symfony Flex recipes automate installation:
+- config
+- routes
+- templates
+- env vars
 
-* config wiring
-* environment variables
-* template setup
-* asset registration
-* Docker Compose service additions
-
-> Recipes install infrastructure. Generators create application code.
+Recipes configure packages. Generators create code.
 
 ---
 
-## 🧩 UI Strategy
+## 📦 Installation
 
-👉 `symfony-x/ui`
-
-Symfony-X defines a **stable UI grammar**:
-
-* Twig Components as the public API
-* Stimulus for browser behavior
-* Turbo-compatible lifecycle
-* Symfony Forms with a consistent theme
-
-Flowbite is used internally **as an implementation detail**, not as the public API.
-
-> Apps depend on Symfony-X UI — not on Flowbite directly.
-
----
-
-## ⚙️ Generators
-
-👉 `symfony-x/maker`
-
-Symfony-X provides CLI-driven scaffolding:
-
-```bash
-php bin/console app:make:component
-php bin/console app:make:crud
-php bin/console app:make:async-flow
-php bin/console app:make:widget-wrapper
-```
-
-Generators ensure:
-
-* consistent structure
-* predictable output
-* reduced AI ambiguity
-
----
-
-## 🐳 Local Development
-
-Symfony-X uses Docker Compose by default.
-
-Feature packages may extend `compose.yaml` via recipes:
-
-* database
-* Mercure
-* queues
-* mail services
-* optional AI infrastructure
-
-All changes are:
-
-* additive
-* predictable
-* scoped to the feature
-
----
-
-## 📦 Installation Model
-
-Start with the base:
-
-```bash
 composer create-project symfony-x/skeleton my_app
 cd my_app
-```
 
-Then add features:
-
-```bash
-composer require symfony-x/ui
-composer require symfony-x/doctrine-pack
-composer require symfony-x/async-pack
-composer require symfony-x/user-system-pack
-```
-
-Symfony Flex recipes handle setup automatically.
+composer require symfony-x/user
+composer require symfony-x/user-oauth
+composer require symfony-x/admin
 
 ---
 
-## 🧭 Project Philosophy
+## 🧠 Terminology
 
-Symfony-X replaces:
-
-❌ multiple starter templates
-❌ forked “tiers” of apps
-❌ copy-paste architecture decisions
-
-with:
-
-✅ one canonical base
-✅ composable feature modules
-✅ consistent installation via recipes
-✅ predictable generation via CLI
-
----
-
-## 📚 Existing Repositories
-
-The following repositories represent earlier exploration stages:
-
-* `symfony-x`
-* `symfony-x2`
-* `symfony-xxx`
-
-These are being **phased out** in favor of:
-
-> **one skeleton + modular packages**
-
-They remain available for reference but should not be used for new projects.
-
----
-
-## 🏭 Symfony-XL
-
-👉 `symfony-x/symfony-XL`
-
-A separate project focused on:
-
-* automation
-* orchestration
-* AI-driven software generation
-
-This is **not part of the core runtime platform**, but builds on top of Symfony-X.
-
----
-
-## 🧠 Why This Approach Works
-
-By constraining the stack and enforcing structure:
-
-* AI produces more consistent code
-* architecture becomes predictable
-* onboarding becomes faster
-* maintenance becomes simpler
-
-Symfony-X turns Symfony into:
-
-> **a constrained development language, not just a framework**
+- Developer → builds the app
+- Application User → uses the app
+- User Entity → represents users in code
 
 ---
 
 ## 🏁 Status
 
-🚧 Active development
-⚠️ APIs and structure may evolve
-🧪 Experimental but grounded in Symfony best practices
-
----
-
-## 🧭 Motto
-
-**Stay close to Symfony. Constrain where it matters. Eliminate slop.**
+Active development.
