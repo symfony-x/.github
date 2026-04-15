@@ -10,11 +10,11 @@ It is the **source of truth** for how Symfony-X systems are designed, built, and
 
 The `.github` repository exists to:
 
-- define architecture and system design  
-- enforce consistency across all repositories  
-- standardize terminology and constraints  
-- govern package development and composition  
-- enable deterministic and AI-compatible workflows  
+- define architecture and system design
+- enforce consistency across all repositories
+- standardize terminology and constraints
+- govern package development and composition
+- enable deterministic and AI-compatible workflows
 
 All Symfony-X repositories must align with these documents.
 
@@ -27,20 +27,21 @@ All Symfony-X repositories must align with these documents.
 #### `ARCHITECTURE.md`
 Defines the full system architecture:
 
-- layer model (Foundation, Identity, Features, Governance)  
-- dependency direction rules  
-- separation of concerns  
-- application vs control-plane boundaries  
+- layer model (Foundation, Identity, Features, Governance)
+- dependency direction rules
+- separation of concerns
+- application vs control-plane boundaries
+- SXUC as the async UI identity for UI-first applications
 
 ---
 
 #### `TERMINOLOGY.md`
 Defines the canonical language of the system:
 
-- foundation, identity, feature  
-- Maker, command, intent  
-- Buffer, control plane, MCP  
-- application vs governance concepts  
+- foundation, identity, feature
+- Maker, command, intent
+- Buffer, control plane, MCP
+- SXUC, async UX, immediate/deferred update model
 
 All documentation and code must use these terms consistently.
 
@@ -49,10 +50,11 @@ All documentation and code must use these terms consistently.
 #### `CONSTRAINTS.md`
 Defines **non-negotiable system rules**:
 
-- what is allowed and forbidden  
-- dependency restrictions  
-- generation requirements  
-- identity and feature boundaries  
+- what is allowed and forbidden
+- dependency restrictions
+- generation requirements
+- identity and feature boundaries
+- SXUC runtime/preset boundary rules
 
 This is the primary guard against architectural drift.
 
@@ -63,22 +65,24 @@ This is the primary guard against architectural drift.
 #### `PACKAGE_GUIDELINES.md`
 Defines how Symfony-X packages must be built:
 
-- package structure  
-- dependency rules  
-- configuration design  
-- testing requirements  
-- integration patterns  
+- package structure
+- dependency rules
+- configuration design
+- testing requirements
+- integration patterns
+- SXUC package boundary guidance
 
 ---
 
 #### `MAKER_CONTRACT.md`
 Defines how all Maker commands must behave:
 
-- deterministic generation rules  
-- naming conventions  
-- file placement rules  
-- idempotency requirements  
-- AI interaction constraints  
+- deterministic generation rules
+- naming conventions
+- file placement rules
+- idempotency requirements
+- AI interaction constraints
+- async-aware SXUC scaffolding requirements
 
 ---
 
@@ -87,10 +91,11 @@ Defines how all Maker commands must behave:
 #### `COMMAND_MAP.md`
 Defines how **intent becomes commands**:
 
-- intent classification  
-- package ownership resolution  
-- command selection rules  
-- installation vs generation logic  
+- intent classification
+- package ownership resolution
+- command selection rules
+- installation vs generation logic
+- SXUC-specific intent mapping
 
 This is the translation layer between requests and actions.
 
@@ -99,10 +104,10 @@ This is the translation layer between requests and actions.
 #### `GENERATION_PIPELINE.md`
 Defines the **execution pipeline**:
 
-- intent → classification → package → command  
-- validation before and after generation  
-- deterministic structure creation  
-- audit and traceability  
+- intent → classification → package → command
+- validation before and after generation
+- deterministic structure creation
+- audit and traceability
 
 All structural changes must pass through this pipeline.
 
@@ -113,11 +118,11 @@ All structural changes must pass through this pipeline.
 #### `BUFFER_ARCHITECTURE.md`
 Defines the Buffer system:
 
-- control-plane responsibilities  
-- validation engine  
-- command orchestration  
-- AI agent coordination (MCP)  
-- audit and intent tracking  
+- control-plane responsibilities
+- validation engine
+- command orchestration
+- AI agent coordination (MCP)
+- audit and intent tracking
 
 Buffer governs the ecosystem externally.
 
@@ -128,11 +133,12 @@ Buffer governs the ecosystem externally.
 #### `ARCHITECTURE_ENFORCEMENT.md`
 Defines how rules are enforced:
 
-- Dev Tools (local enforcement)  
-- Makers & pipeline (structural enforcement)  
-- Buffer (global enforcement)  
-- CI/CD integration  
-- violation handling  
+- Dev Tools (local enforcement)
+- Makers & pipeline (structural enforcement)
+- Buffer (global enforcement)
+- CI/CD integration
+- violation handling
+- SXUC enforcement implications
 
 This ensures architecture is enforced automatically.
 
@@ -143,10 +149,21 @@ This ensures architecture is enforced automatically.
 #### `REPOSITORY_TAXONOMY.md`
 Defines repository structure and policy:
 
-- repository tiers (Core, Identity, Feature, Product)  
-- ownership and review rules  
-- approval requirements  
-- creation guidelines  
+- repository tiers (Core, Identity, Feature, Product)
+- ownership and review rules
+- approval requirements
+- creation guidelines
+- SXUC ownership boundary in Tier B identity
+
+---
+
+### Learning & Operation
+
+#### `READ_ORDER.md`
+Defines how to learn the system in the correct sequence.
+
+#### `OPERATING_MODES.md`
+Defines workflow policy modes while preserving architectural invariants.
 
 ---
 
@@ -154,10 +171,16 @@ Defines repository structure and policy:
 
 Symfony-X operates as a constrained system:
 
-- **Foundation** → minimal baseline  
-- **Identity** → defines application nature  
-- **Features** → add capability  
-- **Governance** → enforces correctness  
+- **Foundation** → minimal baseline
+- **Identity** → defines application nature
+- **Features** → add capability
+- **Governance** → enforces correctness
+
+For UI-first applications:
+
+- **SXUC** defines governed async UI identity
+- **Turbo** handles immediate interaction flow
+- **Mercure** handles deferred state propagation
 
 Structural changes must follow:
 
@@ -169,10 +192,10 @@ Intent → Command → Pipeline → Validation → Audit
 
 Rules are enforced through:
 
-- Maker commands (structure control)  
-- Dev Tools (static validation)  
-- Recipes (controlled installation)  
-- Buffer (global governance)  
+- Maker commands (structure control)
+- Dev Tools (static validation)
+- Recipes (controlled installation)
+- Buffer (global governance)
 
 Manual structural changes are not considered valid.
 
@@ -182,11 +205,11 @@ Manual structural changes are not considered valid.
 
 All Symfony-X repositories must:
 
-- adhere to these documents  
-- follow defined dependency rules  
-- use Makers for structural generation  
-- pass validation requirements  
-- maintain alignment with architecture  
+- adhere to these documents
+- follow defined dependency rules
+- use Makers for structural generation
+- pass validation requirements
+- maintain alignment with architecture
 
 ---
 
@@ -196,16 +219,16 @@ Changes to this repository affect the entire ecosystem.
 
 Requirements:
 
-- clear justification  
-- alignment with existing architecture  
-- consideration of downstream impact  
-- approval from maintainers  
+- clear justification
+- alignment with existing architecture
+- consideration of downstream impact
+- approval from maintainers
 
 Architectural changes must not introduce:
 
-- ambiguity  
-- implicit behavior  
-- non-determinism  
+- ambiguity
+- implicit behavior
+- non-determinism
 
 ---
 
