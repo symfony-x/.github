@@ -1,233 +1,258 @@
 # Symfony-X
 
-**Symfony-X is an opinionated development platform for building modern web applications with Symfony 8, the LAST stack, and AI-assisted workflows.**
+> A constrained, composable architecture for building Symfony 8 applications.
 
-> Stay close to Symfony. Constrain where it matters. Eliminate slop.
+Symfony-X is not a starter kit.
 
----
-
-## 🚀 Vision
-
-Symfony-X aims to make Symfony the best platform for **AI-driven application development** by:
-
-* reducing architectural ambiguity
-* enforcing consistent patterns
-* providing generator-driven workflows
-* enabling modular, composable feature installation
-* delivering complete features with default UX
-* keeping everything aligned with Symfony best practices
-
-Symfony-X is not a new framework.
-
-It is:
-
-> **Symfony, constrained and structured for speed, consistency, and AI reliability.**
+It is a **governed ecosystem** designed to eliminate architectural drift and enable deterministic, scalable application development — for both humans and AI systems.
 
 ---
 
-## 🧠 Core Principles
+## What is Symfony-X?
 
-* **Symfony first** — follow official best practices by default
-* **LAST stack** — HTML-first, server-driven UI
-* **Tailwind baseline** — consistent UI system across all features
-* **Explicit over magical** — no hidden lifecycle ownership
-* **Generators over guesswork** — CLI-driven development
-* **Composable features** — install complete feature systems
-* **AI-friendly structure** — predictable, machine-legible architecture
+Symfony-X provides a **foundation-first approach** to building applications:
 
----
-
-## 🧱 Platform Architecture
-
-Symfony-X is built from two primary layers:
-
-### 1. Foundation (Platform Layer)
-
-👉 `symfony-x/skeleton`
-
-Defines how Symfony-X works. Mostly invisible to Application Users.
-
-Includes:
-
-* Symfony 8 baseline
-* AssetMapper, Stimulus, Turbo, Tailwind
-* minimal Docker setup
-* Symfony-X policies and conventions
-* zero product features
-
-Other foundation repositories:
-
-* `symfony-x/ui` → UI contract (Twig components, Tailwind, Stimulus patterns)
-* `symfony-x/maker` → generators and deterministic scaffolding
-* `symfony-x/dev-tools` → standardized development tooling
-* `symfony-x/recipes` → Symfony Flex automation
+- Start from a **true minimal Symfony baseline**
+- Explicitly define your application's **nature**
+- Add **composable feature modules**
+- Generate code through **deterministic commands**
+- Enforce structure through **tooling and governance**
+- Optionally integrate with a **control-plane system (Buffer)**
 
 ---
 
-### 2. Feature Modules (Installable Features)
+## Core Principles
 
-Install complete, working feature systems with default UX.
+### 1. Foundation First
 
-Examples:
+Start with:
 
-* `symfony-x/user` → internal user system (auth, persistence, account UI)
-* `symfony-x/user-oauth` → OAuth/social login integration
-* `symfony-x/admin` → internal/admin tooling
+- https://github.com/symfony-x/skeleton
 
-Future modules may include:
+This is a **barebones Symfony 8 application**.
 
-* AI integrations
-* billing systems
-* async/realtime capabilities
+It includes:
+- minimal framework setup  
+- Docker/dev environment  
 
-> Features are installed intentionally — not baked into the base.
+It excludes:
+- UI stack  
+- database  
+- authentication  
+- business logic  
 
----
-
-## 🧩 Feature Module Philosophy
-
-Each Feature Module provides:
-
-* backend wiring
-* configuration
-* routes
-* templates / components
-* Tailwind-based UI
-* default UX flows
-* recipe automation
-
-> No half-features. No scaffolding-only packages.
+Nothing is assumed.
 
 ---
 
-## 🔁 Recipes (Automation)
+### 2. Explicit Application Identity
 
-👉 `symfony-x/recipes`
+Define what your application *is*:
 
-Symfony Flex recipes automate installation:
+- https://github.com/symfony-x/ui → UI-first (LAST stack)  
+- https://github.com/symfony-x/api → API-first / headless  
+- https://github.com/symfony-x/mcp → AI-first / MCP-enabled  
 
-* config wiring
-* environment variables
-* template setup
-* asset registration
-* Docker Compose extensions
-
-> Recipes configure packages. Generators create application code.
+Identity is **not implicit**. It is explicitly installed.
 
 ---
 
-## 🧩 UI Strategy
+### 3. Composable Feature Modules
 
-👉 `symfony-x/ui`
+Add functionality through bounded packages:
 
-Symfony-X defines a **stable UI grammar**:
+- https://github.com/symfony-x/user  
+- https://github.com/symfony-x/dashboard  
+- https://github.com/symfony-x/admin  
+- https://github.com/symfony-x/user-oauth  
+- https://github.com/symfony-x/oauth-server  
 
-* Twig Components as the public API
-* Stimulus for browser behavior
-* Turbo-compatible lifecycle
-* Symfony Forms with a consistent theme
-* Tailwind as the design system
-
-> Apps depend on Symfony-X UI — not on specific UI libraries.
-
----
-
-## ⚙️ Generators
-
-👉 `symfony-x/maker`
-
-Symfony-X provides CLI-driven scaffolding:
-
-php bin/console make:x-feature
-php bin/console make:x-entity
-php bin/console make:x-component
-
-Generators ensure:
-
-* consistent structure
-* predictable output
-* reduced AI ambiguity
+Each module:
+- declares dependencies explicitly  
+- does not redefine application structure  
+- integrates through recipes and contracts  
 
 ---
 
-## 🐳 Local Development
+### 4. Deterministic Code Generation
 
-Symfony-X uses Docker Compose by default.
+- https://github.com/symfony-x/maker  
+- https://github.com/symfony-x/dev-tools  
+- https://github.com/symfony-x/recipes  
 
-Feature Modules may extend `compose.yaml` via recipes:
+Symfony-X replaces freeform scaffolding with:
 
-* database
-* queues
-* realtime services
-* mail services
-* optional AI infrastructure
+- **deterministic maker commands**
+- **package-owned generators**
+- **quality-locked output (PHPStan, CS rules)**
 
-All changes are:
-
-* additive
-* predictable
-* scoped to the feature
+AI agents and developers use the same system.
 
 ---
 
-## 📦 Installation Model
+### 5. Control Plane (Buffer)
 
-Start with the base:
+- https://github.com/symfony-x/buffer  
 
-composer create-project symfony-x/skeleton my_app
-cd my_app
+Buffer is a **separate system**, not part of your app.
 
-Then add features:
+It acts as a **control plane** for:
 
-composer require symfony-x/user
-composer require symfony-x/user-oauth
-composer require symfony-x/admin
-
-Symfony Flex recipes handle setup automatically.
-
----
-
-## 🧭 Project Philosophy
-
-Symfony-X replaces:
-
-❌ multiple starter templates  
-❌ fragmented architecture decisions  
-❌ copy-paste feature implementation  
-
-with:
-
-✅ one canonical base  
-✅ installable feature modules  
-✅ consistent installation via recipes  
-✅ predictable generation via CLI  
+- compatibility validation  
+- product intent tracking  
+- architectural governance  
+- AI agent coordination (MCP)  
+- generation approval workflows  
 
 ---
 
-## 📚 Existing Repositories
+## Architecture Model
 
-The following repositories represent earlier exploration stages:
+Symfony-X enforces separation between:
 
-* `symfony-x`
-* `symfony-x2`
-* `symfony-xxx`
+- **Foundation** → how an app starts  
+- **Nature** → what kind of app it is  
+- **Features** → what the app does  
+- **Governance** → how the system evolves  
 
-These are being **phased out** in favor of:
-
-> **one skeleton + feature modules**
-
-They remain available for reference but should not be used for new projects.
-
----
-
-## 🏁 Status
-
-🚧 Active development  
-⚠️ APIs and structure may evolve  
-🧪 Experimental but grounded in Symfony best practices  
+This separation is the key to:
+- long-term maintainability  
+- AI-assisted development  
+- reproducible architectures  
 
 ---
 
-## 🧭 Motto
+## Why Symfony-X?
 
-**Stay close to Symfony. Constrain where it matters. Eliminate AI slop.**
+### No Hidden Assumptions
+You choose everything. Nothing is preloaded.
+
+---
+
+### No Structural Drift
+Architecture is enforced through:
+- package boundaries  
+- recipes  
+- maker commands  
+- dev tooling  
+- Buffer validation  
+
+---
+
+### AI-Native Development
+
+Instead of generating arbitrary code, agents:
+
+1. determine intent  
+2. map to commands  
+3. generate deterministic structure  
+4. refine within constraints  
+
+---
+
+### Composable System Design
+
+Applications are built by composing:
+
+- identity  
+- features  
+- integrations  
+
+Not by modifying a monolithic starter.
+
+---
+
+## Getting Started
+
+Clone the skeleton:
+
+    git clone https://github.com/symfony-x/skeleton my-app
+    cd my-app
+
+Choose your identity:
+
+    composer require symfony-x/ui
+    # or
+    composer require symfony-x/api
+
+Add features:
+
+    composer require symfony-x/user
+
+---
+
+## Repository Structure
+
+Symfony-X is organized into strict repository tiers:
+
+### Core (Foundation & Tooling)
+- `skeleton`
+- `recipes`
+- `maker`
+- `dev-tools`
+
+### Identity (Application Nature)
+- `ui`
+- `api`
+- `mcp`
+
+### Features (Composable Modules)
+- `user`
+- `dashboard`
+- `admin`
+- `user-oauth`
+- `oauth-server`
+
+### Product (Control Plane)
+- `buffer`
+
+---
+
+## Governance
+
+Symfony-X enforces strict policies:
+
+- core repositories are **collaborator-controlled**
+- architecture changes require **review and alignment**
+- packages must declare **explicit dependencies**
+- deterministic generation replaces freeform scaffolding
+
+See:
+- `.github/REPOSITORY_TAXONOMY.md`
+- `.github/ARCHITECTURE.md`
+
+---
+
+## Contribution Model
+
+We prioritize:
+
+- architectural integrity over speed  
+- clarity over flexibility  
+- deterministic systems over convention drift  
+
+Most repositories:
+- do not accept anonymous PRs  
+- require structured review  
+- must align with taxonomy and architecture  
+
+Start with discussions before proposing changes.
+
+---
+
+## Roadmap
+
+- stabilize core contracts (`skeleton`, `recipes`, `maker`, `dev-tools`)
+- finalize identity layer (`ui`, `api`, `mcp`)
+- expand feature modules
+- develop Buffer as control-plane
+- enable AI-native development workflows
+
+---
+
+## Guiding Principle
+
+> Symfony-X is a **constrained system for building unconstrained applications**.
+
+You control what gets installed.  
+Symfony-X controls how it fits together.
