@@ -1,367 +1,419 @@
-# Symfony-X Terminology Specification
+# Symfony-X Terminology
 
-This document defines the canonical terminology for Symfony-X.
+## Purpose
 
-> Goal: eliminate ambiguity, enforce consistency, and improve determinism for developers and AI-assisted workflows.
+This document defines the canonical terminology used throughout the Symfony-X ecosystem.
 
----
+All documentation, packages, and tools must use these terms consistently to:
 
-# 1. Core Actors
-
-## Developer
-
-A **Developer** is a person building an application using Symfony-X.
-
-- installs packages
-- writes code
-- configures the system
-
-Never refer to Developers as “Users”.
+- avoid ambiguity  
+- enforce architectural clarity  
+- support AI-driven workflows  
+- maintain shared understanding across the ecosystem  
 
 ---
 
-## Application User
+## Core Concepts
 
-An **Application User** is a person using the application built with Symfony-X.
+### Foundation
+
+The minimal starting point for any Symfony-X application.
+
+Defined by:
+- `symfony-x/skeleton`
+
+Characteristics:
+- contains only baseline Symfony setup  
+- includes no application assumptions  
+- excludes UI, database, authentication, and features  
+
+---
+
+### Identity
+
+Defines the **nature of an application**.
 
 Examples:
-- customer
-- admin user
-- end-user of the app
+- UI-first application  
+- API-first application  
+- AI/MCP-enabled application  
+
+Implemented by:
+- `symfony-x/ui`
+- `symfony-x/api`
+- `symfony-x/mcp`
+
+Key rule:
+- identity must be explicitly installed  
 
 ---
 
-## User Entity
+### Feature Module
 
-The **User Entity** is the internal representation of an Application User in code.
+A bounded package that provides application capability.
 
 Examples:
-- `App\Entity\User`
-- database records
+- user system  
+- dashboard  
+- admin interface  
+- OAuth integration  
+
+Characteristics:
+- composable  
+- dependency-aware  
+- domain-scoped  
 
 ---
 
-# 2. Identity & Authentication
+### Governance
 
-## Account
+The system that enforces architectural correctness and consistency.
 
-**Account** is the UI-facing term for an Application User.
-
-Use in:
-- UI (“My Account”)
-- documentation when discussing user-facing concepts
+Includes:
+- `dev-tools` (static analysis, linting)  
+- `maker` (deterministic generation)  
+- `recipes` (install-time wiring)  
+- `Buffer` (control plane)  
 
 ---
 
-## External Identity
+### Control Plane
 
-An **External Identity** is identity data provided by an external system.
+A system that governs application structure and evolution externally.
+
+In Symfony-X:
+- implemented by Buffer  
+
+Responsibilities:
+- validation  
+- orchestration  
+- intent tracking  
+- AI coordination  
+
+---
+
+## Structural Terms
+
+### Package
+
+A Composer-distributed unit of functionality within Symfony-X.
+
+Types:
+- identity package  
+- feature package  
+- cross-cutting package  
+
+---
+
+### Repository
+
+A GitHub repository containing one primary package or product.
+
+Types:
+- package repository  
+- product repository  
+
+---
+
+### Product
+
+A standalone system with its own runtime and lifecycle.
+
+Example:
+- Buffer  
+
+---
+
+### Layer
+
+A level in the Symfony-X architecture model.
+
+Layers:
+1. Foundation  
+2. Identity  
+3. Features  
+4. Governance  
+
+---
+
+### Dependency Direction
+
+The allowed flow of dependencies between layers.
+
+Valid direction:
+Foundation → Governance → Identity → Features
+
+Invalid:
+- Feature → Foundation inversion  
+- Identity → Feature  
+- Core → Feature  
+
+---
+
+## Generation Terms
+
+### Maker
+
+A deterministic command that generates application structure.
 
 Examples:
-- Google account
-- GitHub account
+- `make:x-user`  
+- `make:x-dashboard-widget`  
+
+Key properties:
+- predictable output  
+- package-owned  
+- structure-enforcing  
 
 ---
 
-## OAuth Provider
+### Deterministic Generation
 
-An **OAuth Provider** is a third-party system that authenticates users.
+The process of creating code where identical inputs produce identical outputs.
+
+Key requirement:
+- no randomness or hidden variation  
+
+---
+
+### Structural Code
+
+Code that defines application shape.
 
 Examples:
-- Google
-- GitHub
+- entities  
+- services  
+- controllers  
+- configuration structure  
+
+Must be generated via Makers.
 
 ---
 
-## OAuth Account
+### Behavioral Code
 
-An **OAuth Account** links an External Identity to a User Entity.
-
----
-
-## Auth Session
-
-An **Auth Session** is the authenticated session managed by Symfony Security.
-
----
-
-# 3. Architecture & Packaging
-
-## Package
-
-A **Package** is a Composer package.
+Code that defines logic within an existing structure.
 
 Examples:
-- `symfony-x/user`
-- `symfony-x/user-oauth`
+- business rules  
+- conditionals  
+- validation logic  
+
+May be written or refined manually or by AI.
 
 ---
 
-## Bundle
+### Command
 
-A **Bundle** is a Symfony-specific code structure.
+An executable action that produces or modifies structure.
 
-This is an internal implementation detail, not a product concept.
+Types:
+- Maker command  
+- install/setup command  
+- validation command  
 
 ---
 
-## Feature Module
+### Command Map
 
-A **Feature Module** is a Symfony-X concept:
+The mapping between **intent and commands**.
 
-> an installable package that provides a complete feature with backend and UI.
+Defines how requests become executable operations.
+
+---
+
+## Intent & AI Terms
+
+### Intent
+
+A declared desired outcome.
 
 Examples:
-- `symfony-x/user`
-- `symfony-x/admin`
+- “add user login”  
+- “create dashboard widget”  
+- “enable OAuth”  
 
 ---
 
-## Starter Stack
+### Intent Resolution
 
-A **Starter Stack** is a curated set of Feature Modules.
+The process of translating intent into:
 
-Examples:
-- `symfony-x/starter-saas`
-- `symfony-x/starter-user`
-
----
-
-# 4. Security & Authorization
-
-## Security Role
-
-A **Security Role** is used by Symfony Security.
-
-Examples:
-- `ROLE_USER`
-- `ROLE_ADMIN`
+- package ownership  
+- command selection  
 
 ---
 
-## Permission
+### Intent Category
 
-A **Permission** represents business-level authorization.
+Classification of intent.
 
-It is not tied directly to Symfony roles and is used in domain logic.
-
----
-
-# 5. Async & Messaging
-
-## Message
-
-A **Message** is a unit of work handled by Symfony Messenger.
+Types:
+- foundation  
+- identity  
+- feature  
+- structural  
+- governance  
 
 ---
 
-## Async Job
+### AI Agent
 
-An **Async Job** is a Message processed asynchronously.
+An automated system that interacts with Symfony-X through commands.
 
----
-
-## Worker
-
-A **Worker** is a process that consumes Messages.
-
----
-
-## Domain Event
-
-A **Domain Event** represents something that happened in the business domain.
+Rules:
+- must map intent before acting  
+- must use Makers for structure  
+- must not invent architecture  
 
 ---
 
-# 6. Frontend & Interaction
+### MCP (Model Context Protocol)
 
-## UI State
+A structured interface for AI-agent interaction.
 
-**UI State** refers to the state of the frontend.
-
----
-
-## Entity State
-
-**Entity State** refers to the state of domain objects.
+In Symfony-X:
+- used by Buffer  
+- used by `symfony-x/mcp`  
 
 ---
 
-## UI Event
+## Buffer-Specific Terms
 
-A **UI Event** is a frontend interaction.
+### Buffer
 
-Examples:
-- click
-- form submit
+The Symfony-X control-plane system.
 
----
-
-# 7. Networking & Integration
-
-## HTTP Client
-
-Used for making HTTP requests.
+Responsibilities:
+- validation  
+- orchestration  
+- intent tracking  
+- AI coordination  
 
 ---
 
-## OAuth Client
+### Intent Store
 
-Credentials or configuration used to communicate with an OAuth Provider.
-
----
-
-## Browser
-
-The frontend runtime environment.
+The Buffer subsystem that tracks declared goals and desired system state.
 
 ---
 
-# 8. Tokens
+### Package Graph
 
-All tokens must be explicitly qualified.
-
-Use:
-- CSRF Token
-- Access Token
-- Refresh Token
-- API Token
-- Reset Token
-
-Never use “token” alone.
+A representation of installed packages and their relationships.
 
 ---
 
-# 9. Sessions & Context
+### Validation Engine
 
-## Browser Session
-
-The session managed by the browser.
+A Buffer subsystem that enforces architecture rules.
 
 ---
 
-## Auth Session
+### Command Orchestrator
 
-The authenticated session.
-
----
-
-## Context
-
-Context must always be qualified.
-
-Examples:
-- Security Context
-- Request Context
-- AI Context
+A Buffer subsystem that sequences and executes commands.
 
 ---
 
-# 10. AI Concepts
+### Audit Log
 
-## AI Agent
-
-An **AI Agent** is an autonomous system component.
+A record of all structural actions taken.
 
 ---
 
-## Worker
+## Application Terms
 
-A **Worker** is not an AI Agent.
+### Application Plane
 
-- Worker = executes jobs
-- AI Agent = makes decisions
+The running Symfony application.
 
----
-
-# 11. Environment
-
-## App Environment
-
-Defined by `APP_ENV`.
-
-Examples:
-- `dev`
-- `prod`
+Responsibilities:
+- execute business logic  
+- serve users  
 
 ---
 
-## Deployment Environment
+### Control Plane
 
-Infrastructure-level environment.
+The Buffer system.
 
-Examples:
-- local
-- staging
-- production
-
----
-
-# 12. Naming Rules
-
-## Always Qualify Ambiguous Terms
-
-If a term has multiple meanings, it must be qualified.
-
-Examples:
-- not `token`
-- use `Access Token`
-
-- not `client`
-- use `OAuth Client`
+Responsibilities:
+- govern structure  
+- enforce rules  
+- coordinate changes  
 
 ---
 
-## Avoid Overloading Terms
+## UX Terms
 
-One term should have one meaning within Symfony-X documentation and architecture.
+### Dashboard
 
----
+An application-level interface for end users.
 
-## Prefer Explicitness Over Brevity
-
-Clarity is more important than short names.
-
----
-
-# 13. Canonical Mental Model
-
-    Developer
-        ↓
-    Application (Symfony-X)
-        ↓
-    Application User
-        ↓
-    User Entity
+Scope:
+- user-specific data  
+- personal interactions  
 
 ---
 
-# 14. Guiding Principle
+### Admin
 
-> If a word can mean more than one thing, it must be disambiguated.
+A privileged application interface.
 
----
+Scope:
+- system-level management  
+- operational visibility  
 
-# 15. Enforcement
-
-This document applies to:
-- package naming
-- code, including classes and interfaces
-- documentation
-- generators and Maker commands
-- AI prompts and outputs
+Not:
+- the control plane  
 
 ---
 
-# 16. Philosophy
+## Rules & Constraints
 
-Symfony-X prioritizes:
-- determinism
-- clarity
-- composability
-- reduced ambiguity
-- AI-friendly structure
+### Explicitness
+
+All structure and dependencies must be explicit.
 
 ---
 
-End of Specification
+### Determinism
+
+All structural generation must be reproducible.
+
+---
+
+### Separation of Concerns
+
+- identity defines nature  
+- features define capability  
+- governance enforces correctness  
+
+---
+
+### No Hidden Behavior
+
+No implicit structure or silent installation of dependencies.
+
+---
+
+## Anti-Terms (Avoid)
+
+Avoid vague or overloaded terms:
+
+- “core” (unless explicitly defined)  
+- “platform” (without scope)  
+- “magic”  
+- “auto-configured” (without explanation)  
+- “just works”  
+
+Replace with precise definitions.
+
+---
+
+## Guiding Principle
+
+Clear terminology is required for deterministic systems.
+
+If a term is ambiguous, it introduces architectural risk.
