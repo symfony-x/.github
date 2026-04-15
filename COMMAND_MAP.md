@@ -6,11 +6,11 @@ This document defines how human and AI intent is translated into deterministic S
 
 It exists to ensure that:
 
-- structural changes are generated through approved commands  
-- intent is mapped consistently  
-- AI agents do not invent architecture  
-- package boundaries remain enforced  
-- generation remains deterministic and auditable  
+- structural changes are generated through approved commands
+- intent is mapped consistently
+- AI agents do not invent architecture
+- package boundaries remain enforced
+- generation remains deterministic and auditable
 
 ---
 
@@ -26,12 +26,12 @@ Agents and developers may decide **what** they want to build, but Symfony-X comm
 
 The command pipeline is:
 
-1. identify intent  
-2. classify intent  
-3. resolve owning package  
-4. map intent to command  
-5. execute deterministic generation  
-6. refine implementation inside generated structure  
+1. identify intent
+2. classify intent
+3. resolve owning package
+4. map intent to command
+5. execute deterministic generation
+6. refine implementation inside generated structure
 
 ---
 
@@ -43,15 +43,15 @@ Intent related to initial project setup or baseline capabilities.
 
 Examples:
 
-- create a new Symfony-X application  
-- initialize local development environment  
-- install baseline tooling  
+- create a new Symfony-X application
+- initialize local development environment
+- install baseline tooling
 
 Typical command targets:
 
-- project creation commands  
-- installer/bootstrap commands  
-- package installation commands  
+- project creation commands
+- installer/bootstrap commands
+- package installation commands
 
 ---
 
@@ -61,9 +61,9 @@ Intent related to defining what kind of application this is.
 
 Examples:
 
-- make this a UI-first app  
-- make this an API-first app  
-- add MCP capabilities  
+- make this a UI-first app
+- make this an API-first app
+- add MCP capabilities
 
 Typical package targets:
 
@@ -73,9 +73,9 @@ Typical package targets:
 
 Typical command forms:
 
-- composer require package  
-- package install command  
-- package setup command  
+- `composer require <package>`
+- package install command
+- package setup command
 
 ---
 
@@ -85,11 +85,11 @@ Intent related to adding bounded application capability.
 
 Examples:
 
-- add a user system  
-- add dashboard widgets  
-- add admin tools  
-- add OAuth login  
-- add OAuth server support  
+- add a user system
+- add dashboard widgets
+- add admin tools
+- add OAuth login
+- add OAuth server support
 
 Typical package targets:
 
@@ -107,15 +107,15 @@ Intent related to generating a package-owned structural element.
 
 Examples:
 
-- create a voter  
-- create a widget  
-- create an integration service  
-- create a policy object  
-- create a client adapter  
+- create a voter
+- create a widget
+- create an integration service
+- create a policy object
+- create a client adapter
 
 Typical command targets:
 
-- package-owned Maker commands  
+- package-owned Maker commands
 
 ---
 
@@ -125,16 +125,30 @@ Intent related to validation, compatibility, linting, and architectural enforcem
 
 Examples:
 
-- verify package compatibility  
-- validate architecture  
-- check standards compliance  
-- inspect generation readiness  
+- verify package compatibility
+- validate architecture
+- check standards compliance
+- inspect generation readiness
 
 Typical command targets:
 
-- dev-tools commands  
-- Buffer validation workflows  
-- QA commands  
+- dev-tools commands
+- Buffer validation workflows
+- QA commands
+
+---
+
+## SXUC-Specific Intent Resolution
+
+If the intent is UI-first and async UX-oriented, ownership resolves to `symfony-x/ui` unless the request is clearly feature-owned.
+
+Examples:
+
+- “make this a UI-first app” → install `symfony-x/ui`
+- “create an async table component” → `symfony-x/ui`
+- “add a reusable modal component” → `symfony-x/ui`
+- “add a user management screen” → likely feature package + `symfony-x/ui` integration
+- “install shadcn preset for SXUC” → `symfony-x/ui` + preset bridge package/setup flow
 
 ---
 
@@ -149,6 +163,7 @@ Examples:
 - “create a dashboard widget” → `symfony-x/dashboard`
 - “create a security voter for users” → `symfony-x/user`
 - “add AI traffic logging” → `symfony-x/mcp`
+- “add an async UI component” → `symfony-x/ui`
 
 No command should be chosen before ownership is resolved.
 
@@ -160,9 +175,9 @@ If the intent affects project structure, it must map to a command.
 
 Forbidden behavior:
 
-- inventing files manually when a Maker should exist  
-- bypassing package contracts  
-- generating cross-boundary code without an owning command  
+- inventing files manually when a Maker should exist
+- bypassing package contracts
+- generating cross-boundary code without an owning command
 
 ---
 
@@ -173,12 +188,14 @@ Use the most package-specific command available.
 Preferred:
 
 - `make:x-user-voter`
+- `make:sxuc:component`
 
 Less preferred:
 
 - generic maker plus manual edits
 
 Reason:
+
 - package-specific Makers encode package rules
 
 ---
@@ -190,9 +207,11 @@ If the required package is not installed, the system must first map intent to in
 Example:
 
 Intent:
+
 - add dashboard widgets
 
 Resolution:
+
 1. install `symfony-x/dashboard`
 2. run dashboard-specific Maker command
 
@@ -204,10 +223,11 @@ If a command changes architecture, package composition, or cross-package behavio
 
 Examples:
 
-- adding a new identity package  
-- enabling multiple major subsystems  
-- introducing auth/server integration  
-- adding MCP surfaces  
+- adding a new identity package
+- enabling multiple major subsystems
+- introducing auth/server integration
+- adding MCP surfaces
+- switching SXUC preset strategy
 
 ---
 
@@ -223,6 +243,8 @@ Examples:
 - “Create a widget for account activity”
 - “Add Google OAuth”
 - “Make this an API”
+- “Make this a UI-first app”
+- “Create a live async component”
 
 ---
 
@@ -230,11 +252,11 @@ Examples:
 
 Classify the request as one of:
 
-- foundation  
-- identity  
-- feature  
-- structural  
-- governance  
+- foundation
+- identity
+- feature
+- structural
+- governance
 
 ---
 
@@ -249,6 +271,7 @@ Examples:
 - admin panel action → `symfony-x/admin`
 - OAuth login → `symfony-x/user-oauth`
 - resource-provider auth server → `symfony-x/oauth-server`
+- async UI component → `symfony-x/ui`
 
 ---
 
@@ -257,345 +280,89 @@ Examples:
 Check whether the owning package is installed.
 
 If not installed:
-- map to install action first
 
-If installed:
-- continue to command selection
-
----
-
-### Step 5 — Select Command
-
-Choose the most specific deterministic command available.
-
-Priority order:
-
-1. package-specific Maker command  
-2. package install/setup command  
-3. governance/validation command  
-4. fallback manual implementation only if no structural command should exist  
+- map to installation first
+- then map to package-owned generation command if needed
 
 ---
 
-### Step 6 — Execute and Refine
+### Step 5 — Resolve Identity Dependencies
 
-After deterministic generation:
-- refine business logic only inside generated boundaries  
-- do not mutate package structure arbitrarily  
+If the feature depends on a specific identity:
 
----
-
-## Canonical Command Forms
-
-### Package Installation
-
-Use Composer installation for package acquisition.
-
-Examples:
-
-- `composer require symfony-x/ui`
-- `composer require symfony-x/api`
-- `composer require symfony-x/user`
-
-Installation may be followed by:
-- recipe execution  
-- package setup command  
-- validation step  
-
----
-
-### Package Setup Commands
-
-Some packages may expose installation/setup commands.
-
-Examples:
-
-- `php bin/console x:user:install`
-- `php bin/console x:dashboard:install`
-
-These commands should:
-- finalize package-local configuration  
-- scaffold package baseline artifacts if appropriate  
-- remain deterministic  
-
----
-
-### Package Maker Commands
-
-These generate structural artifacts owned by a package.
-
-Examples:
-
-- `php bin/console make:x-user`
-- `php bin/console make:x-user-voter`
-- `php bin/console make:x-dashboard-widget`
-- `php bin/console make:x-admin-module`
-- `php bin/console make:x-oauth-client`
-
----
-
-### Governance Commands
-
-These validate composition and standards.
-
-Examples:
-
-- `php bin/console x:arch:validate`
-- `php bin/console x:package:validate`
-- `php bin/console x:maker:lint`
-- `php bin/console x:buffer:sync`
-
-Exact command names may evolve, but the governance role must remain explicit.
-
----
-
-## Intent-to-Command Examples
-
-### Example 1 — “I want a web app with login”
-
-Intent breakdown:
-
-- UI-first application identity  
-- local user system  
-
-Resolution:
-
-1. `composer require symfony-x/ui`
-2. `composer require symfony-x/user`
-3. optional package setup command for user installation profile
-4. validate composition
-
-Possible command sequence:
-
-- `composer require symfony-x/ui`
-- `composer require symfony-x/user`
-- `php bin/console x:user:install --profile=web-app`
-- `php bin/console x:arch:validate`
-
----
-
-### Example 2 — “Create a voter for account access”
-
-Intent breakdown:
-
-- structural element  
-- owned by user/security domain  
-
-Resolution:
-
-- use user package Maker
-
-Possible command sequence:
-
-- `php bin/console make:x-user-voter AccountAccess`
-
----
-
-### Example 3 — “Add a dashboard widget for recent activity”
-
-Intent breakdown:
-
-- feature extension  
-- dashboard-owned structural artifact  
-
-Resolution:
-
-1. ensure dashboard package is installed  
-2. run dashboard Maker
-
-Possible command sequence:
-
-- `composer require symfony-x/dashboard`
-- `php bin/console make:x-dashboard-widget RecentActivity`
-
----
-
-### Example 4 — “Add Google login”
-
-Intent breakdown:
-
-- OAuth identity-consumer integration  
-- local user system extension  
-
-Resolution:
-
-1. ensure user package installed  
-2. install user-oauth package  
-3. run oauth-specific setup/generation commands  
-
-Possible command sequence:
-
-- `composer require symfony-x/user`
-- `composer require symfony-x/user-oauth`
-- `php bin/console x:user-oauth:install google`
-- `php bin/console x:arch:validate`
-
----
-
-### Example 5 — “Turn this into an API”
-
-Intent breakdown:
-
-- identity change / expansion  
-
-Resolution:
-
-1. install API identity package  
-2. run any setup command if required  
-3. validate compatibility with existing packages  
-
-Possible command sequence:
-
-- `composer require symfony-x/api`
-- `php bin/console x:api:install`
-- `php bin/console x:arch:validate`
-
----
-
-### Example 6 — “Enable MCP agent tooling”
-
-Intent breakdown:
-
-- identity / integration capability  
-- governance-sensitive  
-
-Resolution:
-
-1. install MCP package  
-2. run setup  
-3. validate policy and compatibility  
-4. optionally sync with Buffer  
-
-Possible command sequence:
-
-- `composer require symfony-x/mcp`
-- `php bin/console x:mcp:install`
-- `php bin/console x:arch:validate`
-- `php bin/console x:buffer:sync`
-
----
-
-## AI Agent Rules
-
-### Rule 1 — Always Map Intent Before Acting
-
-AI must not jump directly from user request to file generation.
-
-AI must first determine:
-- intent type  
-- owning package  
-- appropriate command  
-
----
-
-### Rule 2 — Never Invent Missing Architecture
-
-If the correct command does not exist, AI must:
-
-- identify the missing command gap  
-- avoid inventing hidden structure  
-- propose or create the missing Maker through the proper package process  
-
----
-
-### Rule 3 — Prefer Installation Profiles When Available
-
-If a package provides explicit installation profiles, AI should use them rather than manually assembling equivalent structure.
+- confirm identity is installed
+- install it explicitly if missing
+- never assume it silently
 
 Example:
-- `x:user:install --profile=web-app`
+
+- a UI-owned interactive flow requires `symfony-x/ui`
 
 ---
 
-### Rule 4 — Refine Only After Generation
+### Step 6 — Select Command
 
-AI may implement:
-- business logic  
-- conditionals  
-- validation rules  
-- domain-specific code  
+Choose the narrowest valid command.
 
-Only after deterministic structure exists.
+Examples:
 
----
-
-## Fallback Rules
-
-### When No Command Exists
-
-If no command exists for a structural concept, the system must decide one of:
-
-1. a new Maker should be added to the owning package  
-2. the concept does not belong in Symfony-X generation  
-3. manual implementation is acceptable because the concept is non-structural  
-
-### Rule
-
-The absence of a command is an architectural signal, not permission to improvise structure.
+- install UI identity → `composer require symfony-x/ui`
+- generate SXUC component → `php bin/console make:sxuc:component`
+- generate SXUC live component → `php bin/console make:sxuc:live-component`
 
 ---
 
-## Validation Integration
+## SXUC Installation Mapping
 
-Commands that affect architecture should be followed by validation.
+### Base UI Identity
 
-Recommended validation points:
+Intent:
 
-- after identity installation  
-- after feature installation  
-- after cross-package setup  
-- after governance-sensitive enablement  
-- before major code generation  
+- make this a UI-first app
+
+Resolution:
+
+1. install `symfony-x/ui`
+2. run any UI setup/install command if defined
+3. configure explicit preset if desired
 
 ---
 
-## Command Naming Guidance
+### SXUC Preset Mapping
 
-Recommended command families:
+Intent:
 
-- `make:x-*` for structural generation  
-- `x:*:install` for package setup  
-- `x:*:validate` for validation  
-- `x:*:sync` for external/control-plane coordination  
+- use shadcn with SXUC
+- use Flowbite with SXUC
 
-Naming should remain:
+Resolution pattern:
 
-- explicit  
-- package-scoped  
-- stable  
-- predictable  
+1. ensure `symfony-x/ui` is installed
+2. install the preset bridge package if required
+3. set explicit preset configuration
+4. run preset-aware setup or generation commands if defined
+
+Rule:
+
+Preset selection must remain explicit and developer-controlled.
 
 ---
 
 ## Anti-Patterns
 
-Forbidden behaviors:
+Do not:
 
-- AI generating structural code without command resolution  
-- using generic commands when a package-specific Maker exists  
-- skipping package installation state checks  
-- mixing ownership across packages  
-- silently introducing identity changes  
-- bypassing validation for major architectural changes  
-
----
-
-## Design Checklist
-
-Before executing a command mapping, verify:
-
-- is the intent clearly identified?  
-- is the intent category known?  
-- is the owning package resolved?  
-- is the package installed?  
-- is there a package-specific command?  
-- should validation run before or after execution?  
-- is the planned change structural or only behavioral?  
+- skip package ownership resolution
+- generate structure directly
+- choose commands before identifying ownership
+- silently install identity through feature intent
+- infer SXUC preset choice from accidental project state
+- invent ad hoc UI generation outside SXUC Makers for SXUC-owned structure
 
 ---
 
 ## Guiding Principle
 
-Intent must become a command before it becomes code.
+Intent becomes safe only after it becomes a command.
 
-Symfony-X commands are the contract layer between requested outcomes and generated structure.
+If intent is not mapped to an owning package and an explicit command, it is not ready to change structure.
