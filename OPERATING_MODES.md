@@ -13,6 +13,7 @@ Rather than enforcing a single workflow, Symfony-X provides **explicit operating
 > **Structure is always deterministic. Workflow is policy-driven.**
 
 All modes preserve **architectural invariants**, while allowing variation in:
+
 - developer workflow
 - agent behavior
 - enforcement strictness
@@ -30,8 +31,11 @@ These rules are **non-negotiable** and enforced regardless of mode:
 - Service registration correctness
 - Forbidden pattern prevention (as defined by Symfony-X rules)
 - Composer and bundle consistency
+- Explicit identity ownership
+- SXUC async invariants when `symfony-x/ui` is installed
 
 These are enforced by:
+
 - Buffer (hard constraints)
 - Linter (authoritative validation)
 
@@ -51,7 +55,8 @@ These are enforced by:
 
 ## Description
 
-Locked Mode enforces **full deterministic architecture**.  
+Locked Mode enforces **full deterministic architecture**.
+
 All changes must pass through Symfony-X generators and commands.
 
 ## Characteristics
@@ -85,7 +90,7 @@ Guided Mode allows **controlled flexibility** while preserving architectural gua
 
 ## Characteristics
 
-- Makers are preferred but not required
+- Makers are preferred but not required for every local workflow step
 - Manual code is allowed within constraints
 - Agents may edit **bounded regions**
 - Buffer enforces invariants but allows workflow flexibility
@@ -115,8 +120,8 @@ Exploratory Mode enables **maximum flexibility and experimentation**, with stron
 
 ## Characteristics
 
-- Makers optional
-- Manual and agent-driven workflows allowed
+- Makers optional for experimentation
+- Manual and agent-driven workflows allowed within audited bounds
 - Buffer acts primarily as an advisor
 - Continuous audit replaces strict pre-write blocking
 - Profiler and logs provide real-time feedback
@@ -154,12 +159,14 @@ Exploratory Mode enables **maximum flexibility and experimentation**, with stron
 Symfony-X uses a **dual-layer enforcement system**:
 
 ## 1. Pre-Write Enforcement (Buffer)
+
 - Prevents invalid writes before they occur
 - Strongest in Locked mode
 - Selective in Guided mode
 - Minimal in Exploratory mode
 
 ## 2. Post-Write Validation (Linter + Profiler)
+
 - Always active in all modes
 - Final authority on compliance
 - Produces:
@@ -197,6 +204,12 @@ Agents may NOT modify:
 - Service wiring
 - Contracts/interfaces
 
+For SXUC-owned structure, they also may not redefine:
+
+- immediate/deferred async split
+- preset/runtime boundaries
+- Turbo/Mercure invariants
+
 ---
 
 # Linter as Source of Truth
@@ -218,10 +231,29 @@ Mode can be defined via:
 - Project configuration (`symfony_x.yaml`)
 - Environment (`APP_MODE`)
 - CLI flags
-- CI/CD policy
 
-Example:
+---
 
-```yaml
-symfony_x:
-  mode: guided
+# Important Boundary Rule
+
+Operating mode changes **workflow policy**, not **architecture identity**.
+
+Therefore, switching between Locked, Guided, and Exploratory must not:
+
+- redefine package ownership
+- weaken identity boundaries
+- change SXUC runtime semantics if `symfony-x/ui` is installed
+
+In particular:
+
+- Turbo remains the immediate interaction mechanism in SXUC
+- Mercure remains the deferred propagation mechanism in SXUC
+- presets remain presentation concerns only
+
+---
+
+# Guiding Principle
+
+Operating modes let teams choose how tightly workflow is governed.
+
+They do not let teams redefine what the system fundamentally is.
