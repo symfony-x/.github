@@ -1,6 +1,6 @@
 # Symfony-X
 
-> A constrained, composable system for building Symfony 8 applications.
+> A constrained, composable system for building modern Symfony applications.
 
 Symfony-X is not a starter kit.
 
