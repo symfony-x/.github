@@ -6,9 +6,9 @@ This document provides a visual model of the Symfony-X architecture.
 
 It complements:
 
-- ARCHITECTURE.md (structure)  
-- GENERATION_PIPELINE.md (execution)  
-- BUFFER_ARCHITECTURE.md (control plane)  
+- ARCHITECTURE.md (structure)
+- GENERATION_PIPELINE.md (execution)
+- BUFFER_ARCHITECTURE.md (control plane)
 
 ---
 
@@ -16,8 +16,8 @@ It complements:
 
 Symfony-X consists of two interacting systems:
 
-1. Application Plane (your Symfony app)  
-2. Control Plane (Buffer)  
+1. Application Plane (your Symfony app)
+2. Control Plane (Buffer)
 
 ---
 
@@ -47,7 +47,7 @@ Symfony-X consists of two interacting systems:
     │                           │ depends on                     │
     │  Identity Layer                                            │
     │  --------------------------------------------------------  │
-    │  ui        api        mcp                                  │
+    │  ui (SXUC)   api   mcp                                      │
     │                           ▲                                │
     │                           │ depends on                     │
     │  Governance Layer                                          │
@@ -57,7 +57,7 @@ Symfony-X consists of two interacting systems:
     │                           │ depends on                     │
     │  Foundation Layer                                          │
     │  --------------------------------------------------------  │
-    │  skeleton                                                 │
+    │  skeleton                                                   │
     │                                                            │
     └────────────────────────────────────────────────────────────┘
 
@@ -69,10 +69,49 @@ Symfony-X consists of two interacting systems:
 
 Rules:
 
-- dependencies flow upward only  
-- no downward or cyclic dependencies  
-- identity must not depend on features  
-- foundation must remain neutral  
+- dependencies flow upward only
+- no downward or cyclic dependencies
+- identity must not depend on features
+- foundation must remain neutral
+
+---
+
+## SXUC Runtime Model
+
+For UI-first applications, `symfony-x/ui` introduces the governed async UX substrate:
+
+    User Action
+        │
+        ▼
+    Turbo / Live Component Request
+        │
+        ▼
+    Immediate Symfony Response
+        │
+        ├── Turbo Frame / Stream DOM Update
+        │
+        └── Pending State Shown
+
+    Background Work (optional)
+        │
+        ▼
+    Domain Event / Completion
+        │
+        ▼
+    Mercure Publication
+        │
+        ▼
+    Browser Receives Update
+        │
+        ▼
+    Turbo Stream or Stimulus Bridge
+        │
+        ▼
+    Deferred UI Reconciliation
+
+Canonical principle:
+
+> Turbo governs the immediate request-response interaction cycle, while Mercure governs deferred real-time state propagation back into the UI.
 
 ---
 
@@ -128,9 +167,9 @@ Rules:
 
 Rules:
 
-- AI never writes structure directly  
-- AI must use Makers  
-- AI operates through the pipeline  
+- AI never writes structure directly
+- AI must use Makers
+- AI operates through the pipeline
 
 ---
 
@@ -181,33 +220,49 @@ Rules:
 
 ### Determinism
 
-- same input → same structure  
-- no randomness  
-- no hidden behavior  
+- same input → same structure
+- no randomness
+- no hidden behavior
 
 ---
 
 ### Explicitness
 
-- all dependencies declared  
-- all structure generated  
-- no implicit assumptions  
+- all dependencies declared
+- all structure generated
+- no implicit assumptions
 
 ---
 
 ### Separation of Concerns
 
-- identity defines nature  
-- features define capability  
-- governance enforces correctness  
+- identity defines nature
+- features define capability
+- governance enforces correctness
 
 ---
 
 ### External Governance
 
-- Buffer is not part of runtime  
-- control plane is separate  
-- system remains operational without Buffer  
+- Buffer is not part of runtime
+- control plane is separate
+- system remains operational without Buffer
+
+---
+
+## SXUC-Specific Properties
+
+### Immediate / Deferred Split
+
+- Turbo handles immediate interaction flow
+- Mercure handles deferred propagation
+- Stimulus bridges behavior safely inside the Turbo lifecycle
+
+### Preset Boundary
+
+- presets affect presentation
+- presets do not redefine transport semantics
+- presets do not replace server-driven UI ownership
 
 ---
 
@@ -220,6 +275,8 @@ Rules:
     ✗ Skipping pipeline
     ✗ AI generating code directly
     ✗ Buffer embedded in runtime
+    ✗ UI preset redefining SXUC async runtime
+    ✗ Ad hoc frontend architecture replacing SXUC
 
 ---
 
