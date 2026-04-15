@@ -4,7 +4,7 @@
 
 This document defines how to learn and operate within the Symfony-X system.
 
-Symfony-X is a **constrained architecture system**.  
+Symfony-X is a **constrained architecture system**.
 Understanding it requires reading documents in the correct order.
 
 ---
@@ -15,7 +15,7 @@ Symfony-X must be understood from:
 
     Constraints → Structure → Generation → Execution → Governance
 
-Do not start with code.  
+Do not start with code.
 Start with rules.
 
 ---
@@ -42,9 +42,10 @@ Follow this path to become productive quickly.
 
 Learn the core language:
 
-- foundation, identity, feature  
-- Maker, command, intent  
-- control plane vs application plane  
+- foundation, identity, feature
+- Maker, command, intent
+- control plane vs application plane
+- SXUC and async UX if building UI-first applications
 
 ---
 
@@ -52,9 +53,10 @@ Learn the core language:
 
 Understand the system visually:
 
-- layer structure  
-- dependency direction  
-- pipeline flow  
+- layer structure
+- dependency direction
+- pipeline flow
+- SXUC immediate/deferred runtime split
 
 ---
 
@@ -64,9 +66,11 @@ Learn what you are not allowed to do.
 
 Focus on:
 
-- dependency rules  
-- generation rules  
-- forbidden patterns  
+- dependency rules
+- generation rules
+- forbidden patterns
+- identity boundaries
+- SXUC invariants if using `symfony-x/ui`
 
 ---
 
@@ -82,14 +86,20 @@ Understand how commands execute.
 
 ---
 
-### Step 6 — Start Building
+### Step 6 — ARCHITECTURE.md
+
+Understand the formal layer model and where SXUC fits as UI identity.
+
+---
+
+### Step 7 — Start Building
 
 Follow this workflow:
 
-1. identify intent  
-2. map to command  
-3. run Maker  
-4. refine behavior  
+1. identify intent
+2. map to command
+3. run Maker
+4. refine behavior
 
 ---
 
@@ -103,10 +113,10 @@ If something feels unclear, jump to the Full System Path.
 
 Required for:
 
-- maintainers  
-- contributors  
-- architects  
-- AI systems  
+- maintainers
+- contributors
+- architects
+- AI systems
 
 ---
 
@@ -188,17 +198,29 @@ Defines system philosophy and governance model.
 
 ---
 
+## UI-First Addendum
+
+If you are working on `symfony-x/ui` or any UI-first Symfony-X app, read these ideas as you go:
+
+- SXUC defines async UI identity
+- Turbo governs immediate request-response interaction
+- Mercure governs deferred state propagation
+- presets are presentation-only
+- UI structure should be generated through SXUC Makers
+
+---
+
 ## Execution Model (All Paths)
 
 All work must follow:
 
-1. identify intent  
-2. classify intent  
-3. resolve package ownership  
-4. map to command  
-5. execute through pipeline  
-6. validate  
-7. refine behavior  
+1. identify intent
+2. classify intent
+3. resolve package ownership
+4. map to command
+5. execute through pipeline
+6. validate
+7. refine behavior
 
 ---
 
@@ -206,12 +228,12 @@ All work must follow:
 
 Do not:
 
-- start with implementation  
-- skip constraints  
-- guess architecture  
-- create structure manually  
-- bypass Makers  
-- ignore validation  
+- start with implementation
+- skip constraints
+- guess architecture
+- create structure manually
+- bypass Makers
+- ignore validation
 
 ---
 
@@ -219,10 +241,10 @@ Do not:
 
 AI must:
 
-- follow Full System Path before acting  
-- operate through COMMAND_MAP  
-- generate structure via Makers  
-- respect all constraints  
+- follow Full System Path before acting
+- operate through COMMAND_MAP
+- generate structure via Makers
+- respect all constraints
 
 Rule:
 
@@ -234,10 +256,10 @@ AI that does not follow this order is unsafe.
 
 Before submitting changes:
 
-- confirm alignment with all documents  
-- verify constraints are not violated  
-- ensure deterministic behavior  
-- validate through pipeline  
+- confirm alignment with all documents
+- verify constraints are not violated
+- ensure deterministic behavior
+- validate through pipeline
 
 ---
 
@@ -245,9 +267,9 @@ Before submitting changes:
 
 Symfony-X is designed to be:
 
-- learned in order  
-- executed deterministically  
-- enforced automatically  
+- learned in order
+- executed deterministically
+- enforced automatically
 
 Understanding precedes action.
 
