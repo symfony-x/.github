@@ -4,7 +4,7 @@
 
 Symfony-X is not a starter kit.
 
-It is a **governed development system** for Symfony 8 that combines:
+It is a **governed development system** for modern Symfony that combines:
 
 - a minimal universal foundation
 - explicit application identity
@@ -38,7 +38,7 @@ Start from the minimal baseline:
 
 The foundation includes:
 
-- Symfony 8 baseline
+- Symfony baseline
 - standard project bootstrap
 - base local/dev environment
 
