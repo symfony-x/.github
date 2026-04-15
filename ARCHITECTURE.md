@@ -1,18 +1,181 @@
+# Symfony-X Architecture
 
-More precisely:
+## Purpose
 
-1. `skeleton`
-2. `recipes`, `maker`, `dev-tools`
-3. identity packages (`ui`, `api`, `mcp`)
-4. feature packages (`user`, `dashboard`, etc.)
+This document defines the **architectural model, constraints, and governing principles** of the Symfony-X ecosystem.
+
+Symfony-X is a **constrained composition system** for building Symfony 8 applications with:
+
+- deterministic structure  
+- explicit application identity  
+- composable feature modules  
+- enforced architectural boundaries  
+- AI-compatible development workflows  
+
+---
+
+## Core Model
+
+Symfony-X separates application construction into four layers:
+
+1. Foundation  
+2. Identity  
+3. Features  
+4. Governance  
+
+Each layer has strict responsibilities and dependency rules.
+
+---
+
+## Layer 1 — Foundation
+
+### Repository
+- `symfony-x/skeleton`
+
+### Responsibility
+
+Provides the **minimal application baseline**.
+
+Includes:
+- Symfony 8 framework baseline  
+- base configuration  
+- Docker / local development setup  
+
+Excludes:
+- UI stack  
+- database  
+- authentication  
+- business logic  
+- application features  
+
+### Rules
+
+- must remain minimal and neutral  
+- must not assume application type  
+- must not include optional subsystems by default  
+- must be safe for all application types  
+
+---
+
+## Layer 2 — Identity
+
+### Repositories
+
+- `symfony-x/ui`  
+- `symfony-x/api`  
+- `symfony-x/mcp`  
+
+### Responsibility
+
+Defines the **nature of the application**.
+
+Identity answers:
+
+> “What kind of system is this?”
+
+Examples:
+
+- `ui` → UI-first applications (LAST stack)  
+- `api` → headless / API-first systems  
+- `mcp` → AI-native / MCP-enabled systems  
+
+### Rules
+
+- identity must be explicitly installed  
+- identity must not be implicitly assumed by feature packages  
+- identity packages must remain narrowly scoped  
+- identity packages define integration patterns, not business logic  
+
+---
+
+## Layer 3 — Feature Modules
+
+### Examples
+
+- `symfony-x/user`  
+- `symfony-x/dashboard`  
+- `symfony-x/admin`  
+- `symfony-x/user-oauth`  
+- `symfony-x/oauth-server`  
+
+### Responsibility
+
+Provides **bounded, composable functionality**.
+
+Feature modules:
+- implement business capability  
+- extend the application  
+- integrate with identity packages where required  
+
+### Rules
+
+- must declare dependencies explicitly  
+- must not redefine application structure  
+- must not implicitly install identity  
+- must remain within a clearly defined domain boundary  
+
+---
+
+## Layer 4 — Governance & Control Plane
+
+### Repositories
+
+- `symfony-x/dev-tools`  
+- `symfony-x/maker`  
+- `symfony-x/recipes`  
+- `symfony-x/buffer` (separate product)  
+
+### Responsibility
+
+Ensures **consistency, correctness, and evolution control**.
+
+#### dev-tools
+- static analysis (PHPStan)  
+- formatting (PHP-CS-Fixer)  
+- architectural linting  
+- baseline quality enforcement  
+
+#### maker
+- deterministic code generation framework  
+- shared abstractions for generators  
+- eliminates structural ambiguity  
+
+#### recipes
+- install-time automation  
+- configuration wiring  
+- environment setup  
+
+#### buffer (Control Plane)
+
+A **separate system** responsible for:
+- compatibility validation  
+- architectural policy enforcement  
+- product intent tracking  
+- AI agent coordination (MCP)  
+- generation approval workflows  
+
+### Rules
+
+- governance tools must not introduce runtime coupling  
+- Buffer must remain separate from application runtime  
+- generation must be deterministic and reproducible  
+- no freeform scaffolding is allowed  
+
+---
+
+## Dependency Model
+
+### Allowed Direction
+
+Foundation → Governance → Identity → Features
 
 ### Constraints
 
-- lower layers must not depend on higher layers
-- identity must not depend on feature modules
-- core tools must not depend on application features
-- feature modules may depend on identity only when required
-- Buffer integrates externally and is not part of the dependency chain
+- lower layers must not depend on higher layers  
+- identity must not depend on feature modules  
+- core tools must not depend on application features  
+- feature modules may depend on identity only when required  
+- Buffer integrates externally and is not part of the dependency chain  
 
 ---
 
@@ -22,17 +185,17 @@ Symfony-X replaces ad-hoc scaffolding with **deterministic generation**.
 
 ### Process
 
-1. intent is identified (human or AI)
-2. intent is mapped to a maker command
-3. generator produces structure based on package contract
-4. developer or agent refines within constraints
+1. intent is identified (human or AI)  
+2. intent is mapped to a maker command  
+3. generator produces structure based on package contract  
+4. developer or agent refines within constraints  
 
 ### Properties
 
-- predictable output
-- enforced naming and placement
-- package-aligned structure
-- test scaffolding generated alongside code
+- predictable output  
+- enforced naming and placement  
+- package-aligned structure  
+- test scaffolding generated alongside code  
 
 ### Rule
 
@@ -46,16 +209,16 @@ Recipes automate installation and configuration.
 
 ### Responsibilities
 
-- register services
-- configure bundles
-- add routes
-- set environment defaults
+- register services  
+- configure bundles  
+- add routes  
+- set environment defaults  
 
 ### Constraints
 
-- recipes must not contain business logic
-- recipes must not override package ownership
-- recipes must remain idempotent and predictable
+- recipes must not contain business logic  
+- recipes must not override package ownership  
+- recipes must remain idempotent and predictable  
 
 ---
 
@@ -69,10 +232,10 @@ No feature package may silently define application nature.
 
 ### Exception
 
-Feature packages may provide **installation profiles** that:
+Feature packages may provide installation profiles that:
 
-- require identity packages explicitly
-- clearly communicate what is being installed
+- require identity packages explicitly  
+- clearly communicate what is being installed  
 
 Example:
 - `symfony-x/user` may offer a “web-app” profile that installs `symfony-x/ui`
@@ -81,19 +244,19 @@ Example:
 
 ## Admin vs Control Plane
 
-### `symfony-x/admin`
+### symfony-x/admin
 
-- application-local
-- privileged user interface
-- operates on application state
-- part of the deployed app
+- application-local  
+- privileged user interface  
+- operates on application state  
+- part of the deployed app  
 
-### `Buffer`
+### Buffer
 
-- external control-plane system
-- operates across applications and environments
-- enforces architecture and policy
-- coordinates AI and generation workflows
+- external control-plane system  
+- operates across applications and environments  
+- enforces architecture and policy  
+- coordinates AI and generation workflows  
 
 ### Rule
 
@@ -107,14 +270,14 @@ Packages should provide visibility into their behavior.
 
 ### Mechanism
 
-- Symfony Profiler `DataCollector`s
+- Symfony Profiler DataCollectors  
 
 ### Examples
 
-- UI state inspector (`ui`)
-- security decisions (`user`)
-- AI traffic logs (`mcp`)
-- system activity (`admin`)
+- UI state inspector (`ui`)  
+- security decisions (`user`)  
+- AI traffic logs (`mcp`)  
+- system activity (`admin`)  
 
 ### Rule
 
@@ -132,30 +295,30 @@ AI does not write arbitrary code.
 
 ### Workflow
 
-1. determine intent
-2. map to command
-3. generate deterministic structure
-4. refine within constraints
+1. determine intent  
+2. map to command  
+3. generate deterministic structure  
+4. refine within constraints  
 
 ### Enforcement
 
-- maker commands define structure
-- dev-tools enforce correctness
-- Buffer validates system-wide integrity
+- maker commands define structure  
+- dev-tools enforce correctness  
+- Buffer validates system-wide integrity  
 
 ---
 
 ## Architectural Constraints Summary
 
-- minimal foundation
-- explicit identity selection
-- composable features only
-- deterministic generation required
-- recipes handle wiring only
-- no hidden dependencies
-- no implicit structure changes
-- governance is enforced, not optional
-- control plane is external
+- minimal foundation  
+- explicit identity selection  
+- composable features only  
+- deterministic generation required  
+- recipes handle wiring only  
+- no hidden dependencies  
+- no implicit structure changes  
+- governance is enforced, not optional  
+- control plane is external  
 
 ---
 
