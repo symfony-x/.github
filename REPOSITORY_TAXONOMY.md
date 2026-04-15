@@ -1,334 +1,365 @@
+# File: .github/REPOSITORY_TAXONOMY.md
+
 # Symfony-X Repository Taxonomy
 
-This document defines the repository structure, classification tiers, and governance policies for Symfony-X.
+## Purpose
 
-> Symfony-X is a constraint-driven Symfony 8 platform built around a single skeleton, modular Feature Modules, and recipe-driven automation.
+This document defines the repository classes, ownership model, and governance rules for the Symfony-X organization.
 
----
+Symfony-X is organized around:
 
-# Tier A — Foundation (Platform Layer)
+1. a constrained Composer package ecosystem
+2. one minimal universal skeleton
+3. one separate control-plane product (`Buffer`)
 
-These repositories define how Symfony-X works.
-
-They are:
-- highly stable
-- tightly controlled
-- architecturally critical
-
-## Repositories
-
-- symfony-x/skeleton
-- symfony-x/ui
-- symfony-x/maker
-- symfony-x/dev-tools
-- symfony-x/recipes
-
-## Role
-
-- define Symfony-X baseline (Symfony 8 + LAST stack)
-- enforce architectural constraints
-- provide deterministic scaffolding
-- define UI contract (Twig + Tailwind + Stimulus)
-- standardize development tooling
-- automate configuration via recipes
-
-## Policy
-
-- collaborator-only PRs
-- 2 approvals minimum
-- CODEOWNERS required
-- architect signoff required
-- strict CI required
+The repository structure must preserve architectural clarity, prevent structural drift, and keep application-local concerns separate from ecosystem governance.
 
 ---
 
-# Tier B — Feature Modules (Product Layer)
+## Repository Classes
 
-These repositories provide installable, complete feature systems.
+### Tier A — Canonical Core Repositories
 
-They are what Developers actually install.
-
-## Repositories (Initial)
-
-- symfony-x/user
-- symfony-x/user-oauth
-- symfony-x/admin
-
-## Future Candidates
-
-- symfony-x/ai
-- symfony-x/billing
-- symfony-x/messenger
-- symfony-x/mercure
-
-## Role
-
-Each Feature Module MUST:
-
-- be installable independently
-- provide a complete working feature
-- include:
-  - backend logic
-  - configuration
-  - routes
-  - templates/components
-  - Tailwind styling
-  - default UX
-  - recipe automation
-
-## Policy
-
-- trusted contributors allowed
-- 1–2 approvals required
-- maintainer review required
-- API changes require architect review
-
----
-
-# Tier C — Recipes (Automation Layer)
-
-Recipes automate installation and configuration.
-
-## Repositories
-
-- symfony-x/recipes
-
-## Role
-
-Recipes are responsible for:
-
-- copying configuration
-- wiring routes
-- installing templates
-- defining environment variables
-- applying opinionated defaults
-
-## Rules
-
-- every Feature Module MUST have a recipe
-- recipes MUST be deterministic
-- no interactive/manual steps required
-
-## Policy
-
-- trusted contributors allowed
-- 1–2 approvals required
-- strict review for breaking changes
-
----
-
-# Tier D — Documentation & Examples
-
-Public-facing repositories that support Developer adoption.
-
-## Repositories
-
-- symfony-x/docs
-- symfony-x/examples
-
-## Role
-
-- document architecture and usage
-- provide example applications
-- demonstrate Feature Module integration
-
-## Policy
-
-- public PRs allowed
-- triage-first review queue
-- maintainer merge required
-
----
-
-# Tier E — Experimental Labs
-
-Unstable, exploratory repositories.
-
-## Repositories
-
-- symfony-x/labs-*
+These repositories define the foundation, automation, deterministic generation model, and quality standards of the Symfony-X ecosystem.
 
 Examples:
-- symfony-x/labs-ai-agent
-- symfony-x/labs-realtime-runtime
-- symfony-x/labs-event-systems
+- `symfony-x/skeleton`
+- `symfony-x/recipes`
+- `symfony-x/maker`
+- `symfony-x/dev-tools`
 
-## Role
+Characteristics:
+- define ecosystem-wide contracts or defaults
+- affect many downstream repositories
+- highest architectural sensitivity
+- changes require strong review discipline
 
-- explore new ideas
-- test architecture extensions
-- prototype future Feature Modules
-
-## Policy
-
-- invite-only contributors
-- unstable branch model allowed
-- no API stability guarantees
-
----
-
-# Tier F — Internal Infrastructure
-
-Internal operational repositories.
-
-## Repositories
-
-- symfony-x/release-engineering
-- symfony-x/security-advisories
-- symfony-x/deployment-infra
-
-## Policy
-
-- maintainers only
-- restricted branch pushes
-- no external contributions
+Policy:
+- collaborator-only pull requests
+- no anonymous or drive-by PR acceptance by default
+- 2 approvals minimum
+- CODEOWNERS required on protected paths
+- required status checks must pass
+- direct pushes to default branch prohibited
+- squash merge only
+- architect signoff required for structural changes
 
 ---
 
-# Starter Stacks (Future Layer)
+### Tier B — Identity Repositories
 
-Starter Stacks are NOT first-order repositories yet.
+These repositories define the application's nature. They are not feature packages.
 
-When introduced, they will be:
+Examples:
+- `symfony-x/ui`
+- `symfony-x/api`
+- `symfony-x/mcp`
 
-- Composer metapackages
-- no code
-- dependency-only
+Characteristics:
+- establish application mode or operating model
+- may be composed explicitly by developers
+- must remain sharply bounded
+- must not silently become feature dumps
 
-Examples (future):
-
-- symfony-x/starter-user
-- symfony-x/starter-saas
-- symfony-x/starter-admin
-
-## Role
-
-- install curated sets of Feature Modules
-- provide rapid application bootstrapping
-
----
-
-# Default PR Access by Tier
-
-| Tier | Outside Public PRs |
-|------|--------------------|
-| A (Foundation) | No |
-| B (Feature Modules) | Limited |
-| C (Recipes) | Limited |
-| D (Docs/Examples) | Yes |
-| E (Labs) | No |
-| F (Internal) | No |
+Policy:
+- trusted contributor PRs only
+- 1 to 2 approvals required depending on change scope
+- CODEOWNERS required for core contracts
+- required static analysis and test checks
+- squash merge only
+- architectural review required for public contract changes
 
 ---
 
-# Branch Protection Standards
+### Tier C — Feature Repositories
 
-## Tier A — Foundation
+These repositories add business capability or user-facing systems on top of the foundation and identity layers.
 
-- 2 approvals required
-- latest push approval required
-- stale approvals dismissed
+Examples:
+- `symfony-x/user`
+- `symfony-x/user-oauth`
+- `symfony-x/oauth-server`
+- `symfony-x/dashboard`
+- `symfony-x/admin`
+
+Characteristics:
+- composable application modules
+- must declare dependencies explicitly
+- must not redefine application nature implicitly
+- may provide package-local maker commands, profiler collectors, and recipes
+
+Policy:
+- trusted contributor PRs allowed
+- 1 approval minimum
+- required tests and static analysis
+- squash merge only
+- maintainer review required for new extension points or public API changes
+
+---
+
+### Tier D — Cross-Cutting Integration Repositories
+
+These repositories exist only when a reusable cross-cutting contract clearly justifies its own package.
+
+Examples:
+- `symfony-x/mercure`
+- `symfony-x/messenger`
+- `symfony-x/telemetry`
+- `symfony-x/testing`
+- `symfony-x/doctrine-tools`
+
+Characteristics:
+- reusable infrastructure-facing integration packages
+- should not be created prematurely
+- should exist only when reuse pressure is proven across multiple packages or apps
+
+Policy:
+- trusted contributor PRs allowed
+- 1 approval minimum
+- required tests and static analysis
+- squash merge only
+- architectural review required before introducing new Tier D repos
+
+---
+
+### Tier P — Product Repositories
+
+These repositories are standalone deployable products, not normal Composer packages.
+
+Examples:
+- `symfony-x/buffer`
+
+Characteristics:
+- independent deployment lifecycle
+- independent operational concerns
+- may serve as control plane, orchestration layer, or governance product
+- may expose UI, API, and MCP surfaces
+- not governed like a normal library package
+
+Policy:
+- collaborator-only pull requests
+- 2 approvals minimum
 - CODEOWNERS required
-- strict CI required
+- required status checks must pass
+- protected environments where applicable
+- release discipline required
+- security review required for authentication, agent, execution, or governance surfaces
+- squash merge only
 
 ---
 
-## Tier B — Feature Modules
+## Architectural Rules by Repository Class
 
-- 1–2 approvals required
-- CI required
-- CODEOWNERS required
+### Rule 1 — Skeleton Must Stay Barebones
 
----
+`symfony-x/skeleton` is the universal entry point.
 
-## Tier C — Recipes
+It must include only:
+- Symfony 8 baseline
+- base Docker/dev environment defaults
+- standard project bootstrap concerns
 
-- 1–2 approvals required
-- CI required
-- careful review for install behavior
-
----
-
-## Tier D — Docs / Examples
-
-- 1 approval required
-- basic CI required
-- maintainer merge only
+It must not include by default:
+- LAST stack
+- Doctrine
+- Mercure
+- application-specific features
+- opinionated domain scaffolding
 
 ---
 
-## Tier E — Labs
+### Rule 2 — Identity Repositories Define Nature
 
-- maintainer discretion
-- unstable policies allowed
+Identity repositories define what kind of application is being built.
 
----
+Examples:
+- `ui` defines UI-first application capabilities
+- `api` defines headless/API-first application capabilities
+- `mcp` defines AI-first server integration capabilities
 
-## Tier F — Internal
-
-- maintainers only
-- restricted pushes
-
----
-
-# Naming & Structural Rules
-
-## Foundation Repositories
-
-- MUST remain minimal
-- MUST NOT contain business features
-
-## Feature Modules
-
-- MUST represent complete features
-- MUST include UI + backend + config
-- MUST NOT be partial capability packages
-
-## Recipes
-
-- MUST be deterministic
-- MUST not require manual setup
-
-## Terminology Alignment
-
-- Developer = person building the app
-- Application User = end user of the app
-- User Entity = internal model
+Feature packages must not silently assume or install identity concerns unless done through an explicit installation profile or declared dependency path.
 
 ---
 
-# Initial Repository Set
+### Rule 3 — Feature Repositories Add Capability, Not Nature
 
-## Foundation
+Feature repositories must:
+- add composable capability
+- declare required dependencies explicitly
+- remain bounded to their feature domain
 
-- .github
-- symfony-x/skeleton
-- symfony-x/ui
-- symfony-x/maker
-- symfony-x/dev-tools
-- symfony-x/recipes
-
-## Feature Modules
-
-- symfony-x/user
-- symfony-x/user-oauth
-- symfony-x/admin
-
-## Documentation
-
-- symfony-x/docs
-- symfony-x/examples
-
-## Labs
-
-- symfony-x/labs-*
+Feature repositories must not:
+- redefine the entire app structure
+- become dumping grounds for unrelated helpers
+- force hidden architectural choices across the ecosystem
 
 ---
 
-# Guiding Principle
+### Rule 4 — Recipes Wire, Packages Own Runtime
 
-> Symfony-X repositories must reduce ambiguity, enforce structure, and enable deterministic development.
+`symfony-x/recipes` may:
+- wire configuration
+- register routes
+- enable services
+- inject environment defaults
+- automate install-time setup
+
+Recipes must not:
+- own runtime business logic
+- become the source of truth for package behavior
+
+Runtime ownership belongs to the package itself.
 
 ---
 
-End of Specification
+### Rule 5 — Deterministic Generation Only
+
+All generated code in Symfony-X should be produced through deterministic maker commands.
+
+Generation policy:
+- shared generation framework lives in `symfony-x/maker`
+- package-specific maker commands live with the package that owns the contract
+- generated output must follow package contract rules
+- generated output should include corresponding test scaffolding where applicable
+
+---
+
+### Rule 6 — Buffer Is a Separate Control-Plane Product
+
+`Buffer` is not an application-local admin panel.
+
+It is a separate control-plane product responsible for concerns such as:
+- compatibility validation
+- product intent tracking
+- generation governance
+- architectural linting
+- AI agent gateway/MCP coordination
+- ecosystem policy enforcement
+
+It must remain separate from normal feature-package concerns.
+
+---
+
+## Dependency Direction Rules
+
+Allowed direction:
+
+1. `skeleton`
+2. `recipes`, `maker`, `dev-tools`
+3. identity packages (`ui`, `api`, `mcp`)
+4. feature packages (`user`, `dashboard`, `admin`, etc.)
+5. separate product (`buffer`) integrates with ecosystem but is not a normal downstream feature package
+
+General rule:
+- lower layers must not depend on higher layers
+- identity packages must not depend on feature packages
+- core repositories must not depend on app-specific modules
+- feature packages may depend on identity packages only when explicitly required
+- Buffer may integrate with many repos, but should not collapse their contracts into itself
+
+---
+
+## Approval Expectations
+
+### Structural Changes
+Examples:
+- adding or removing repositories
+- changing repository class
+- changing package boundaries
+- changing dependency direction rules
+- redefining installation responsibilities
+
+Requirements:
+- architect review required
+- minimum 2 approvals for Tier A and Tier P
+- taxonomy and architecture docs must be updated in the same PR where applicable
+
+### Routine Changes
+Examples:
+- bug fixes
+- test additions
+- documentation updates
+- localized implementation improvements
+
+Requirements:
+- normal approval policy for the affected tier
+- all required checks passing
+
+---
+
+## Repository Creation Policy
+
+A new repository should be created only when at least one of the following is true:
+- it represents a stable public contract
+- it has a clearly bounded responsibility
+- it has an independent release cadence
+- it needs materially different governance or permissions
+- it is reused across multiple packages or applications
+
+A new repository should not be created merely because:
+- the code is getting longer
+- the idea sounds important
+- a future use is imaginable but not yet real
+
+Default bias:
+- prefer fewer, clearer repositories
+- split only when the boundary is real
+
+---
+
+## Current First-Wave Repository Set
+
+Core:
+- `symfony-x/skeleton`
+- `symfony-x/recipes`
+- `symfony-x/maker`
+- `symfony-x/dev-tools`
+
+Identity:
+- `symfony-x/ui`
+- `symfony-x/api`
+
+Feature:
+- `symfony-x/user`
+
+Product:
+- `symfony-x/buffer`
+
+These repositories define the initial proof of the Symfony-X architecture.
+
+---
+
+## Second-Wave Candidate Repositories
+
+Identity:
+- `symfony-x/mcp`
+
+Feature:
+- `symfony-x/dashboard`
+- `symfony-x/admin`
+- `symfony-x/user-oauth`
+- `symfony-x/oauth-server`
+
+Cross-cutting:
+- `symfony-x/mercure`
+- `symfony-x/messenger`
+- `symfony-x/testing`
+- `symfony-x/telemetry`
+
+These should be created only after first-wave contracts are proven.
+
+---
+
+## Governance Principle
+
+Symfony-X is not a loose collection of starter kits.
+
+It is a constrained architecture ecosystem built from:
+- one minimal skeleton
+- explicit identity selection
+- composable feature packages
+- deterministic code generation
+- centralized standards
+- a separate governance/control-plane product
+
+The repository taxonomy must always reinforce that model.
