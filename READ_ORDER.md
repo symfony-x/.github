@@ -18,7 +18,9 @@ This sequence ensures:
 
 ## Core Principle
 
-Symfony-X must be understood **from constraints to execution**, not the other way around.
+Symfony-X must be understood from:
+
+    Constraints → Structure → Generation → Execution → Governance
 
 Do not start with code.  
 Start with rules.
@@ -38,7 +40,7 @@ You must understand:
 - control plane vs application plane  
 - deterministic generation  
 
-### Rule
+Rule:
 
 If terms are unclear, stop and resolve them before continuing.
 
@@ -46,7 +48,7 @@ If terms are unclear, stop and resolve them before continuing.
 
 ### 2. CONSTRAINTS.md
 
-Defines what is **allowed and forbidden**.
+Defines what is allowed and forbidden.
 
 You must understand:
 
@@ -55,13 +57,30 @@ You must understand:
 - identity boundaries  
 - forbidden patterns  
 
-### Rule
+Rule:
 
-Constraints are not guidelines. They are enforced.
+Constraints are enforced, not optional.
 
 ---
 
-### 3. ARCHITECTURE.md
+### 3. SYSTEM_DIAGRAM.md
+
+Provides the visual model of the system.
+
+You must understand:
+
+- layer relationships  
+- control plane vs application plane  
+- dependency direction  
+- pipeline flow  
+
+Rule:
+
+If you cannot visualize the system, do not proceed.
+
+---
+
+### 4. ARCHITECTURE.md
 
 Defines the system structure.
 
@@ -74,19 +93,19 @@ You must understand:
 
 ---
 
-### 4. REPOSITORY_TAXONOMY.md
+### 5. REPOSITORY_TAXONOMY.md
 
-Defines how the system is organized at the repository level.
+Defines how the system is organized.
 
 You must understand:
 
-- repository tiers  
+- repository tiers (A, B, C, D, P)  
 - package roles  
 - governance boundaries  
 
 ---
 
-### 5. PACKAGE_GUIDELINES.md
+### 6. PACKAGE_GUIDELINES.md
 
 Defines how packages must be built.
 
@@ -99,7 +118,7 @@ You must understand:
 
 ---
 
-### 6. MAKER_CONTRACT.md
+### 7. MAKER_CONTRACT.md
 
 Defines how structure is generated.
 
@@ -112,7 +131,7 @@ You must understand:
 
 ---
 
-### 7. COMMAND_MAP.md
+### 8. COMMAND_MAP.md
 
 Defines how intent becomes commands.
 
@@ -120,11 +139,11 @@ You must understand:
 
 - intent classification  
 - package ownership resolution  
-- command selection rules  
+- command selection  
 
 ---
 
-### 8. GENERATION_PIPELINE.md
+### 9. GENERATION_PIPELINE.md
 
 Defines how commands are executed.
 
@@ -137,7 +156,7 @@ You must understand:
 
 ---
 
-### 9. BUFFER_ARCHITECTURE.md
+### 10. BUFFER_ARCHITECTURE.md
 
 Defines the control plane.
 
@@ -146,11 +165,11 @@ You must understand:
 - Buffer responsibilities  
 - validation and orchestration  
 - AI coordination  
-- separation from application runtime  
+- separation from runtime  
 
 ---
 
-### 10. ARCHITECTURE_ENFORCEMENT.md
+### 11. ARCHITECTURE_ENFORCEMENT.md
 
 Defines how rules are enforced.
 
@@ -163,19 +182,19 @@ You must understand:
 
 ---
 
-### 11. TEAM_PERMISSION_MATRIX.md
+### 12. TEAM_PERMISSION_MATRIX.md
 
-Defines who can do what.
+Defines access and control.
 
 You must understand:
 
-- repository tier permissions  
+- repository permissions  
 - approval requirements  
 - AI contribution limits  
 
 ---
 
-### 12. ORG_CHARTER.md
+### 13. ORG_CHARTER.md
 
 Defines the governing philosophy.
 
@@ -190,13 +209,13 @@ You must understand:
 
 ## Execution Order (For Developers & AI)
 
-After reading, all work must follow this flow:
+After reading, all work must follow:
 
 1. identify intent  
 2. classify intent  
 3. resolve package ownership  
 4. map to command  
-5. run through generation pipeline  
+5. execute through pipeline  
 6. validate  
 7. refine behavior  
 
@@ -215,7 +234,7 @@ Do not:
 
 ---
 
-## For AI Agents
+## AI-Specific Rules
 
 AI must:
 
@@ -224,7 +243,7 @@ AI must:
 - generate structure via Makers  
 - respect all constraints  
 
-### Rule
+Rule:
 
 If an AI system has not processed these documents in order, it is not safe to operate.
 
@@ -237,7 +256,7 @@ Before submitting changes:
 - confirm alignment with all documents  
 - verify constraints are not violated  
 - ensure deterministic behavior  
-- validate against pipeline  
+- validate through pipeline  
 
 ---
 
