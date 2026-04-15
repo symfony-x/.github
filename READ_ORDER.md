@@ -2,17 +2,10 @@
 
 ## Purpose
 
-This document defines the **canonical reading order** for understanding the Symfony-X system.
+This document defines how to learn and operate within the Symfony-X system.
 
-Symfony-X is a **constrained, multi-layer architecture**.  
-Reading documents out of order will lead to misunderstanding.
-
-This sequence ensures:
-
-- correct mental model  
-- proper understanding of constraints  
-- safe participation in the ecosystem  
-- compatibility with AI-driven workflows  
+Symfony-X is a **constrained architecture system**.  
+Understanding it requires reading documents in the correct order.
 
 ---
 
@@ -27,81 +20,123 @@ Start with rules.
 
 ---
 
-## Recommended Read Order
+## Two Learning Paths
 
-### 1. TERMINOLOGY.md
+Symfony-X supports two paths:
 
-Defines the language of the system.
+### 1. Quick Start Path (Developers)
 
-You must understand:
+For experienced developers who want to start building quickly.
+
+### 2. Full System Path (Architects, Maintainers, AI)
+
+For complete understanding of the system.
+
+---
+
+# Quick Start Path
+
+Follow this path to become productive quickly.
+
+### Step 1 — TERMINOLOGY.md
+
+Learn the core language:
 
 - foundation, identity, feature  
 - Maker, command, intent  
 - control plane vs application plane  
-- deterministic generation  
 
-Rule:
+---
 
-If terms are unclear, stop and resolve them before continuing.
+### Step 2 — SYSTEM_DIAGRAM.md
+
+Understand the system visually:
+
+- layer structure  
+- dependency direction  
+- pipeline flow  
+
+---
+
+### Step 3 — CONSTRAINTS.md
+
+Learn what you are not allowed to do.
+
+Focus on:
+
+- dependency rules  
+- generation rules  
+- forbidden patterns  
+
+---
+
+### Step 4 — COMMAND_MAP.md
+
+Understand how to translate intent into commands.
+
+---
+
+### Step 5 — GENERATION_PIPELINE.md
+
+Understand how commands execute.
+
+---
+
+### Step 6 — Start Building
+
+Follow this workflow:
+
+1. identify intent  
+2. map to command  
+3. run Maker  
+4. refine behavior  
+
+---
+
+## Quick Start Rule
+
+If something feels unclear, jump to the Full System Path.
+
+---
+
+# Full System Path
+
+Required for:
+
+- maintainers  
+- contributors  
+- architects  
+- AI systems  
+
+---
+
+### 1. TERMINOLOGY.md
+
+Defines the system language.
 
 ---
 
 ### 2. CONSTRAINTS.md
 
-Defines what is allowed and forbidden.
-
-You must understand:
-
-- dependency rules  
-- generation requirements  
-- identity boundaries  
-- forbidden patterns  
-
-Rule:
-
-Constraints are enforced, not optional.
+Defines all non-negotiable rules.
 
 ---
 
 ### 3. SYSTEM_DIAGRAM.md
 
-Provides the visual model of the system.
-
-You must understand:
-
-- layer relationships  
-- control plane vs application plane  
-- dependency direction  
-- pipeline flow  
-
-Rule:
-
-If you cannot visualize the system, do not proceed.
+Defines the visual system model.
 
 ---
 
 ### 4. ARCHITECTURE.md
 
-Defines the system structure.
-
-You must understand:
-
-- the four-layer model  
-- separation of concerns  
-- dependency direction  
-- application vs control plane  
+Defines the formal system structure.
 
 ---
 
 ### 5. REPOSITORY_TAXONOMY.md
 
-Defines how the system is organized.
-
-You must understand:
-
-- repository tiers (A, B, C, D, P)  
-- package roles  
-- governance boundaries  
+Defines repository organization and governance tiers.
 
 ---
 
@@ -109,50 +144,23 @@ You must understand:
 
 Defines how packages must be built.
 
-You must understand:
-
-- package structure  
-- dependency declaration  
-- integration patterns  
-- testing and documentation requirements  
-
 ---
 
 ### 7. MAKER_CONTRACT.md
 
-Defines how structure is generated.
-
-You must understand:
-
-- deterministic generation  
-- naming conventions  
-- file placement rules  
-- idempotency  
+Defines deterministic generation rules.
 
 ---
 
 ### 8. COMMAND_MAP.md
 
-Defines how intent becomes commands.
-
-You must understand:
-
-- intent classification  
-- package ownership resolution  
-- command selection  
+Defines intent → command mapping.
 
 ---
 
 ### 9. GENERATION_PIPELINE.md
 
-Defines how commands are executed.
-
-You must understand:
-
-- pipeline stages  
-- validation points  
-- execution flow  
-- audit model  
+Defines execution flow.
 
 ---
 
@@ -160,56 +168,29 @@ You must understand:
 
 Defines the control plane.
 
-You must understand:
-
-- Buffer responsibilities  
-- validation and orchestration  
-- AI coordination  
-- separation from runtime  
-
 ---
 
 ### 11. ARCHITECTURE_ENFORCEMENT.md
 
 Defines how rules are enforced.
 
-You must understand:
-
-- Dev Tools enforcement  
-- Maker enforcement  
-- pipeline enforcement  
-- Buffer enforcement  
-
 ---
 
 ### 12. TEAM_PERMISSION_MATRIX.md
 
-Defines access and control.
-
-You must understand:
-
-- repository permissions  
-- approval requirements  
-- AI contribution limits  
+Defines access and approval control.
 
 ---
 
 ### 13. ORG_CHARTER.md
 
-Defines the governing philosophy.
-
-You must understand:
-
-- mission and principles  
-- decision-making model  
-- evolution strategy  
-- authority structure  
+Defines system philosophy and governance model.
 
 ---
 
-## Execution Order (For Developers & AI)
+## Execution Model (All Paths)
 
-After reading, all work must follow:
+All work must follow:
 
 1. identify intent  
 2. classify intent  
@@ -238,18 +219,18 @@ Do not:
 
 AI must:
 
-- follow this read order before acting  
+- follow Full System Path before acting  
 - operate through COMMAND_MAP  
 - generate structure via Makers  
 - respect all constraints  
 
 Rule:
 
-If an AI system has not processed these documents in order, it is not safe to operate.
+AI that does not follow this order is unsafe.
 
 ---
 
-## For Contributors
+## Contributor Requirements
 
 Before submitting changes:
 
@@ -262,8 +243,12 @@ Before submitting changes:
 
 ## Guiding Principle
 
+Symfony-X is designed to be:
+
+- learned in order  
+- executed deterministically  
+- enforced automatically  
+
 Understanding precedes action.
 
-Symfony-X is designed to be learned in order and executed deterministically.
-
-If you skip steps, you will break the system.
+Skipping steps breaks the system.
