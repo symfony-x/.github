@@ -1,119 +1,107 @@
-# Repository Taxonomy
+# Symfony-X Repository Taxonomy
 
-Defines how repositories are classified within the Symfony-X organization.
+This document defines how repositories are organized within the Symfony-X organization.
 
----
-
-## Purpose
-
-The taxonomy exists to:
-
-- enforce architectural boundaries
-- prevent responsibility overlap
-- guide contributor decisions
-- enable automated validation
+Each repository must map to a single architectural role.
 
 ---
 
-## Classification Layers
-
-### Tier A — Foundation
-Minimal baseline.
+## Tier A — Foundation
 
 Examples:
 - symfony-x/skeleton
 
-Rule:
-- Must contain no application-specific logic
+Purpose:
+- minimal application baseline
+
+Rules:
+- no application logic
+- no identity
+- no capabilities
+- no application structure
 
 ---
 
-### Tier B — Identity
-Defines application nature.
+## Tier B — Identity
 
 Examples:
 - symfony-x/ui
 - symfony-x/api
 - symfony-x/mcp
 
+Purpose:
+- define application type
+
 Rules:
-- Must define interaction model
-- Must not depend on compositions
+- must define interaction model
+- must remain independent of application structure
+- must not depend on Application Structure repositories
 
 ---
 
-### Tier C — Capability Repositories
-Reusable functional modules.
+## Tier C — Capability
 
 Examples:
 - symfony-x/user
 - symfony-x/user-oauth
-- symfony-x/oauth-server
+- symfony-x/billing
+
+Purpose:
+- provide reusable functionality
 
 Rules:
-- Must remain identity-agnostic
-- Must not define application structure
-- Must not depend on compositions
+- must be identity-agnostic
+- must remain portable
+- must not define application structure
+- must not depend on Application Structure repositories
 
 ---
 
-### Tier D — Composition Repositories
-Pre-wired application surfaces.
+## Tier D — Application Structure
 
 Examples:
 - symfony-x/dashboard
 
+Purpose:
+- provide higher-level application structure
+
 Rules:
-- Must depend on identity
-- May assemble capabilities
-- Must remain additive
-- Must not redefine identity implicitly
+- must depend on Identity
+- may depend on Capability repositories
+- must remain additive
+- must not redefine application identity
 
 ---
 
-### Tier E — Governance
-System enforcement and tooling.
+## Tier E — Governance
 
 Examples:
 - symfony-x/maker
 - symfony-x/recipes
+- symfony-x/dev-tools
 - symfony-x/buffer
 
+Purpose:
+- enforce architecture
+- provide tooling
+
 Rules:
-- Must not contain business logic
-- Must not define runtime behavior
+- must not define application behavior
+- must not introduce application structure
 
 ---
 
-## Classification Decision Guide
+## Classification Guide
 
-When creating a new repository:
+When creating a repository:
 
-Ask:
-
-1. Does this define what the app *is*?
-→ Identity
-
-2. Does this add isolated functionality?
-→ Capability
-
-3. Does this create a usable application surface?
-→ Composition
-
-4. Does this enforce rules or generate structure?
-→ Governance
+- defines application type → Identity
+- provides reusable functionality → Capability
+- assembles a usable system → Application Structure
+- enforces or supports system rules → Governance
 
 ---
 
-## Anti-Patterns
+## Core Rule
 
-❌ Capability that assumes UI  
-❌ Composition that hides identity  
-❌ Identity that depends on composition  
-❌ Repo that mixes multiple layers  
-
----
-
-## Principle
-
-> Every repository must have a single architectural responsibility.
+> Each repository must have a single, unambiguous architectural role.
