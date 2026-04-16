@@ -2,24 +2,48 @@
 
 Symfony-X is a constraint-driven modular architecture built on explicit layering and deterministic composition.
 
+It is designed to prevent architectural drift by enforcing clear boundaries between system layers and eliminating implicit behavior.
+
+---
+
+## Philosophy
+
+Traditional Symfony applications tend to degrade over time due to:
+
+- implicit structure introduced by scaffolding
+- unclear separation between application concerns
+- features gradually redefining system behavior
+- increasing difficulty maintaining consistency
+
+Symfony-X addresses this by:
+
+- enforcing explicit system composition
+- separating identity, capability, and structure concerns
+- making architecture deterministic and inspectable
+
 ---
 
 ## Layer Model
 
 ### 1. Foundation
-Minimal Symfony skeleton.
+The minimal baseline of a Symfony application.
 
 Contains:
 - Kernel
-- Config baseline
-- No UI
-- No DB
-- No identity
+- Configuration baseline
+
+Does NOT contain:
+- UI
+- Persistence
+- Identity
+- Business logic
+
+This layer exists purely to support higher-level composition.
 
 ---
 
 ### 2. Identity Layer
-Defines the nature of the application.
+Defines what the application *is*.
 
 Examples:
 - UI (SXUC)
@@ -27,8 +51,11 @@ Examples:
 - MCP
 
 Responsibilities:
-- Interaction model
-- Runtime communication pattern
+- interaction model
+- runtime communication pattern
+- system behavior expectations
+
+Identity determines how the system communicates and evolves.
 
 ---
 
@@ -36,75 +63,123 @@ Responsibilities:
 Provides isolated, reusable functionality.
 
 Examples:
-- User system
+- user systems
 - OAuth integration
-- Billing
+- billing
 
 Characteristics:
-- Independent of identity
-- Portable across applications
-- Bounded responsibility
+- independent of identity
+- portable across applications
+- bounded responsibility
+
+Capabilities MUST:
+- not define application structure
+- not assume identity implicitly
+- not alter system behavior outside their scope
 
 ---
 
-### 4. Composition Layer
-Builds application surfaces by assembling identity and capabilities.
+### 4. Application Structure Layer
+Provides higher-level application structure built on identity.
 
 Examples:
-- Dashboard
+- dashboard
 
-Responsibilities:
-- Provide default application structure
-- Deliver ready-to-use UI or API surface
-- Assemble capabilities into cohesive experience
+These packages:
 
-Constraints:
-- Must depend on identity explicitly
-- Must not redefine identity implicitly
-- Must remain additive
+- depend on an Identity Package
+- may assemble multiple capabilities
+- provide a usable application surface
+
+They define how the system is experienced, not what the system fundamentally is.
 
 ---
 
-### 5. Governance Layer
-Controls correctness and consistency.
+## Application Surface
 
-Components:
-- Recipes
-- MakerBundle
-- Buffer
-- Dev tools
+An application surface is a user-facing system assembled by an Application Structure package.
+
+Examples:
+- dashboard UI
+- operational interfaces
+- administrative environments
+
+Application surfaces:
+- emerge from composition
+- do not define identity
+- do not replace capabilities
 
 ---
 
 ## Dependency Rules
 
 Allowed:
-- Composition → Identity
-- Composition → Capability
+- Application Structure → Identity
+- Application Structure → Capability
 - Capability → Foundation
 - Identity → Foundation
 
 Forbidden:
-- Capability → Composition
-- Identity → Composition
-- Foundation → Anything
+- Capability → Application Structure
+- Identity → Application Structure
+- Foundation → Any higher layer
+
+These rules ensure that:
+
+- structure does not leak downward
+- capabilities remain reusable
+- identity remains explicit
+
+---
+
+## Behavioral Model
+
+Under UI identity (SXUC):
+
+- Turbo handles immediate interaction
+- Mercure propagates state asynchronously
+
+This establishes an async-first system model:
+
+- immediate user feedback
+- deferred state resolution
+- eventual consistency
+
+This model ensures that the user interface reflects system state as it evolves, rather than blocking on synchronous operations.
 
 ---
 
 ## Installation Model
 
-Applications are built through composition:
+Applications are composed explicitly through package installation:
 
-composer require symfony-x/ui  
-composer require symfony-x/dashboard  
-composer require symfony-x/user  
+```bash
+composer require symfony-x/ui
+composer require symfony-x/dashboard
+composer require symfony-x/user
+```
+
+Result:
+
+- Identity defines application type
+- Application Structure defines application surface
+- Capabilities define functionality
+
+The final system is the result of composition, not generation.
+
+---
+
+## Constraints
+
+- Identity must always be explicit
+- Capabilities must remain portable
+- Application Structure must remain additive
+- No package may implicitly redefine application type
+
+Violating these constraints introduces architectural ambiguity and must be avoided.
 
 ---
 
 ## Core Principle
 
-Symfony-X is not scaffold-driven.
-
-It is:
-
-A layered composition system where application behavior emerges from explicit package installation.
+> System behavior emerges from explicit composition, not generated structure.
