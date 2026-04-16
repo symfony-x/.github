@@ -20,7 +20,7 @@ Even well-structured projects eventually accumulate:
 
 Symfony-X exists to solve this problem at the architectural level.
 
-Instead of relying on conventions or discipline alone, Symfony-X enforces:
+Instead of relying on convention or discipline alone, Symfony-X enforces:
 
 - explicit system composition
 - strict separation of concerns
@@ -33,7 +33,7 @@ Instead of relying on conventions or discipline alone, Symfony-X enforces:
 
 > Applications are not generated — they are composed.
 
-A Symfony-X application is the result of installing clearly defined packages, each with a specific role in the system.
+A Symfony-X application is built by installing packages that each have a clearly defined role.
 
 There is no hidden scaffolding, no implicit setup, and no ambiguity about how the system is constructed.
 
@@ -45,7 +45,7 @@ Symfony-X applications are built from three distinct concerns:
 
 ### Identity (What the app *is*)
 
-Defines how the application behaves and communicates.
+Defines how the system behaves and communicates.
 
 Examples:
 - `symfony-x/ui` (SXUC)
@@ -64,10 +64,9 @@ Identity determines:
 Reusable, bounded functionality.
 
 Examples:
-- user systems
-- billing
-- integrations
-- domain-specific modules
+- `symfony-x/user`
+- `symfony-x/user-oauth`
+- billing, integrations, domain modules
 
 Capabilities:
 - do not define application structure
@@ -111,20 +110,27 @@ The application emerges from composition — not from generated code.
 
 ---
 
-## SXUC (Symfony-X UI Component)
+## System Architecture
 
-SXUC is the default UI identity for Symfony-X.
+Symfony-X is built on a layered model:
 
-It enforces an async-first interaction model:
+- Foundation → minimal Symfony baseline  
+- Identity → defines application type  
+- Capabilities → provide reusable functionality  
+- Application Structure → defines system surface  
+- Governance → enforces architectural correctness  
 
-- Turbo handles immediate user interaction
-- Mercure propagates state asynchronously
+---
 
-This creates a system where:
+## Governance
 
-- user feedback is immediate
-- long-running operations are handled asynchronously
-- the UI reflects system state as it evolves
+Symfony-X enforces architecture through:
+
+- deterministic code generation (Makers)
+- architectural validation (Buffer)
+- constraint enforcement (CI and tooling)
+
+This ensures that invalid structures cannot be introduced.
 
 ---
 
@@ -161,28 +167,9 @@ Symfony-X is built on a small set of strict principles:
 
 - Identity must always be explicit
 - Capabilities must remain portable
-- Application structure must remain additive
+- Application Structure must remain additive
 - System behavior must be deterministic
 - Architecture must be enforceable
-
----
-
-## Getting Started
-
-Start by choosing an identity:
-
-```bash
-composer require symfony-x/ui
-```
-
-Then add structure and capabilities as needed:
-
-```bash
-composer require symfony-x/dashboard
-composer require symfony-x/user
-```
-
-From there, the system grows through composition.
 
 ---
 
