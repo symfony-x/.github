@@ -6,58 +6,90 @@ It replaces scaffolding and implicit structure with deterministic, install-drive
 
 ---
 
-## The Problem
+## Why Symfony-X Exists
 
-Modern Symfony applications drift because:
+Modern Symfony applications tend to degrade over time.
 
-- structure is generated once, then diverges
-- features blur into architecture
-- UI, API, and domain concerns mix over time
-- AI-generated code introduces inconsistency
+Even well-structured projects eventually accumulate:
 
-Symfony-X solves this by making architecture enforceable.
+- inconsistent architecture
+- blurred boundaries between concerns
+- duplicated patterns across teams and repositories
+- increasing difficulty introducing new features safely
+- drift caused by ad-hoc changes and AI-generated code
+
+Symfony-X exists to solve this problem at the architectural level.
+
+Instead of relying on conventions or discipline alone, Symfony-X enforces:
+
+- explicit system composition
+- strict separation of concerns
+- deterministic structure
+- predictable evolution over time
+
+---
+
+## The Core Idea
+
+> Applications are not generated — they are composed.
+
+A Symfony-X application is the result of installing clearly defined packages, each with a specific role in the system.
+
+There is no hidden scaffolding, no implicit setup, and no ambiguity about how the system is constructed.
 
 ---
 
 ## The Model
 
-Applications are built from three layers:
+Symfony-X applications are built from three distinct concerns:
 
-### 1. Identity (What the app *is*)
-Defines the interaction model.
+### Identity (What the app *is*)
+
+Defines how the application behaves and communicates.
 
 Examples:
-- symfony-x/ui (SXUC)
-- symfony-x/api
-- symfony-x/mcp
+- `symfony-x/ui` (SXUC)
+- `symfony-x/api`
+- `symfony-x/mcp`
+
+Identity determines:
+- interaction model
+- runtime behavior
+- system expectations
 
 ---
 
-### 2. Capabilities (What the app *can do*)
+### Capabilities (What the app *can do*)
+
 Reusable, bounded functionality.
 
 Examples:
 - user systems
 - billing
 - integrations
+- domain-specific modules
 
 Capabilities:
-- do not define structure
+- do not define application structure
 - do not assume identity
-- remain portable
+- remain portable across applications
 
 ---
 
-### 3. Application Structure
+### Application Structure (How the app is experienced)
+
 Some packages provide higher-level application structure built on identity.
 
-These packages:
-- depend on identity
-- assemble capabilities
-- provide a usable system out of the box
+Examples:
+- `symfony-x/dashboard`
 
-Example:
-- symfony-x/dashboard
+These packages:
+
+- depend on identity
+- assemble capabilities into a cohesive system
+- provide a usable application surface out of the box
+
+They define how the system is experienced, not what the system fundamentally is.
 
 ---
 
@@ -72,44 +104,94 @@ composer require symfony-x/user
 This produces:
 
 - an SXUC-driven UI application
-- a working dashboard surface
-- a user system
+- a working operational dashboard
+- a user system ready for integration
 
----
-
-## Core Principle
-
-> Applications are not generated — they are composed.
+The application emerges from composition — not from generated code.
 
 ---
 
 ## SXUC (Symfony-X UI Component)
 
-SXUC provides an async-first UI model:
+SXUC is the default UI identity for Symfony-X.
 
-- Turbo handles immediate interaction
+It enforces an async-first interaction model:
+
+- Turbo handles immediate user interaction
 - Mercure propagates state asynchronously
-- UI reflects system state as it evolves
+
+This creates a system where:
+
+- user feedback is immediate
+- long-running operations are handled asynchronously
+- the UI reflects system state as it evolves
 
 ---
 
-## Why This Matters
+## What This Enables
 
-Symfony-X enables:
+Symfony-X makes it possible to:
 
-- deterministic architecture
-- AI-safe code generation
-- composable system evolution
-- strict separation of concerns
+- build applications with deterministic architecture
+- evolve systems safely over time
+- integrate AI-assisted development without structural drift
+- reuse capabilities across multiple application types
+- maintain clear separation between system concerns
 
 ---
 
 ## What Symfony-X Is Not
 
-- not a starter template
-- not a bundle collection
-- not a UI kit
+Symfony-X is not:
 
-It is:
+- a starter template
+- a bundle collection
+- a UI framework
+- a scaffolding tool
 
-> a system for enforcing architectural correctness over time
+It does not generate applications.
+
+Instead, it defines how applications are **constructed and maintained**.
+
+---
+
+## Design Principles
+
+Symfony-X is built on a small set of strict principles:
+
+- Identity must always be explicit
+- Capabilities must remain portable
+- Application structure must remain additive
+- System behavior must be deterministic
+- Architecture must be enforceable
+
+---
+
+## Getting Started
+
+Start by choosing an identity:
+
+```bash
+composer require symfony-x/ui
+```
+
+Then add structure and capabilities as needed:
+
+```bash
+composer require symfony-x/dashboard
+composer require symfony-x/user
+```
+
+From there, the system grows through composition.
+
+---
+
+## Philosophy
+
+Symfony-X treats architecture as a first-class concern.
+
+Instead of relying on discipline to maintain structure, it encodes structure into the system itself.
+
+The result is:
+
+> a system that remains understandable, predictable, and stable — even as it evolves
