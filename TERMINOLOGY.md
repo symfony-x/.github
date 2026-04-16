@@ -1,106 +1,166 @@
 # Symfony-X Terminology
 
-## Core Concepts
+This document defines the core terms used throughout Symfony-X.
 
-### Foundation
-The minimal Symfony baseline.  
-Contains no UI, no persistence, no identity, and no business logic.
+The goal is to provide a shared vocabulary that enables consistent reasoning about system architecture.
 
 ---
 
-### Identity Package
-Defines the fundamental nature of the application.
+## Foundation
 
-Examples:
-- symfony-x/ui (SXUC)
-- symfony-x/api
-- symfony-x/mcp
+The minimal baseline of a Symfony application.
 
-Rules:
-- Identity must be explicitly installed
-- Identity defines runtime interaction model
-- Multiple identities must not conflict
+Includes:
+- kernel
+- configuration
 
----
+Does not include:
+- identity
+- capabilities
+- application structure
 
-### Capability Package
-A bounded, reusable package that provides isolated functionality.
-
-Examples:
-- symfony-x/user
-- symfony-x/user-oauth
-- symfony-x/billing
-
-Rules:
-- Must not define application identity
-- Must not assume UI/API unless explicitly optional
-- Must remain portable across identities
+Foundation exists only to support composition.
 
 ---
 
-### Composition Package
-An identity-dependent package that provides a pre-wired application surface.
+## Identity
+
+Defines what an application *is*.
 
 Examples:
-- symfony-x/dashboard
+- UI (SXUC)
+- API
+- MCP
+
+Identity determines:
+- how the system communicates
+- how it behaves at runtime
+- how it is interacted with
+
+Identity must always be explicit.
+
+---
+
+## Capability
+
+A bounded, reusable unit of functionality.
+
+Examples:
+- user system
+- billing module
+- integrations
 
 Characteristics:
-- Depends on an Identity Package
-- Provides default wiring and structure
-- Assembles runtime components and capabilities
-- Produces a usable application surface
+- independent of identity
+- portable across applications
+- focused on a single responsibility
 
-Rules:
-- Must be additive, not transformative
-- Must declare identity dependency explicitly
-- Must not silently redefine application identity
-
----
-
-### Application Surface
-The user-facing interface layer produced by a Composition Package.
+Capabilities:
+- do not define application structure
+- do not assume identity
+- do not alter system behavior beyond their scope
 
 ---
 
-### Recipe
-Install-time automation for package setup.
+## Application Structure
 
-Responsibilities:
-- Enable bundles
-- Configure routes/services
-- Provide default config
+A higher-level package that provides application structure built on identity.
 
-Non-Responsibilities:
-- Business logic
-- Runtime behavior
+Examples:
+- dashboard
+
+Application Structure packages:
+
+- depend on identity
+- assemble capabilities
+- provide a usable application surface
+
+They define how a system is experienced, not what the system fundamentally is.
 
 ---
 
-### Maker
+## Application Surface
+
+The user-facing system produced by an Application Structure package.
+
+Examples:
+- dashboard UI
+- administrative interface
+- operational console
+
+An application surface is the result of composition.
+
+---
+
+## Composition
+
+The process of building an application by combining:
+
+- identity
+- capabilities
+- application structure
+
+Symfony-X applications are composed, not generated.
+
+---
+
+## Recipe
+
+A mechanism for configuring an application during installation.
+
+Recipes:
+- enable bundles
+- configure services
+- set up routes
+
+Recipes do not define system behavior.
+
+---
+
+## Maker
+
 A deterministic code generator.
 
-Responsibilities:
-- Generate structure
-- Enforce conventions
-- Maintain architectural boundaries
+Makers:
+- create structure
+- enforce conventions
+- maintain consistency
+
+Makers do not define architecture.
 
 ---
 
-### Buffer
-An external governance layer that validates architectural correctness.
+## Buffer
 
-Responsibilities:
-- Validate structure
-- Enforce rules
-- Prevent drift
+A governance layer responsible for validating architectural correctness.
+
+The buffer ensures that:
+- constraints are respected
+- structure remains consistent
+- drift is detected early
 
 ---
 
-## Key Rules
+## Constraint
 
-- Identity must be explicit
-- Capabilities must remain isolated
-- Compositions may depend on identity and capabilities
-- Capabilities must NOT depend on compositions
-- Recipes configure, not define
-- Makers generate, not decide
+A rule that enforces architectural correctness.
+
+Constraints define:
+- allowed dependencies
+- forbidden relationships
+- required structure
+
+Constraints are enforced across the system.
+
+---
+
+## System Drift
+
+The gradual degradation of architectural consistency over time.
+
+Causes:
+- implicit structure
+- unclear boundaries
+- uncontrolled changes
+
+Symfony-X is designed to prevent drift through explicit composition and enforceable constraints.
