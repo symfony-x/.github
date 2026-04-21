@@ -104,6 +104,18 @@ The system should remain understandable and scalable as projects evolve.
 
 ---
 
+## Research and Model Development
+
+Symfony-X also includes model and dataset work aimed at improving AI-assisted Symfony development.
+
+The related Hugging Face space is:
+
+- [`symfony-last`](https://huggingface.co/symfony-last) — cutting-edge Symfony datasets and LoRAs being developed for specialized Symfony models grounded in current data
+
+This research track complements the broader goal of making Symfony development faster, more reliable, and better aligned with modern AI-assisted workflows.
+
+---
+
 ## What Comes Next
 
 As Symfony-X matures, the organization is expected to grow into a broader ecosystem around:
