@@ -1,184 +1,49 @@
 # Symfony-X
 
-Symfony-X is a constraint-driven architecture for building Symfony applications through explicit composition.
+Symfony-X is a constraint-driven Symfony architecture focused on explicit composition, deterministic installation, and modern Symfony development practices.
 
-It replaces scaffolding and implicit structure with deterministic, install-driven system design.
+The project is being reset around a smaller, clearer foundation so the package graph matches the actual architecture.
 
----
+## Principles
 
-## Why Symfony-X Exists
+Symfony-X currently centers on:
 
-Modern Symfony applications tend to degrade over time.
+- one canonical skeleton
+- reusable installable bundles
+- a separate recipes repository
+- LAST-first UI posture for interactive web applications
+- Symfony AI Mate for development-time AI assistance
+- runtime AI treated as a separate concern
 
-Even well-structured projects eventually accumulate:
+## Current Repository Plan
 
-- inconsistent architecture
-- blurred boundaries between concerns
-- duplicated patterns across teams and repositories
-- increasing difficulty introducing new features safely
-- drift caused by ad-hoc changes and AI-generated code
+### Phase 1
 
-Symfony-X exists to solve this problem at the architectural level.
+- `.github` — governance, profile, and default community health files
+- `skeleton` — canonical Symfony-X project shell
+- `recipes` — Symfony Flex recipes repository
+- `ui-bundle` — reusable Symfony-X UI install surface
+- `mate-extension` — Symfony-X development-time AI extension package
+- `standards` — reusable standards, analysis, and validation support
 
-Instead of relying on convention or discipline alone, Symfony-X enforces:
+### Phase 2
 
-- explicit system composition
-- strict separation of concerns
-- deterministic structure
-- predictable evolution over time
+- `api-bundle`
+- `user-bundle`
+- `user-oauth-bundle`
+- `dashboard-bundle`
+- `agent-runtime-bundle`
 
----
+## Architectural Direction
 
-## The Core Idea
+Symfony-X favors:
 
-> Applications are not generated — they are composed.
+- clear package responsibilities
+- fewer repos with stronger boundaries
+- recipes for deterministic wiring
+- modern Symfony conventions
+- AI assistance that works within architectural constraints
 
-A Symfony-X application is built by installing packages that each have a clearly defined role.
+## Status
 
-There is no hidden scaffolding, no implicit setup, and no ambiguity about how the system is constructed.
-
----
-
-## The Model
-
-Symfony-X applications are built from three distinct concerns:
-
-### Identity (What the app *is*)
-
-Defines how the system behaves and communicates.
-
-Examples:
-- `symfony-x/ui` (SXUC)
-- `symfony-x/api`
-- `symfony-x/mcp`
-
-Identity determines:
-- interaction model
-- runtime behavior
-- system expectations
-
----
-
-### Capabilities (What the app *can do*)
-
-Reusable, bounded functionality.
-
-Examples:
-- `symfony-x/user`
-- `symfony-x/user-oauth`
-- billing, integrations, domain modules
-
-Capabilities:
-- do not define application structure
-- do not assume identity
-- remain portable across applications
-
----
-
-### Application Structure (How the app is experienced)
-
-Some packages provide higher-level application structure built on identity.
-
-Examples:
-- `symfony-x/dashboard`
-
-These packages:
-
-- depend on identity
-- assemble capabilities into a cohesive system
-- provide a usable application surface out of the box
-
-They define how the system is experienced, not what the system fundamentally is.
-
----
-
-## Example
-
-```bash
-composer require symfony-x/ui
-composer require symfony-x/dashboard
-composer require symfony-x/user
-```
-
-This produces:
-
-- an SXUC-driven UI application
-- a working operational dashboard
-- a user system ready for integration
-
-The application emerges from composition — not from generated code.
-
----
-
-## System Architecture
-
-Symfony-X is built on a layered model:
-
-- Foundation → minimal Symfony baseline  
-- Identity → defines application type  
-- Capabilities → provide reusable functionality  
-- Application Structure → defines system surface  
-- Governance → enforces architectural correctness  
-
----
-
-## Governance
-
-Symfony-X enforces architecture through:
-
-- deterministic code generation (Makers)
-- architectural validation (Buffer)
-- constraint enforcement (CI and tooling)
-
-This ensures that invalid structures cannot be introduced.
-
----
-
-## What This Enables
-
-Symfony-X makes it possible to:
-
-- build applications with deterministic architecture
-- evolve systems safely over time
-- integrate AI-assisted development without structural drift
-- reuse capabilities across multiple application types
-- maintain clear separation between system concerns
-
----
-
-## What Symfony-X Is Not
-
-Symfony-X is not:
-
-- a starter template
-- a bundle collection
-- a UI framework
-- a scaffolding tool
-
-It does not generate applications.
-
-Instead, it defines how applications are **constructed and maintained**.
-
----
-
-## Design Principles
-
-Symfony-X is built on a small set of strict principles:
-
-- Identity must always be explicit
-- Capabilities must remain portable
-- Application Structure must remain additive
-- System behavior must be deterministic
-- Architecture must be enforceable
-
----
-
-## Philosophy
-
-Symfony-X treats architecture as a first-class concern.
-
-Instead of relying on discipline to maintain structure, it encodes structure into the system itself.
-
-The result is:
-
-> a system that remains understandable, predictable, and stable — even as it evolves
+This organization is actively being reset and reorganized. Archived repositories may remain for historical reference, but the repository plan documented in `.github` is the current direction.

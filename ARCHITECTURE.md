@@ -1,185 +1,158 @@
 # Symfony-X Architecture
 
-Symfony-X is a constraint-driven modular architecture built on explicit layering and deterministic composition.
+## Position
 
-It is designed to prevent architectural drift by enforcing clear boundaries between system layers and eliminating implicit behavior.
+Symfony-X is a constraint-driven architecture for building Symfony applications with a small, explicit, reusable package graph.
 
----
+It is designed to reduce architectural drift, keep installation deterministic, and make AI-assisted development work within defined boundaries.
 
-## Philosophy
+## Core Principles
 
-Traditional Symfony applications tend to degrade over time due to:
+### 1. One Canonical Skeleton
 
-- implicit structure introduced by scaffolding
-- unclear separation between application concerns
-- features gradually redefining system behavior
-- increasing difficulty maintaining consistency
+Symfony-X starts from one canonical application skeleton.
 
-Symfony-X addresses this by:
+The skeleton defines the baseline project shape and developer experience, but it is intentionally minimal. It should not assume every application needs the same feature set.
 
-- enforcing explicit system composition
-- separating identity, capability, and structure concerns
-- making architecture deterministic and inspectable
+### 2. Composition Over Monoliths
 
----
+Applications are assembled by installing focused packages rather than growing one large framework layer.
 
-## Layer Model
+Symfony-X favors:
 
-### 1. Foundation
-The minimal baseline of a Symfony application.
+- one project shell
+- installable bundles for reusable capabilities
+- recipes for deterministic wiring
+- standards/tooling for consistency
+- explicit package boundaries
 
-Contains:
-- Kernel
-- Configuration baseline
+### 3. Deterministic Installation
 
-Does NOT contain:
-- UI
-- Persistence
-- Identity
-- Business logic
+Installation should be reproducible.
 
-This layer exists purely to support higher-level composition.
+That means:
 
----
+- package boundaries should be clear
+- recipes should apply predictable configuration
+- optional features should remain optional
+- defaults should reduce ambiguity instead of increasing it
 
-### 2. Identity Layer
-Defines what the application *is*.
+### 4. LAST-First UI Doctrine
+
+Symfony-X treats the LAST stack as the default UI posture for modern Symfony applications:
+
+- **L**ive Components
+- **A**ssetMapper
+- **S**timulus
+- **T**urbo
+
+This is the default direction for interactive web applications, especially inside Symfony-X UI.
+
+### 5. Async UX by Design
+
+For interactive Symfony-X web applications:
+
+- Turbo governs the immediate request-response cycle
+- Mercure governs deferred real-time state propagation back into the UI
+- Messenger governs asynchronous work execution
+
+This split is the preferred default for responsive, async-first user experience.
+
+### 6. AI Within Defined Boundaries
+
+Symfony-X now treats **Symfony AI Mate** as the primary development-time AI integration surface.
+
+That means Symfony-X no longer centers AI-assisted development around a custom Maker scaffolding strategy.
+
+Instead:
+
+- Mate extensions provide tools, resources, prompts, and instructions
+- recipes provide deterministic installation and wiring
+- standards and validation protect architectural consistency
+- runtime AI remains a separate concern from development-time AI tooling
+
+## System Model
+
+Symfony-X thinks about application composition through three architectural lenses:
+
+### Identity
+
+What the application is.
+
+This includes the chosen application posture and install surface, not user authentication concerns.
+
+### Capabilities
+
+What the application can do.
+
+Capabilities are installed through packages and enabled through explicit composition.
+
+### Application Structure
+
+How the application is experienced.
+
+This includes web UI, API surfaces, operational dashboards, and other delivery shapes.
+
+## Package Model
+
+Symfony-X recognizes several package types:
+
+### Project
+
+A canonical application shell.
+
+Example:
+- `symfony-x/skeleton`
+
+### Bundle
+
+A reusable Symfony package intended for installation across multiple applications.
 
 Examples:
-- UI (SXUC)
-- API
-- MCP
+- `symfony-x/ui-bundle`
+- `symfony-x/api-bundle`
 
-Responsibilities:
-- interaction model
-- runtime communication pattern
-- system behavior expectations
+### Mate Extension
 
-Identity determines how the system communicates and evolves.
+A Composer package that extends Symfony AI Mate for development-time AI assistance.
 
----
+Example:
+- `symfony-x/mate-extension`
 
-### 3. Capability Layer
-Provides isolated, reusable functionality.
+### Standards / Tooling Package
 
-Examples:
-- user systems
-- OAuth integration
-- billing
+A reusable package for coding standards, analysis rules, CI conventions, and related enforcement.
 
-Characteristics:
-- independent of identity
-- portable across applications
-- bounded responsibility
+Example:
+- `symfony-x/standards`
 
-Capabilities MUST:
-- not define application structure
-- not assume identity implicitly
-- not alter system behavior outside their scope
+### Recipes Repository
 
----
+A dedicated repository for Symfony Flex recipes.
 
-### 4. Application Structure Layer
-Provides higher-level application structure built on identity.
+Example:
+- `symfony-x/recipes`
 
-Examples:
-- dashboard
+## Non-Goals
 
-These packages:
+Symfony-X does not aim to be:
 
-- depend on an Identity Package
-- may assemble multiple capabilities
-- provide a usable application surface
+- an everything-in-one monolith
+- a speculative package explosion
+- a parallel reinvention of Symfony's own official naming
+- an excuse for unconstrained AI code generation
 
-They define how the system is experienced, not what the system fundamentally is.
+## Current Architectural Direction
 
----
+The organization reset is intentionally conservative.
 
-## Application Surface
+The initial architecture centers on:
 
-An application surface is a user-facing system assembled by an Application Structure package.
+- `.github` for governance and defaults
+- `skeleton` as the canonical project shell
+- `recipes` as separate recipe infrastructure
+- `ui-bundle` as the reusable UI install surface
+- `mate-extension` as the development-time AI surface
+- `standards` as the reusable quality and rules package
 
-Examples:
-- dashboard UI
-- operational interfaces
-- administrative environments
-
-Application surfaces:
-- emerge from composition
-- do not define identity
-- do not replace capabilities
-
----
-
-## Dependency Rules
-
-Allowed:
-- Application Structure → Identity
-- Application Structure → Capability
-- Capability → Foundation
-- Identity → Foundation
-
-Forbidden:
-- Capability → Application Structure
-- Identity → Application Structure
-- Foundation → Any higher layer
-
-These rules ensure that:
-
-- structure does not leak downward
-- capabilities remain reusable
-- identity remains explicit
-
----
-
-## Behavioral Model
-
-Under UI identity (SXUC):
-
-- Turbo handles immediate interaction
-- Mercure propagates state asynchronously
-
-This establishes an async-first system model:
-
-- immediate user feedback
-- deferred state resolution
-- eventual consistency
-
-This model ensures that the user interface reflects system state as it evolves, rather than blocking on synchronous operations.
-
----
-
-## Installation Model
-
-Applications are composed explicitly through package installation:
-
-```bash
-composer require symfony-x/ui
-composer require symfony-x/dashboard
-composer require symfony-x/user
-```
-
-Result:
-
-- Identity defines application type
-- Application Structure defines application surface
-- Capabilities define functionality
-
-The final system is the result of composition, not generation.
-
----
-
-## Constraints
-
-- Identity must always be explicit
-- Capabilities must remain portable
-- Application Structure must remain additive
-- No package may implicitly redefine application type
-
-Violating these constraints introduces architectural ambiguity and must be avoided.
-
----
-
-## Core Principle
-
-> System behavior emerges from explicit composition, not generated structure.
+Additional packages should be created only after their boundaries are proven by actual use.

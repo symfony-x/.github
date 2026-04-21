@@ -1,107 +1,137 @@
 # Symfony-X Repository Taxonomy
 
-This document defines how repositories are organized within the Symfony-X organization.
+This document classifies the repository types used by Symfony-X.
 
-Each repository must map to a single architectural role.
+## 1. Organizational Governance Repository
 
----
+### Example
+- `symfony-x/.github`
 
-## Tier A — Foundation
+### Purpose
+Defines organization-wide defaults, public profile content, governance rules, repository planning, and canonical terminology.
 
-Examples:
-- symfony-x/skeleton
-
-Purpose:
-- minimal application baseline
-
-Rules:
-- no application logic
-- no identity
-- no capabilities
-- no application structure
+### Notes
+This is not an implementation repository.
 
 ---
 
-## Tier B — Identity
+## 2. Project Shell Repository
 
-Examples:
-- symfony-x/ui
-- symfony-x/api
-- symfony-x/mcp
+### Example
+- `symfony-x/skeleton`
 
-Purpose:
-- define application type
+### Purpose
+Provides the canonical application shell for new Symfony-X projects.
 
-Rules:
-- must define interaction model
-- must remain independent of application structure
-- must not depend on Application Structure repositories
-
----
-
-## Tier C — Capability
-
-Examples:
-- symfony-x/user
-- symfony-x/user-oauth
-- symfony-x/billing
-
-Purpose:
-- provide reusable functionality
-
-Rules:
-- must be identity-agnostic
-- must remain portable
-- must not define application structure
-- must not depend on Application Structure repositories
+### Characteristics
+- Composer `type: project`
+- intended as an application starting point
+- minimal baseline
+- not a reusable feature bundle
 
 ---
 
-## Tier D — Application Structure
+## 3. Recipes Infrastructure Repository
 
-Examples:
-- symfony-x/dashboard
+### Example
+- `symfony-x/recipes`
 
-Purpose:
-- provide higher-level application structure
+### Purpose
+Stores Symfony Flex recipes separate from package code.
 
-Rules:
-- must depend on Identity
-- may depend on Capability repositories
-- must remain additive
-- must not redefine application identity
-
----
-
-## Tier E — Governance
-
-Examples:
-- symfony-x/maker
-- symfony-x/recipes
-- symfony-x/dev-tools
-- symfony-x/buffer
-
-Purpose:
-- enforce architecture
-- provide tooling
-
-Rules:
-- must not define application behavior
-- must not introduce application structure
+### Characteristics
+- recipe-only repository
+- deterministic package wiring
+- versioned recipe structure
+- no application runtime code
 
 ---
 
-## Classification Guide
+## 4. Reusable Bundle Repository
 
-When creating a repository:
+### Examples
+- `symfony-x/ui-bundle`
+- `symfony-x/api-bundle`
+- `symfony-x/user-bundle`
 
-- defines application type → Identity
-- provides reusable functionality → Capability
-- assembles a usable system → Application Structure
-- enforces or supports system rules → Governance
+### Purpose
+Provides reusable Symfony runtime features that can be installed across multiple applications.
+
+### Characteristics
+- one primary installable package per repo
+- bundle class and Symfony integration
+- package name should describe installable responsibility
+- should not exist unless the boundary is proven
 
 ---
 
-## Core Rule
+## 5. Mate Extension Repository
 
-> Each repository must have a single, unambiguous architectural role.
+### Example
+- `symfony-x/mate-extension`
+
+### Purpose
+Provides Symfony-X-specific development-time AI tooling through Symfony AI Mate.
+
+### Characteristics
+- Composer library
+- discovered via Mate extension metadata
+- may include tools, resources, prompts, and instructions
+- not a runtime AI package
+
+---
+
+## 6. Standards / Tooling Repository
+
+### Example
+- `symfony-x/standards`
+
+### Purpose
+Provides reusable standards, analysis rules, and validation support for Symfony-X repositories.
+
+### Characteristics
+- usually not a Symfony bundle by default
+- focuses on code quality and consistency
+- may include CI conventions and architecture rules
+
+---
+
+## 7. Deferred Repository Concept
+
+### Examples
+- `core`
+- `runtime`
+- `kernel`
+- `contracts`
+- `buffer`
+
+### Purpose
+These names are acknowledged as concepts or historical explorations, but are not current approved repository types.
+
+### Characteristics
+- intentionally not recreated
+- may remain archived
+- require new justification before returning to the active plan
+
+## Approval Expectations by Type
+
+### Governance Repository
+- high review discipline
+- architectural review required for canonical doctrine changes
+
+### Project Shell
+- high review discipline
+- changes should favor stability and minimalism
+
+### Recipes Infrastructure
+- changes must be deterministic and installation-safe
+- recipe drift should be tightly controlled
+
+### Reusable Bundle
+- changes must preserve package responsibility and avoid scope creep
+
+### Mate Extension
+- changes must align with Symfony-X AI strategy and avoid unconstrained code generation behavior
+
+### Standards / Tooling
+- changes must improve consistency, not add ceremony without value

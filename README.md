@@ -1,103 +1,66 @@
-# Symfony-X Documentation
+# Symfony-X Org Governance
 
-This repository contains the governing documentation for the Symfony-X architecture.
+This repository contains the default community health files and the canonical governance documents for the Symfony-X organization.
 
-It defines the system model, terminology, constraints, and operational guidelines used across all Symfony-X repositories.
+It is the constitutional repository for the organization, not an implementation repository.
 
----
+## Purpose
 
-## Overview
+This repository exists to define:
 
-Symfony-X is a constraint-driven architecture built on:
+- the public organization profile
+- contribution, security, and support defaults
+- Symfony-X architectural doctrine
+- repository planning and naming rules
+- the current AI development strategy
 
-- explicit composition
-- strict separation of concerns
-- deterministic system structure
+## Scope
 
-Applications are constructed by combining:
+This repository **does not** contain:
 
-- Identity (what the system is)
-- Capabilities (what the system can do)
-- Application Structure (how the system is experienced)
+- application code
+- bundle code
+- Symfony Flex recipes
+- runtime implementation details
+- example applications
 
----
+Those belong in the installable repositories they describe.
 
-## Documentation Structure
+## Canonical Documents
 
-### Core Documents
+- `ARCHITECTURE.md` — top-level architectural doctrine
+- `TERMINOLOGY.md` — stable vocabulary for Symfony-X
+- `REPOSITORY_PLAN.md` — which repositories exist now, later, and not yet
+- `REPOSITORY_TAXONOMY.md` — repo categories and lifecycle rules
+- `PACKAGE_NAMING.md` — naming rules for repos, packages, bundles, and recipes
+- `AI_STRATEGY.md` — Symfony-X AI development and runtime doctrine
+- `GOVERNANCE.md` — organizational governance and decision model
 
-#### ARCHITECTURE.md
-Defines the system model, layers, and relationships.
+## Default Community Health Files
 
-#### TERMINOLOGY.md
-Defines the vocabulary used throughout the system.
+These files are intended to serve as organization-wide defaults where GitHub supports them:
 
-#### CONSTRAINTS.md
-Defines the rules that enforce architectural correctness.
+- `CODE_OF_CONDUCT.md`
+- `CONTRIBUTING.md`
+- `SECURITY.md`
+- `SUPPORT.md`
+- `PULL_REQUEST_TEMPLATE.md`
+- `.github/ISSUE_TEMPLATE/*`
 
----
+## Public Org Profile
 
-### Implementation Documents
+The public organization profile is defined by:
 
-#### PACKAGE_GUIDELINES.md
-Defines how packages must be designed.
+- `profile/README.md`
 
-#### REPOSITORY_TAXONOMY.md
-Defines how repositories are organized within the organization.
+## Current Direction
 
----
+Symfony-X is being reset around a smaller, clearer foundation:
 
-### System Behavior
+- one canonical skeleton
+- reusable Symfony bundles
+- a separate recipes repository
+- Symfony AI Mate for development-time AI assistance
+- runtime AI treated as a separate concern from development tooling
 
-#### COMMAND_MAP.md
-Defines how intent is resolved into deterministic actions.
-
-#### GENERATION_PIPELINE.md
-Defines how structure is generated within the system.
-
----
-
-### Enforcement & Governance
-
-#### BUFFER_ARCHITECTURE.md
-Defines the validation layer for architectural correctness.
-
-#### ARCHITECTURE_ENFORCEMENT.md
-Defines how constraints are enforced across the system.
-
-#### MAKER_CONTRACT.md
-Defines the contract for deterministic code generation.
-
----
-
-### Supporting Documents
-
-#### SYSTEM_DIAGRAM.md
-Visual representation of the system.
-
-#### OPERATING_MODES.md
-Defines different operational modes of the system.
-
-#### TEAM_PERMISSION_MATRIX.md
-Defines roles and permissions for contributors.
-
-#### READ_ORDER.md
-Defines recommended reading order for understanding the system.
-
----
-
-## Core Principle
-
-> Symfony-X defines how systems are constructed, not just how they are implemented.
-
----
-
-## Usage
-
-All Symfony-X repositories and packages must adhere to these documents.
-
-These documents serve as the canonical reference for:
-
-- system design
-- package development
-- architectural enforcement
+See `REPOSITORY_PLAN.md` and `AI_STRATEGY.md` for the current plan.
