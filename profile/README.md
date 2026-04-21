@@ -1,58 +1,54 @@
-```md id="14389"
 # Symfony-X
 
-**A new direction for modern Symfony application development.**
+> **A disciplined approach to modern Symfony application development.**
 
-Symfony-X is an opinionated initiative exploring how Symfony applications should be built in the AI era: with stronger architectural clarity, better defaults, cleaner composition, and a development experience designed for speed without sacrificing discipline.
-
-It is especially focused on **Turbo-driven web applications** built with modern Symfony patterns, where responsive UX, explicit architecture, and installable capabilities work together instead of fighting each other.
+Symfony-X is an opinionated initiative focused on building **Turbo-driven Symfony web applications** with stronger architectural clarity, better defaults, cleaner composition, and a development model suited to the AI era.
 
 The organization is currently in its **conceptual and foundation phase**.
 
-This is not a finished ecosystem yet.  
-It is the stage where the vision is being sharpened, the boundaries are being defined, and the foundation is being built correctly before expanding.
+This is not yet a complete ecosystem. It is the stage where the architectural model is being refined, the boundaries are being made explicit, and the foundation is being built carefully before wider expansion.
 
 ---
 
-## What is Symfony-X?
+## Purpose
 
-Symfony-X is an attempt to build a more deliberate path for Symfony development.
+Symfony-X exists to explore a better way to build modern Symfony applications.
 
 Not a pile of starter templates.  
 Not a collection of disconnected experiments.  
-Not framework magic for its own sake.
+Not abstraction for its own sake.
 
-The goal is a focused ecosystem built around:
+The aim is to create a focused ecosystem centered on:
 
 - a canonical starting point
 - install-driven composition
 - clear package boundaries
-- modern developer ergonomics
+- modern Symfony development practices
 - Turbo-driven application workflows
-- AI-compatible workflows
+- AI-compatible development workflows
 - long-term maintainability
 
-Symfony-X aims to make it easier to go from **idea → architecture → implementation** with less drift, less ambiguity, and more consistency.
+Symfony-X is designed to reduce drift, reduce ambiguity, and make the path from **idea → architecture → implementation** more deliberate and more consistent.
 
 ---
 
-## Why It Exists
+## Why Symfony-X
 
-Modern web application development is moving fast.
+Modern application development demands both speed and discipline.
 
-Developers are expected to ship quickly, integrate more capabilities, manage growing complexity, and increasingly work alongside AI tools. But speed without structure creates chaos, and flexibility without boundaries creates entropy.
+Teams are expected to deliver quickly, integrate more capabilities, manage growing complexity, and increasingly work with AI-assisted tooling. Speed without structure leads to disorder. Flexibility without boundaries leads to entropy.
 
-Symfony-X exists to explore a better balance:
+Symfony-X is built around a different premise:
 
-- **fast, but intentional**
-- **modern, but disciplined**
-- **AI-friendly, but architecturally explicit**
-- **Turbo-driven, but maintainable**
-- **composable, but coherent**
+> **The future of rapid development is not less architecture — it is better architecture with better tooling.**
 
-The belief behind Symfony-X is simple:
+The project is intended to balance:
 
-> the future of rapid development is not less architecture — it is better architecture with better tooling.
+- **speed** without losing rigor
+- **modern development** without sacrificing clarity
+- **AI assistance** without dissolving architecture
+- **Turbo-driven UX** without compromising maintainability
+- **modularity** without fragmentation
 
 ---
 
@@ -60,76 +56,68 @@ The belief behind Symfony-X is simple:
 
 Symfony-X is in **active foundation-building mode**.
 
-The current repositories represent the earliest layer of that work:
+The current repositories represent the first layer of that work:
 
-- **`.github`** — architectural direction, governance, planning, and project doctrine
+- **`.github`** — architecture, governance, planning, and project doctrine
 - **`skeleton`** — the future canonical starting point for applications
 - **`recipes`** — installation and automated wiring behavior
 
-Right now, the public org is focused on defining the system properly before expanding into a larger package ecosystem.
+At this stage, the public organization is intentionally focused on defining the system correctly before expanding into a broader package ecosystem.
 
-That means the vision is ahead of the implementation surface for the moment — intentionally.
+That means the vision currently extends further than the implementation surface — by design.
 
-The priority is to build something durable, not to create surface area before the structure is ready.
+The priority is to build something durable, coherent, and worth building on.
 
 ---
 
-## The Vision
+## Core Direction
 
-Symfony-X is being shaped into a disciplined ecosystem for building Symfony applications with:
+Symfony-X is being shaped around several core principles.
 
-### Clear Structure
-Applications should have understandable boundaries and intentional composition.
+### Architectural Clarity
+
+Applications should be composed from explicit parts with understandable boundaries.
 
 ### Better Defaults
-The starting point should help developers move faster without creating long-term mess.
 
-### Turbo-Driven UX
-Web applications should feel fast, responsive, and modern by default, with Turbo playing a central role in the interaction model.
+The starting point should accelerate development without creating long-term disorder.
 
-### Modular Growth
-Capabilities should be installable and composable rather than improvised ad hoc.
+### Turbo-Driven Web Applications
 
-### Modern Symfony Development
-The developer experience should reflect current best practices, not legacy habits.
+Symfony-X is especially focused on web applications built around **Turbo-driven interaction patterns**, where responsiveness, progressive enhancement, and server-driven UI work as first-class concerns.
+
+### Install-Driven Composition
+
+Capabilities should be added through intentional installation and wiring, not accumulated through ad hoc drift.
+
+### Modern Symfony Practices
+
+The ecosystem should reflect current Symfony best practices and encourage a clean, maintainable development model.
 
 ### AI-Aware Development
-AI should accelerate development, not dissolve architecture. Symfony-X is being designed with that tension in mind.
 
-### Strong Foundations
-The system should remain understandable, maintainable, and scalable as projects evolve.
+AI should enhance productivity while remaining compatible with explicit architecture, auditability, and developer control.
+
+### Long-Term Maintainability
+
+The system should remain understandable and scalable as projects evolve.
 
 ---
 
 ## What Comes Next
 
-As Symfony-X matures, the organization is expected to expand into a more complete ecosystem around:
+As Symfony-X matures, the organization is expected to grow into a broader ecosystem around:
 
 - the canonical skeleton
-- install recipes and package automation
+- installation recipes and package automation
 - shared standards and conventions
 - Turbo-driven UI and experience layers
 - AI-assisted development tooling
-- additional extension packages with clearly scoped roles
+- additional extension packages with clearly scoped responsibilities
 
-The focus right now is not on rushing to maximum repo count.
+The goal is not to expand quickly for appearances.
 
-It is on making sure the ecosystem grows from a foundation that is actually worth building on.
-
----
-
-## Follow the Buildout
-
-Symfony-X is still early, but this is the stage where the direction is being set.
-
-If this vision resonates with you:
-
-- **Star the repositories**
-- **Follow the organization**
-- **Check back soon**
-
-The foundation is being laid now.  
-The broader ecosystem comes next.
+The goal is to expand carefully from a foundation that is structurally sound.
 
 ---
 
@@ -139,7 +127,7 @@ The broader ecosystem comes next.
 - [`recipes`](https://github.com/symfony-x/recipes) — installation and wiring automation
 - [`.github`](https://github.com/symfony-x/.github) — architecture, governance, and planning
 
-Archived repositories are being retained for historical reference during the reset.
+Archived repositories are retained for historical reference during the reset.
 
 ---
 
@@ -147,11 +135,19 @@ Archived repositories are being retained for historical reference during the res
 
 To understand the direction of Symfony-X, begin with the documentation in [`.github`](https://github.com/symfony-x/.github).
 
-That repository defines the current architectural thinking and the principles guiding the next phase of the org.
+That repository defines the architectural model, governance, and planning principles guiding the next phase of the organization.
 
 ---
 
-**Symfony-X is early by design.**  
-**The foundation is being built now.**  
-**Star it. Follow it. Check back soon.**
-```
+## Follow the Project
+
+Symfony-X is still early, but this is the stage where the direction is being established.
+
+If the vision resonates with you:
+
+- **Star the repositories**
+- **Follow the organization**
+- **Check back soon**
+
+The foundation is being built now.  
+The ecosystem comes next.
