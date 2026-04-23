@@ -21,9 +21,10 @@ Symfony-X currently centers on:
 
 - `.github` — governance, profile, and default community health files
 - `skeleton` — canonical Symfony-X project shell
+- `workbench` — Mate-enabled maintainer development application
 - `recipes` — Symfony Flex recipes repository
 - `ui-bundle` — reusable Symfony-X UI install surface
-- `mate-extension` — Symfony-X development-time AI extension package
+- `ai-mate-extension` — Symfony-X development-time AI extension package
 - `standards` — reusable standards, analysis, and validation support
 
 ### Phase 2

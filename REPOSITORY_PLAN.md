@@ -45,7 +45,7 @@ Purpose:
 Status:
 - create now
 
-### 5. `symfony-x/mate-extension`
+### 5. `symfony-x/ai-mate-extension`
 
 Purpose:
 - Symfony-X development-time AI integration
@@ -62,6 +62,16 @@ Purpose:
 - static analysis baselines
 - architectural rule support
 - CI and validation conventions
+
+Status:
+- create now
+
+### 7. `symfony-x/workbench`
+
+Purpose:
+- maintainer-facing Symfony-X development application
+- Mate-enabled environment for Symfony-X contributors
+- working application for developing and testing Symfony-X packages
 
 Status:
 - create now

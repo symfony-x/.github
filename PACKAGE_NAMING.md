@@ -10,7 +10,7 @@ A package name should describe what a developer installs, not the internal mecha
 
 Good:
 - `ui-bundle`
-- `mate-extension`
+- `ai-mate-extension`
 - `standards`
 
 Bad:
@@ -73,7 +73,7 @@ Suffix Symfony AI Mate extension packages with:
 - `-mate-extension`
 
 Examples:
-- `symfony-x/mate-extension`
+- `symfony-x/ai-mate-extension`
 - future specialized extensions should follow the same pattern unless there is a compelling reason not to
 
 ### Standards / Tooling Packages
@@ -126,9 +126,10 @@ Package segment:
 ## Current Approved Initial Names
 
 - `symfony-x/skeleton`
+- `symfony-x/workbench`
 - `symfony-x/recipes`
 - `symfony-x/ui-bundle`
-- `symfony-x/mate-extension`
+- `symfony-x/ai-mate-extension`
 - `symfony-x/standards`
 
 ## Approved Deferred Names
