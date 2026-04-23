@@ -14,6 +14,14 @@ This is not yet a complete ecosystem. It is the stage where the architectural mo
 
 Symfony-X exists to explore a better way to build modern Symfony applications.
 
+- `.github` — governance, profile, and default community health files
+- `skeleton` — canonical Symfony-X project shell
+- `workbench` — Mate-enabled maintainer development application
+- `recipes` — Symfony Flex recipes repository
+- `ui-bundle` — reusable Symfony-X UI install surface
+- `ai-mate-extension` — Symfony-X development-time AI extension package
+- `standards` — reusable standards, analysis, and validation support
+
 Not a pile of starter templates.  
 Not a collection of disconnected experiments.  
 Not abstraction for its own sake.

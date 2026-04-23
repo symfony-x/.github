@@ -12,6 +12,12 @@ The canonical Symfony-X application shell.
 
 This is the baseline starting point for new projects and should remain minimal.
 
+## Workbench
+
+The Symfony-X maintainer development application.
+
+This is the Mate-enabled environment used by Symfony-X contributors. It is distinct from Skeleton, which is the public project shell for new applications.
+
 ## Bundle
 
 A reusable Symfony package intended to be installed across multiple applications.

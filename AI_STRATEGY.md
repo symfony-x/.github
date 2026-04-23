@@ -50,7 +50,7 @@ Symfony-X should treat runtime AI as its own package concern and not blur it wit
 
 ## Repository Implications
 
-### `symfony-x/mate-extension`
+### `symfony-x/ai-mate-extension`
 
 This repository is the primary home for Symfony-X development-time AI integration.
 
@@ -62,6 +62,12 @@ It should contain Symfony-X-specific:
 - instructions
 - local development guidance
 - architecture-aware assistance surfaces
+
+### `symfony-x/workbench`
+
+This repository is the Mate-enabled maintainer development application.
+
+It is the primary working environment for Symfony-X contributors and is the expected context for Symfony-X-specific Mate tooling.
 
 ### `symfony-x/agent-runtime-bundle`
 

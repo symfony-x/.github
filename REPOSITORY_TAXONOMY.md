@@ -68,7 +68,7 @@ Provides reusable Symfony runtime features that can be installed across multiple
 ## 5. Mate Extension Repository
 
 ### Example
-- `symfony-x/mate-extension`
+- `symfony-x/ai-mate-extension`
 
 ### Purpose
 Provides Symfony-X-specific development-time AI tooling through Symfony AI Mate.
@@ -96,7 +96,23 @@ Provides reusable standards, analysis rules, and validation support for Symfony-
 
 ---
 
-## 7. Deferred Repository Concept
+## 7. Maintainer Workbench Repository
+
+### Example
+- `symfony-x/workbench`
+
+### Purpose
+Provides the Mate-enabled development environment used by Symfony-X contributors and maintainers.
+
+### Characteristics
+- Composer `type: project`
+- not a public starter app or install surface
+- Mate-enabled by design for Symfony-X development
+- distinct from `skeleton`, which is the public project shell for new applications
+
+---
+
+## 8. Deferred Repository Concept
 
 ### Examples
 - `core`
@@ -135,3 +151,7 @@ These names are acknowledged as concepts or historical explorations, but are not
 
 ### Standards / Tooling
 - changes must improve consistency, not add ceremony without value
+
+### Maintainer Workbench
+- changes must serve Symfony-X contributor and maintainer workflow
+- should not grow into a public install surface or example app

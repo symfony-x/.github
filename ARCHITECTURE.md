@@ -117,7 +117,7 @@ Examples:
 A Composer package that extends Symfony AI Mate for development-time AI assistance.
 
 Example:
-- `symfony-x/mate-extension`
+- `symfony-x/ai-mate-extension`
 
 ### Standards / Tooling Package
 
@@ -150,9 +150,10 @@ The initial architecture centers on:
 
 - `.github` for governance and defaults
 - `skeleton` as the canonical project shell
+- `workbench` as the Mate-enabled maintainer development application
 - `recipes` as separate recipe infrastructure
 - `ui-bundle` as the reusable UI install surface
-- `mate-extension` as the development-time AI surface
+- `ai-mate-extension` as the development-time AI surface
 - `standards` as the reusable quality and rules package
 
 Additional packages should be created only after their boundaries are proven by actual use.
