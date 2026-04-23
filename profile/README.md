@@ -16,7 +16,7 @@ Symfony-X exists to explore a better way to build modern Symfony applications.
 
 - `.github` — governance, profile, and default community health files
 - `skeleton` — canonical Symfony-X project shell
-- `workbench` — Mate-enabled maintainer development application
+- `workbench` — maintainer host application; validates the package-and-recipe path inside a real Symfony-X environment
 - `recipes` — Symfony Flex recipes repository
 - `ui-bundle` — reusable Symfony-X UI install surface
 - `ai-mate-extension` — Symfony-X development-time AI extension package
@@ -97,6 +97,8 @@ Symfony-X is especially focused on web applications built around **Turbo-driven 
 ### Install-Driven Composition
 
 Capabilities should be added through intentional installation and wiring, not accumulated through ad hoc drift.
+
+In Symfony-X, new reusable behavior enters through a package, gets installed and wired through a recipe, and is validated inside a real Symfony host application. The `workbench` exists specifically to serve as that validation host. This keeps reusable capability out of application-local code and ensures architectural additions are composable from the start.
 
 ### Modern Symfony Practices
 

@@ -14,9 +14,11 @@ This is the baseline starting point for new projects and should remain minimal.
 
 ## Workbench
 
-The Symfony-X maintainer development application.
+The Symfony-X maintainer host application.
 
-This is the Mate-enabled environment used by Symfony-X contributors. It is distinct from Skeleton, which is the public project shell for new applications.
+Workbench exists to validate that the package-and-recipe installation path works correctly inside a real Symfony application. It is where Symfony-X contributors develop and verify packages and recipes before they reach users.
+
+It is not a public starter app, not a reusable bundle, and not a product application. It is distinct from Skeleton, which is the public project shell for new applications.
 
 ## Bundle
 
@@ -28,7 +30,7 @@ In Symfony-X, reusable runtime features should normally be delivered as bundles.
 
 A Symfony Flex recipe that applies deterministic installation-time wiring for a package.
 
-Recipes are not package code. They belong in the recipes repository.
+Recipes are the installation and wiring contract for a package. They are not the capability itself; the capability lives in the package. Recipes belong in the recipes repository, separate from package code.
 
 ## Mate Extension
 

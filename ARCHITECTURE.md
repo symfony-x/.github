@@ -130,6 +130,8 @@ Example:
 
 A dedicated repository for Symfony Flex recipes.
 
+Recipes provide the installation and wiring contract for packages. They are not the capability itself; the capability lives in the package. This separation keeps installation deterministic and package boundaries clean.
+
 Example:
 - `symfony-x/recipes`
 
@@ -150,10 +152,12 @@ The initial architecture centers on:
 
 - `.github` for governance and defaults
 - `skeleton` as the canonical project shell
-- `workbench` as the Mate-enabled maintainer development application
+- `workbench` as the maintainer host application for validating the package-and-recipe path inside a real Symfony environment
 - `recipes` as separate recipe infrastructure
 - `ui-bundle` as the reusable UI install surface
 - `ai-mate-extension` as the development-time AI surface
 - `standards` as the reusable quality and rules package
 
 Additional packages should be created only after their boundaries are proven by actual use.
+
+New reusable behavior should enter the ecosystem through a package, be wired through a recipe, and be validated inside a real Symfony host application before wider adoption. `workbench` serves as that host. This keeps architectural additions composable and prevents reusable capability from being introduced ad hoc inside application-local code.

@@ -69,9 +69,9 @@ Status:
 ### 7. `symfony-x/workbench`
 
 Purpose:
-- maintainer-facing Symfony-X development application
-- Mate-enabled environment for Symfony-X contributors
-- working application for developing and testing Symfony-X packages
+- maintainer host application for validating the package-and-recipe install path inside a real Symfony-X environment
+- Mate-enabled working environment for Symfony-X contributors
+- integration target for Symfony-X packages under active development
 
 Status:
 - create now

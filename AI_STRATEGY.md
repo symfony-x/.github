@@ -65,9 +65,9 @@ It should contain Symfony-X-specific:
 
 ### `symfony-x/workbench`
 
-This repository is the Mate-enabled maintainer development application.
+This repository is the Mate-enabled maintainer host application.
 
-It is the primary working environment for Symfony-X contributors and is the expected context for Symfony-X-specific Mate tooling.
+It is the primary working environment for Symfony-X contributors and the expected context for Symfony-X-specific Mate tooling. It is also the integration host where contributors validate that Symfony-X packages and recipes install and wire correctly inside a real Symfony application.
 
 ### `symfony-x/agent-runtime-bundle`
 

@@ -102,13 +102,14 @@ Provides reusable standards, analysis rules, and validation support for Symfony-
 - `symfony-x/workbench`
 
 ### Purpose
-Provides the Mate-enabled development environment used by Symfony-X contributors and maintainers.
+Provides the integration and validation environment where Symfony-X contributors confirm that the package-and-recipe installation path works correctly inside a real Symfony host application. It is also the primary working environment for Symfony-X-specific Mate tooling.
 
 ### Characteristics
 - Composer `type: project`
-- not a public starter app or install surface
+- not a public starter app, not a package, not a reusable bundle
 - Mate-enabled by design for Symfony-X development
 - distinct from `skeleton`, which is the public project shell for new applications
+- reusable behavior that originates here should be extracted into a package
 
 ---
 
@@ -153,5 +154,6 @@ These names are acknowledged as concepts or historical explorations, but are not
 - changes must improve consistency, not add ceremony without value
 
 ### Maintainer Workbench
-- changes must serve Symfony-X contributor and maintainer workflow
+- changes must serve Symfony-X contributor and maintainer workflow, or improve validation of the package-and-recipe install path
 - should not grow into a public install surface or example app
+- should not accumulate reusable behavior that belongs in a dedicated package

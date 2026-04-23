@@ -125,12 +125,12 @@ Package segment:
 
 ## Current Approved Initial Names
 
-- `symfony-x/skeleton`
-- `symfony-x/workbench`
-- `symfony-x/recipes`
-- `symfony-x/ui-bundle`
-- `symfony-x/ai-mate-extension`
-- `symfony-x/standards`
+- `symfony-x/skeleton` — project shell (public starter app)
+- `symfony-x/workbench` — project shell (maintainer validation host; not a package)
+- `symfony-x/recipes` — recipes infrastructure
+- `symfony-x/ui-bundle` — reusable bundle
+- `symfony-x/ai-mate-extension` — Mate extension
+- `symfony-x/standards` — standards/tooling
 
 ## Approved Deferred Names
 
