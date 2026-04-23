@@ -108,9 +108,11 @@ Example:
 
 A reusable Symfony package intended for installation across multiple applications.
 
+Naming follows a three-part convention: Composer `symfony-x/<name>-bundle`, repo `<name>-bundle`, PHP class `SymfonyX<Name>Bundle`.
+
 Examples:
-- `symfony-x/ui-bundle`
-- `symfony-x/api-bundle`
+- `symfony-x/ui-bundle` → `SymfonyXUiBundle`
+- `symfony-x/api-bundle` → `SymfonyXApiBundle`
 
 ### Mate Extension
 

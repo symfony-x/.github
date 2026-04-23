@@ -26,6 +26,14 @@ A reusable Symfony package intended to be installed across multiple applications
 
 In Symfony-X, reusable runtime features should normally be delivered as bundles.
 
+Symfony-X bundles follow a three-part naming convention:
+
+- Composer: `symfony-x/<name>-bundle`
+- Repo: `<name>-bundle`
+- PHP class: `SymfonyX<Name>Bundle`
+
+Example: `symfony-x/ui-bundle` → repo `ui-bundle` → class `SymfonyXUiBundle`
+
 ## Recipe
 
 A Symfony Flex recipe that applies deterministic installation-time wiring for a package.

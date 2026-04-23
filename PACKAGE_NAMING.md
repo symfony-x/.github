@@ -34,7 +34,32 @@ then the repository should be:
 
 - `symfony-x/ui-bundle`
 
-### 4. Reserve Abstract Names
+### 4. Bundle Names Are a Three-Part Convention
+
+Reusable Symfony bundles must follow all three layers consistently:
+
+| Layer | Pattern | Example |
+|---|---|---|
+| Composer package | `symfony-x/<name>-bundle` | `symfony-x/ui-bundle` |
+| GitHub repository | `<name>-bundle` | `ui-bundle` |
+| PHP bundle class | `SymfonyX<Name>Bundle` | `SymfonyXUiBundle` |
+
+All three must align. The repo name is the Composer package segment. The PHP class capitalizes each word and prefixes with `SymfonyX`.
+
+### 5. Reserve `-bundle` for Reusable Symfony Bundles Only
+
+The `-bundle` suffix is reserved for repositories that deliver a reusable Symfony bundle class.
+
+Application repositories must not use `-bundle`:
+- correct: `skeleton`, `workbench`
+
+Recipe repositories must not use `-bundle`:
+- correct: `recipes`
+
+Mate extension repositories must not use `-bundle`:
+- correct: `ai-mate-extension`
+
+### 6. Reserve Abstract Names
 
 Do not create abstract top-level names until the boundary is proven in practice.
 
@@ -56,21 +81,25 @@ Example:
 
 ### Reusable Symfony Bundles
 
-Suffix reusable Symfony feature packages with:
+Reusable Symfony bundles follow the three-part convention established in Core Rule 4:
 
-- `-bundle`
+- Composer: `symfony-x/<name>-bundle`
+- Repo: `<name>-bundle`
+- PHP class: `SymfonyX<Name>Bundle`
 
 Examples:
-- `symfony-x/ui-bundle`
-- `symfony-x/api-bundle`
-- `symfony-x/user-bundle`
-- `symfony-x/dashboard-bundle`
+- `symfony-x/ui-bundle` → repo `ui-bundle` → class `SymfonyXUiBundle`
+- `symfony-x/api-bundle` → repo `api-bundle` → class `SymfonyXApiBundle`
+- `symfony-x/user-bundle` → repo `user-bundle` → class `SymfonyXUserBundle`
+- `symfony-x/dashboard-bundle` → repo `dashboard-bundle` → class `SymfonyXDashboardBundle`
 
 ### Mate Packages
 
 Suffix Symfony AI Mate extension packages with:
 
 - `-mate-extension`
+
+Mate extensions are not Symfony bundles. They do not register a Symfony bundle class and must not use the `-bundle` suffix.
 
 Examples:
 - `symfony-x/ai-mate-extension`

@@ -50,15 +50,16 @@ Stores Symfony Flex recipes separate from package code.
 ## 4. Reusable Bundle Repository
 
 ### Examples
-- `symfony-x/ui-bundle`
-- `symfony-x/api-bundle`
-- `symfony-x/user-bundle`
+- `symfony-x/ui-bundle` → class `SymfonyXUiBundle`
+- `symfony-x/api-bundle` → class `SymfonyXApiBundle`
+- `symfony-x/user-bundle` → class `SymfonyXUserBundle`
 
 ### Purpose
 Provides reusable Symfony runtime features that can be installed across multiple applications.
 
 ### Characteristics
 - one primary installable package per repo
+- Composer: `symfony-x/<name>-bundle`; repo: `<name>-bundle`; PHP class: `SymfonyX<Name>Bundle`
 - bundle class and Symfony integration
 - package name should describe installable responsibility
 - should not exist unless the boundary is proven
