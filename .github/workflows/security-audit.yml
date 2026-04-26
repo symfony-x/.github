@@ -1,0 +1,126 @@
+name: Daily Security Audit
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    name: Scan for Secrets and Personal Information
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan for secrets with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+  contributor-audit:
+    name: Audit Default Branch Contributors
+    runs-on: ubuntu-latest
+    env:
+      ORG: symfony-x
+      # Space-separated GitHub logins of approved non-org contributors.
+      # Add logins here when an outside collaborator has been explicitly approved.
+      APPROVED_CONTRIBUTORS: ''
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify contributors are authorized
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          DEFAULT_BRANCH="${{ github.event.repository.default_branch }}"
+          # 25-hour window (instead of 24) gives a 1-hour buffer for schedule drift
+          # so no commits are silently skipped between daily runs.
+          SINCE=$(date -u -d '25 hours ago' '+%Y-%m-%dT%H:%M:%SZ')
+
+          echo "## Contributor Audit" >> "$GITHUB_STEP_SUMMARY"
+          echo "Auditing commits on \`${DEFAULT_BRANCH}\` since \`${SINCE}\`." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          # Fetch org members (paginated; stops on the first empty page).
+          # Each page holds up to 100 results; there is no hard cap on pages.
+          ORG_MEMBERS=""
+          PAGE=1
+          while true; do
+            PAGE_MEMBERS=$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              "/orgs/${ORG}/members?per_page=100&page=${PAGE}" \
+              --jq '.[].login' 2>/dev/null || true)
+            [ -z "$PAGE_MEMBERS" ] && break
+            ORG_MEMBERS=$(printf '%s\n%s' "$ORG_MEMBERS" "$PAGE_MEMBERS")
+            PAGE=$((PAGE + 1))
+          done
+
+          if [ -z "$ORG_MEMBERS" ]; then
+            echo "⚠️ Could not retrieve org member list — GITHUB_TOKEN may lack \`read:org\` permission." >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::Could not retrieve org member list. Skipping membership check."
+            exit 0
+          fi
+
+          # Combine org members with explicitly approved contributors
+          AUTHORIZED=$(printf '%s\n%s' "$ORG_MEMBERS" "$APPROVED_CONTRIBUTORS" | tr ' ' '\n' | sort -u | grep -v '^$')
+
+          echo "**Authorized identities (org members + approved contributors):** $(echo "$AUTHORIZED" | wc -l)" >> "$GITHUB_STEP_SUMMARY"
+
+          # Fetch commits on the default branch since the cutoff (paginated).
+          COMMITS_JSON='[]'
+          PAGE=1
+          while true; do
+            PAGE_JSON=$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/${{ github.repository }}/commits?sha=${DEFAULT_BRANCH}&since=${SINCE}&per_page=100&page=${PAGE}" \
+              2>/dev/null || echo '[]')
+            PAGE_COUNT=$(echo "$PAGE_JSON" | jq 'length')
+            [ "$PAGE_COUNT" -eq 0 ] && break
+            COMMITS_JSON=$(jq -s '.[0] + .[1]' <(echo "$COMMITS_JSON") <(echo "$PAGE_JSON"))
+            PAGE=$((PAGE + 1))
+          done
+
+          COMMIT_COUNT=$(echo "$COMMITS_JSON" | jq 'length')
+          echo "**Commits inspected:** ${COMMIT_COUNT}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$COMMIT_COUNT" -eq 0 ]; then
+            echo "✅ No commits in the audit window — nothing to verify." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          # Extract author logins (may be null for unlinked accounts) and emails
+          SUSPICIOUS_LINES=""
+          while IFS=$'\t' read -r SHA LOGIN EMAIL NAME; do
+            if [ -z "$LOGIN" ] || [ "$LOGIN" = "null" ]; then
+              # Unlinked GitHub account — flag by email/name
+              SUSPICIOUS_LINES+="- ⚠️ Commit \`${SHA}\` by **${NAME}** (\`${EMAIL}\`) has no linked GitHub account\n"
+              continue
+            fi
+
+            if ! echo "$AUTHORIZED" | grep -qx "$LOGIN"; then
+              SUSPICIOUS_LINES+="- 🚨 Commit \`${SHA}\` by **@${LOGIN}** is not an org member or approved contributor\n"
+            fi
+          done < <(echo "$COMMITS_JSON" | jq -r '.[] | [.sha[0:7], (.author.login // "null"), .commit.author.email, .commit.author.name] | @tsv')
+
+          if [ -n "$SUSPICIOUS_LINES" ]; then
+            echo "### ⚠️ Suspicious Commits Detected" >> "$GITHUB_STEP_SUMMARY"
+            echo -e "$SUSPICIOUS_LINES" >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::One or more commits were made by unauthorized or unlinked accounts. See the job summary for details."
+            exit 1
+          else
+            echo "### ✅ All contributors are authorized" >> "$GITHUB_STEP_SUMMARY"
+            echo "Every commit in the audit window was made by an org member or approved contributor."
+          fi
