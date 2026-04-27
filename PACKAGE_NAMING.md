@@ -2,6 +2,10 @@
 
 This document defines the naming conventions for Symfony-X repositories and packages.
 
+Symfony-X is an independent community project built for Symfony applications. It is not affiliated with, endorsed by, sponsored by, or maintained by Symfony SAS or the Symfony project. Symfony is a trademark of Symfony SAS.
+
+---
+
 ## Core Rules
 
 ### 1. Use Responsibility-Based Names
@@ -9,16 +13,20 @@ This document defines the naming conventions for Symfony-X repositories and pack
 A package name should describe what a developer installs, not the internal mechanism used to implement it.
 
 Good:
+
 - `ui-bundle`
+- `dashboard-bundle`
 - `ai-mate-extension`
 - `standards`
 
-Bad:
+Bad unless the boundary is proven:
+
 - `runtime`
 - `core`
 - `kernel`
-- `mcp`  
-  unless the package is truly about MCP as a protocol surface
+- `contracts`
+- `mcp`
+- `maker`
 
 ### 2. One Primary Installable Package Per Repository
 
@@ -34,41 +42,27 @@ then the repository should be:
 
 - `symfony-x/ui-bundle`
 
-### 4. Bundle Names Are a Three-Part Convention
-
-Reusable Symfony bundles must follow all three layers consistently:
-
-| Layer | Pattern | Example |
-|---|---|---|
-| Composer package | `symfony-x/<name>-bundle` | `symfony-x/ui-bundle` |
-| GitHub repository | `<name>-bundle` | `ui-bundle` |
-| PHP bundle class | `SymfonyX<Name>Bundle` | `SymfonyXUiBundle` |
-
-All three must align. The repo name is the Composer package segment. The PHP class capitalizes each word and prefixes with `SymfonyX`.
-
-### 5. Reserve `-bundle` for Reusable Symfony Bundles Only
-
-The `-bundle` suffix is reserved for repositories that deliver a reusable Symfony bundle class.
-
-Application repositories must not use `-bundle`:
-- correct: `skeleton`, `workbench`
-
-Recipe repositories must not use `-bundle`:
-- correct: `recipes`
-
-Mate extension repositories must not use `-bundle`:
-- correct: `ai-mate-extension`
-
-### 6. Reserve Abstract Names
+### 4. Reserve Abstract Names
 
 Do not create abstract top-level names until the boundary is proven in practice.
 
 Reserved / deferred examples:
+
 - `core`
 - `runtime`
 - `kernel`
 - `contracts`
 - `buffer`
+- `maker`
+- `mcp`
+
+### 5. Avoid Official-Sounding Claims
+
+Package names and descriptions must not imply that Symfony-X is official Symfony, a Symfony distribution, a certification authority, or a replacement for Symfony.
+
+Symfony-X packages are independent packages built for Symfony applications.
+
+---
 
 ## Package Type Naming
 
@@ -77,40 +71,73 @@ Reserved / deferred examples:
 Use a simple, direct name.
 
 Example:
+
 - `symfony-x/skeleton`
+
+### Maintainer Workbench
+
+Use a simple, direct name.
+
+Example:
+
+- `symfony-x/workbench`
+
+The workbench is a maintainer host application, not a reusable package.
 
 ### Reusable Symfony Bundles
 
-Reusable Symfony bundles follow the three-part convention established in Core Rule 4:
+Suffix reusable Symfony feature packages with:
 
-- Composer: `symfony-x/<name>-bundle`
-- Repo: `<name>-bundle`
-- PHP class: `SymfonyX<Name>Bundle`
+- `-bundle`
 
 Examples:
-- `symfony-x/ui-bundle` → repo `ui-bundle` → class `SymfonyXUiBundle`
-- `symfony-x/api-bundle` → repo `api-bundle` → class `SymfonyXApiBundle`
-- `symfony-x/user-bundle` → repo `user-bundle` → class `SymfonyXUserBundle`
-- `symfony-x/dashboard-bundle` → repo `dashboard-bundle` → class `SymfonyXDashboardBundle`
 
-### Mate Packages
+- `symfony-x/ui-bundle`
+- `symfony-x/dashboard-bundle`
+- `symfony-x/api-bundle`
+- `symfony-x/user-bundle`
 
-Suffix Symfony AI Mate extension packages with:
+### UX-Oriented Symfony Bundles
+
+Use `-bundle` naming, not vague frontend package naming.
+
+Preferred:
+
+- `symfony-x/ui-bundle`
+
+Avoid:
+
+- `symfony-x/ui-component`
+- `symfony-x/components`
+- `symfony-x/frontend`
+
+### AI/Mate Packages
+
+Suffix Symfony-X Mate extension packages with:
 
 - `-mate-extension`
 
-Mate extensions are not Symfony bundles. They do not register a Symfony bundle class and must not use the `-bundle` suffix.
-
 Examples:
+
 - `symfony-x/ai-mate-extension`
-- future specialized extensions should follow the same pattern unless there is a compelling reason not to
+
+Future specialized extensions should follow the same pattern unless there is a compelling reason not to.
+
+### Optional Vendor Adapters
+
+Vendor-specific adapters may use names that make the adapter role explicit.
+
+They must not imply that the vendor is required by Symfony-X core architecture.
 
 ### Standards / Tooling Packages
 
 Use a direct responsibility-based name.
 
 Examples:
+
 - `symfony-x/standards`
+
+---
 
 ## Naming Doctrine
 
@@ -118,6 +145,8 @@ Symfony-X should prefer names that are:
 
 - explicit
 - stable
+- Symfony-native
+- Composer-aligned
 - ecosystem-aligned
 - install-surface oriented
 
@@ -125,46 +154,88 @@ Symfony-X should avoid names that are:
 
 - overly theoretical
 - protocol-centric without need
-- likely to collide conceptually with Symfony official packages
+- likely to collide conceptually with official Symfony packages
 - unclear to developers browsing the org
+- suggestive of official Symfony status
+
+---
 
 ## Symfony-X Terminology vs Package Naming
 
 Not every strong architecture term should become a repo name.
 
 Example:
-- **SXUC** is a useful architecture term
-- **ui-bundle** is the preferred install/package name
+
+- **SXUC** is a useful architecture term.
+- **ui-bundle** is the preferred install/package name.
 
 Likewise:
-- **Identity** is a strong architecture term
-- it should not automatically become the package name for auth/user code
+
+- **Identity** is a strong architecture term.
+- It should not automatically become the package name for auth/user code.
+
+---
 
 ## Composer Naming Expectations
 
 Composer package names should remain lowercase and follow the conventional `vendor/package` form.
 
 Symfony-X vendor:
+
 - `symfony-x`
 
 Package segment:
+
 - lowercase
 - hyphenated where needed
 - responsibility based
 
+---
+
 ## Current Approved Initial Names
 
-- `symfony-x/skeleton` — project shell (public starter app)
-- `symfony-x/workbench` — project shell (maintainer validation host; not a package)
+- `symfony-x/skeleton` — project shell for new applications
+- `symfony-x/workbench` — maintainer validation host; not a package
 - `symfony-x/recipes` — recipes infrastructure
-- `symfony-x/ui-bundle` — reusable bundle
-- `symfony-x/ai-mate-extension` — Mate extension
+- `symfony-x/ui-bundle` — reusable Symfony UX-oriented bundle
+- `symfony-x/ai-mate-extension` — vendor-neutral Mate/MCP extension
 - `symfony-x/standards` — standards/tooling
+
+---
+
+## Current Planned Names
+
+- `symfony-x/dashboard-bundle` — reusable operational UI surface
+
+---
 
 ## Approved Deferred Names
 
 - `symfony-x/api-bundle`
 - `symfony-x/user-bundle`
 - `symfony-x/user-oauth-bundle`
-- `symfony-x/dashboard-bundle`
 - `symfony-x/agent-runtime-bundle`
+- `symfony-x/mate-observer`
+
+---
+
+## Avoided Public Language
+
+Avoid package descriptions using:
+
+- official Symfony
+- certified Symfony-X
+- Symfony distribution
+- Symfony replacement
+- next Symfony
+- autonomous AI generator
+- software factory
+
+Prefer:
+
+- independent Symfony ecosystem project
+- built for Symfony applications
+- Symfony-native package composition
+- package-first architecture
+- Turbo-driven web applications
+- AI/Mate developer assistance

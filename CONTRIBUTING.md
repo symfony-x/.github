@@ -1,82 +1,126 @@
 # Contributing to Symfony-X
 
-Thanks for your interest in contributing.
+Thank you for your interest in Symfony-X.
 
-Symfony-X is still in an architecture-forming stage, so contributions should prioritize clarity, stability, and semantic integrity over volume.
+Symfony-X is an independent community project built for Symfony applications. It is not affiliated with, endorsed by, sponsored by, or maintained by Symfony SAS or the Symfony project. Symfony is a trademark of Symfony SAS.
 
-## Before You Contribute
+Symfony-X is early and intentionally conservative. Contributions are most useful when they strengthen the architecture, clarify the doctrine, reduce ambiguity, or validate the package-and-recipe model.
 
-Please read these documents first:
+---
 
-- `ARCHITECTURE.md`
-- `TERMINOLOGY.md`
-- `REPOSITORY_PLAN.md`
-- `PACKAGE_NAMING.md`
-- `AI_STRATEGY.md`
+## Project Posture
 
-## Contribution Priorities
+Symfony-X is not trying to replace Symfony.
 
-Helpful contributions usually do one or more of the following:
+It is a package-first architecture project built on Symfony's public extension points.
 
-- clarify package boundaries
-- improve deterministic installation and wiring
-- strengthen naming consistency
-- improve standards, validation, or developer experience
-- fix bugs without introducing architectural ambiguity
-- improve documentation precision
+The goal is disciplined composition:
 
-## Discuss First When the Change Is Structural
+- Composer packages
+- Symfony bundles
+- Flex recipes
+- LAST-stack defaults
+- Turbo-driven UX
+- focused AI/Mate developer tooling
+- predictable, inspectable application growth
 
-Open an architecture discussion before implementing changes that affect:
+---
 
-- repository creation
-- package naming
-- package boundaries
-- AI development strategy
-- canonical terminology
-- top-level architecture doctrine
+## Contribution Principles
 
-## Pull Request Expectations
+Good contributions should:
 
-Pull requests should be:
+- preserve Symfony-native terminology
+- improve clarity
+- reduce drift
+- respect package boundaries
+- avoid speculative abstractions
+- avoid unnecessary repository creation
+- keep automation explicit and reviewable
+- preserve the Symfony/Symfony-X distinction
 
-- focused
-- explicit about purpose
-- aligned with current doctrine
-- small enough to review carefully
+Avoid contributions that:
 
-Please include:
-- what changed
-- why it changed
-- whether it affects architecture, naming, or repo boundaries
-- any follow-up work that should happen separately
+- imply Symfony-X is official Symfony
+- introduce freeform AI-driven structure
+- add project-local reusable behavior that belongs in a package
+- create packages before boundaries are proven
+- add ceremony without clear value
+- privilege one AI vendor in core docs or architecture
 
-## What to Avoid
+---
 
-Please avoid submitting changes that:
+## Before Opening a Pull Request
 
-- create speculative abstractions
-- duplicate an existing package responsibility
-- blur development-time AI and runtime AI concerns
-- invent new terminology without strong justification
-- treat convenience as a reason to erode architectural clarity
+Please check:
 
-## Code Style and Standards
+- Does this align with `ARCHITECTURE.md`?
+- Does this preserve terms from `TERMINOLOGY.md`?
+- Does this follow `PACKAGE_NAMING.md`?
+- Does this match the current `REPOSITORY_PLAN.md`?
+- Does this keep Symfony-X independent and unofficial?
+- Does this avoid vendor-specific AI assumptions in core docs?
 
-Repository-specific standards will vary, but Symfony-X generally prefers:
+---
 
-- modern Symfony conventions
-- clear package boundaries
-- minimal configuration drift
-- deterministic installation behavior
-- explicit naming
+## Package-First Rule
 
-## Security
+Reusable behavior should enter Symfony-X through a package whenever possible.
 
-Do not open public issues for security vulnerabilities.
+If runtime Symfony integration is needed, the package should usually be a Symfony bundle.
 
-Please use the process described in `SECURITY.md`.
+If setup or wiring is needed, it should be automated through a Flex recipe.
 
-## Conduct
+If host application files must be generated, generation should be explicit, deterministic, minimal, and reviewable.
 
-Participation in Symfony-X is governed by `CODE_OF_CONDUCT.md`.
+---
+
+## Documentation Contributions
+
+Documentation is part of the architecture.
+
+When editing docs:
+
+- keep tone disciplined, practical, and respectful
+- avoid hype
+- avoid official-sounding Symfony claims
+- avoid “software factory” language
+- avoid autonomous AI claims
+- use vendor-neutral AI language in core docs
+- prefer Symfony-native terms over invented terms
+
+---
+
+## Code Contributions
+
+Code contributions should be scoped to the relevant repository.
+
+The `.github` repository is not an implementation repository.
+
+Implementation belongs in packages such as:
+
+- `skeleton`
+- `workbench`
+- `ui-bundle`
+- `ai-mate-extension`
+- `dashboard-bundle`
+- `standards`
+
+---
+
+## AI-Assisted Contributions
+
+AI-assisted work is welcome when it remains inside the project constraints.
+
+AI-generated contributions should be reviewed carefully for:
+
+- architectural drift
+- invented terminology
+- incorrect Symfony assumptions
+- vendor lock-in
+- vague abstractions
+- hidden mutation behavior
+
+The Symfony-X rule remains:
+
+> **AI reasons. Symfony-X commands mutate.**

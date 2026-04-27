@@ -1,48 +1,41 @@
-# Symfony-X Code of Conduct
+# Code of Conduct
 
-## Our Standard
+Symfony-X is an independent community project built for Symfony applications.
 
-Symfony-X is a technical project, but it still depends on constructive human collaboration.
+We want Symfony-X spaces to be respectful, practical, and focused on improving modern Symfony application development.
 
-Participants are expected to be respectful, honest, and focused on improving the work.
+Symfony-X is not affiliated with, endorsed by, sponsored by, or maintained by Symfony SAS or the Symfony project. Symfony is a trademark of Symfony SAS.
+
+---
 
 ## Expected Behavior
 
-Examples of expected behavior include:
+Participants are expected to:
 
-- discussing ideas in good faith
-- criticizing ideas without attacking people
-- welcoming correction and clarification
-- keeping technical disagreement substantive
-- respecting project boundaries and decisions
-- avoiding noise, harassment, and personal hostility
+- be respectful and constructive
+- assume good faith where reasonable
+- focus criticism on ideas, code, architecture, and documentation
+- respect the Symfony ecosystem and its maintainers
+- avoid personal attacks, harassment, or abusive behavior
+- keep discussions useful for contributors and users
+
+---
 
 ## Unacceptable Behavior
 
-Examples of unacceptable behavior include:
+Unacceptable behavior includes:
 
 - harassment or intimidation
 - personal attacks
-- discriminatory or demeaning language
-- bad-faith disruption
-- repeated attempts to derail discussion
-- knowingly misrepresenting another participant's position
+- discriminatory or abusive comments
+- deliberate disruption of discussions
+- bad-faith misrepresentation of Symfony-X as official Symfony
+- hostile behavior toward Symfony, Symfony maintainers, Symfony SAS, or other ecosystem projects
+
+---
 
 ## Enforcement
 
-Project maintainers may take action they consider appropriate to protect the quality of collaboration and the health of the project space.
+Maintainers may moderate issues, discussions, pull requests, or other project spaces to preserve a respectful environment.
 
-This may include:
-- requesting changes in behavior
-- limiting participation
-- closing or locking discussions
-- removing content
-- restricting contribution access
-
-## Scope
-
-This code of conduct applies in Symfony-X repositories, issues, pull requests, discussions, and other project-managed collaboration spaces.
-
-## Reporting
-
-If there is a conduct problem, contact the project maintainer through the most appropriate available channel.
+Actions may include warnings, comment deletion, issue locking, or blocking participation where necessary.

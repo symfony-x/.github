@@ -1,40 +1,36 @@
 ## Summary
 
-Describe the change clearly.
+Describe the change and why it is needed.
 
-## Why this change
+## Repository / Package Boundary
 
-Explain the problem being solved or the value being added.
+- [ ] This change belongs in this repository.
+- [ ] This change does not introduce reusable behavior that belongs in a package.
+- [ ] This change does not create a new repository/package boundary without justification.
 
-## Scope
+## Symfony-X Doctrine
 
-- [ ] Documentation only
-- [ ] Tooling / standards
-- [ ] Recipe-related
-- [ ] Bundle/package behavior
-- [ ] Architecture / governance
-- [ ] Other
+- [ ] This change aligns with `ARCHITECTURE.md`.
+- [ ] This change preserves terms from `TERMINOLOGY.md`.
+- [ ] This change follows `PACKAGE_NAMING.md` where naming is involved.
+- [ ] This change aligns with `REPOSITORY_PLAN.md`.
 
-## Architectural impact
+## Symfony / Symfony-X Distinction
 
-Does this change affect any of the following?
+- [ ] This change does not imply Symfony-X is official Symfony.
+- [ ] This change does not describe Symfony-X as a Symfony distribution, replacement, fork, or certification authority.
+- [ ] Public-facing text preserves the independent/unofficial project posture where relevant.
 
-- [ ] Repository plan
-- [ ] Package naming
-- [ ] Package boundaries
-- [ ] AI strategy
-- [ ] Canonical terminology
-- [ ] None of the above
+## AI/Mate Guardrails
 
-## Validation
+- [ ] This change does not privilege a specific AI vendor in core architecture or docs.
+- [ ] This change does not encourage freeform AI mutation as the default workflow.
+- [ ] Any mutation behavior is explicit, bounded, and reviewable.
 
-What did you verify?
+## Testing / Validation
 
-- [ ] I reviewed the relevant canonical docs
-- [ ] I kept the change focused
-- [ ] I avoided introducing speculative abstractions
-- [ ] I documented follow-up work separately if needed
+Explain how this was tested or reviewed.
 
-## Notes for reviewers
+## Notes
 
-Anything reviewers should pay special attention to?
+Add any additional context for reviewers.

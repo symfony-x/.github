@@ -1,39 +1,81 @@
 # Security Policy
 
-## Reporting a Vulnerability
+Symfony-X takes security seriously, especially anywhere AI-assisted tooling, recipes, generated files, local development tools, or agent experiments are involved.
 
-Please do **not** report security vulnerabilities through public GitHub issues.
+Symfony-X is an independent community project built for Symfony applications. It is not affiliated with, endorsed by, sponsored by, or maintained by Symfony SAS or the Symfony project. Symfony is a trademark of Symfony SAS.
 
-Instead, report vulnerabilities privately to the project maintainer through the designated security contact method for the repository or organization.
+---
 
-If a dedicated security contact is later published, use that contact method first.
+## Reporting Security Issues
 
-## What to Include
+Please do not disclose security vulnerabilities publicly before maintainers have had a chance to review them.
 
-Please include:
+Use the repository's private vulnerability reporting feature where available, or contact the maintainers through the appropriate private channel listed for the specific repository.
 
-- affected repository and package name
-- affected version or commit if known
-- vulnerability description
-- impact assessment
-- reproduction steps or proof of concept when safe to share
-- suggested mitigation if you have one
+Include:
 
-## Response Expectations
+- affected repository
+- affected package/version if known
+- reproduction steps
+- impact summary
+- suggested mitigation if available
 
-Symfony-X aims to:
-
-- acknowledge reports promptly
-- assess severity and impact
-- coordinate a fix responsibly
-- disclose appropriately after a fix is available when relevant
+---
 
 ## Scope
 
-This policy applies to active Symfony-X repositories.
+This policy applies to Symfony-X repositories and packages, including:
 
-Archived repositories may not receive the same response or remediation guarantees.
+- skeleton setup concerns
+- recipes and installation wiring
+- bundle behavior
+- development tooling
+- AI/Mate tooling
+- standards and validation tooling
+- sandboxed agent experiments
 
-## Responsible Disclosure
+This policy does not replace Symfony's own security reporting process for Symfony framework vulnerabilities.
 
-Please avoid public disclosure until the issue has been reviewed and a coordinated response is possible.
+---
+
+## AI and Agent Security
+
+AI-assisted tooling must not be treated as a trusted host-level operator.
+
+Agentic workflows and external runtimes must be sandboxed by default.
+
+Expected posture:
+
+- Docker sandbox for agent runtimes
+- restricted egress
+- no raw host access
+- no production secrets
+- no writable access to real Symfony-X repositories by default
+- explicit user control for mutation
+- auditable command output
+
+Symfony-X should prefer one agent/runtime at a time by default. Advanced users may opt into more complex setups intentionally.
+
+---
+
+## Recipes and Generated Files
+
+Recipes and generators can affect host applications.
+
+Security-sensitive changes should be:
+
+- explicit
+- deterministic
+- minimal
+- reviewable
+- reversible where practical
+
+Recipes should not silently introduce unsafe defaults.
+
+---
+
+## Supported Versions
+
+Symfony-X is currently pre-stable and in foundation-building mode.
+
+Security expectations apply to active repositories, but formal version support windows may be defined later per package.

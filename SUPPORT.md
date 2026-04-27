@@ -1,32 +1,48 @@
 # Support
 
-## What This File Is For
+Symfony-X is currently in foundation-building mode.
 
-This document explains where to ask for help and how to route different kinds of questions.
+Symfony-X is an independent community project built for Symfony applications. It is not affiliated with, endorsed by, sponsored by, or maintained by Symfony SAS or the Symfony project. Symfony is a trademark of Symfony SAS.
 
-## Use GitHub Issues For
+---
 
-- reproducible bugs
-- concrete documentation corrections
-- focused feature requests
-- architecture discussions that fit the issue templates
+## Project Support
 
-## Do Not Use GitHub Issues For
+Use GitHub issues in the relevant Symfony-X repository for:
 
-- private security reports
-- vague brainstorming without a concrete proposal
-- support requests that belong to a specific closed or internal environment
+- documentation corrections
+- package boundary questions
+- recipe behavior questions
+- Symfony-X-specific installation issues
+- architecture clarification
+- reproducible bugs in Symfony-X packages
 
-## Architecture Questions
+For organization-level doctrine, terminology, naming, or repository planning, use the `.github` repository.
 
-If your question affects naming, repository boundaries, package responsibilities, or doctrine, use the architecture discussion issue template.
+---
 
-## Security Questions
+## Not Symfony Support
 
-Please follow `SECURITY.md` for vulnerability reporting.
+Symfony-X cannot provide official Symfony support.
 
-## General Note
+For Symfony framework issues, use the appropriate Symfony documentation, community channels, or official support paths.
 
-Symfony-X is intentionally opinionated.
+Symfony-X issues should be limited to Symfony-X repositories, packages, recipes, documentation, and tooling.
 
-The best support requests are concrete, scoped, and aligned with the current documented plan.
+---
+
+## Security Issues
+
+Do not open public issues for security vulnerabilities.
+
+See `SECURITY.md` for reporting expectations.
+
+---
+
+## Early Project Expectations
+
+Symfony-X is early.
+
+Support should be treated as best-effort while the foundation is being established.
+
+The project is not yet a complete ecosystem, and some repositories described in the doctrine may still be planned or deferred.
