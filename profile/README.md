@@ -318,7 +318,7 @@ The first priority is human-readable doctrine, package boundaries, recipes, Mate
 
 Related research space:
 
-- [`symfony-last`](https://huggingface.co/symfony-last) — Symfony-focused datasets and model experiments
+- Hugging Face [`symfony-x`](https://huggingface.co/symfony-x) — Symfony-focused datasets and model experiments
 
 ---
 
