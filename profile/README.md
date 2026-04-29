@@ -1,62 +1,84 @@
 # Symfony-X
 
-> **A disciplined approach to modern Symfony application development.**
+> **A disciplined, package-first architecture project for modern Symfony applications.**
 
-Symfony-X is an opinionated initiative focused on building **Turbo-driven Symfony web applications** with stronger architectural clarity, better defaults, cleaner composition, and a development model suited to the AI era.
+Symfony-X is an independent community project focused on composing modern Symfony applications through **Composer packages, Symfony bundles, Flex recipes, LAST-stack defaults, and focused AI/Mate developer tooling**.
 
-The organization is currently in its **conceptual and foundation phase**.
+Symfony-X is currently in its **foundation-building phase**.
 
-This is not yet a complete ecosystem. It is the stage where the architectural model is being refined, the boundaries are being made explicit, and the foundation is being built carefully before wider expansion.
+The goal is not to replace Symfony, fork Symfony, or present Symfony-X as an official Symfony distribution. The goal is to build a disciplined, inspectable, Symfony-native composition layer for developers who want stronger defaults, clearer package boundaries, and better tooling for modern application development.
+
+---
+
+## Symfony and Symfony-X
+
+Symfony-X is built **for Symfony**.
+
+It is not Symfony itself.
+
+Symfony-X is not affiliated with, endorsed by, sponsored by, or maintained by Symfony SAS or the Symfony project. Symfony is a trademark of Symfony SAS.
+
+Symfony-X exists as an independent ecosystem project that uses Symfony’s public extension points:
+
+- Composer packages
+- Symfony bundles
+- Flex recipes
+- Maker-style generators
+- Symfony UX conventions
+- AssetMapper
+- Turbo
+- Stimulus
+- Live Components
+- Mercure
+- Messenger
+- Symfony-native developer tooling
+
+Symfony-X should be understood as:
+
+> **An opinionated, unofficial package composition project for building modern Symfony applications.**
+
+It should not be understood as:
+
+- an official Symfony distribution
+- a Symfony replacement
+- a fork of Symfony
+- a certification authority
+- a framework competing with Symfony
+- an autonomous AI app generator
+
+Symfony-X depends on Symfony being strong, stable, and extensible. The project’s purpose is to build on that foundation carefully.
 
 ---
 
 ## Purpose
 
-Symfony-X exists to explore a better way to build modern Symfony applications.
+Symfony-X exists to explore a better way to compose modern Symfony applications.
 
-- `.github` — governance, profile, and default community health files
-- `skeleton` — canonical Symfony-X project shell
-- `workbench` — maintainer host application; validates the package-and-recipe path inside a real Symfony-X environment
-- `recipes` — Symfony Flex recipes repository
-- `ui-bundle` — reusable Symfony-X UI install surface
-- `ai-mate-extension` — Symfony-X development-time AI extension package
-- `standards` — reusable standards, analysis, and validation support
+The project is centered on a simple constraint:
 
-Not a pile of starter templates.  
-Not a collection of disconnected experiments.  
-Not abstraction for its own sake.
+> **Start by installing the capability that owns the concern.**
 
-The aim is to create a focused ecosystem centered on:
+Reusable behavior should enter an application through a package whenever possible. If runtime Symfony integration is needed, that package should usually be a Symfony bundle. If setup or wiring is needed, it should be automated through a Flex recipe. If files must be generated into the host application, that generation should be explicit, deterministic, minimal, and reviewable.
 
-- a canonical starting point
-- install-driven composition
-- clear package boundaries
-- modern Symfony development practices
-- Turbo-driven application workflows
-- AI-compatible development workflows
+Symfony-X is not a pile of starter templates.
+
+It is not a collection of disconnected experiments.
+
+It is not abstraction for its own sake.
+
+The aim is to create a focused ecosystem around:
+
+- a canonical Symfony-X application shell
+- package-driven application composition
+- Symfony bundles with clear ownership boundaries
+- Flex recipes for predictable installation
+- LAST-stack defaults for modern web applications
+- Turbo-driven UX patterns
+- deterministic scaffolding where needed
+- focused AI/Mate tooling for developer assistance
 - long-term maintainability
 
-Symfony-X is designed to reduce drift, reduce ambiguity, and make the path from **idea → architecture → implementation** more deliberate and more consistent.
-
----
-
-## Why Symfony-X
-
-Modern application development demands both speed and discipline.
-
-Teams are expected to deliver quickly, integrate more capabilities, manage growing complexity, and increasingly work with AI-assisted tooling. Speed without structure leads to disorder. Flexibility without boundaries leads to entropy.
-
-Symfony-X is built around a different premise:
-
-> **The future of rapid development is not less architecture — it is better architecture with better tooling.**
-
-The project is intended to balance:
-
-- **speed** without losing rigor
-- **modern development** without sacrificing clarity
-- **AI assistance** without dissolving architecture
-- **Turbo-driven UX** without compromising maintainability
-- **modularity** without fragmentation
+Symfony-X is designed to reduce drift, reduce ambiguity, and make the path from **idea → architecture → installation → implementation** more deliberate and more consistent.
 
 ---
 
@@ -64,17 +86,28 @@ The project is intended to balance:
 
 Symfony-X is in **active foundation-building mode**.
 
-The current repositories represent the first layer of that work:
+The vision currently extends beyond the implementation surface. That is intentional.
 
-- **`.github`** — architecture, governance, planning, and project doctrine
-- **`skeleton`** — the future canonical starting point for applications
-- **`recipes`** — installation and automated wiring behavior
+This stage is about defining the architecture, terminology, package boundaries, repository roles, and developer workflow before expanding into a broader ecosystem.
 
-At this stage, the public organization is intentionally focused on defining the system correctly before expanding into a broader package ecosystem.
+The current priority is to build something durable, coherent, and worth building on.
 
-That means the vision currently extends further than the implementation surface — by design.
+---
 
-The priority is to build something durable, coherent, and worth building on.
+## Current Repositories
+
+The active Symfony-X organization is being shaped around these repositories and package roles:
+
+- [`.github`](https://github.com/symfony-x/.github) — organization doctrine, architecture, governance, terminology, and planning
+- [`skeleton`](https://github.com/symfony-x/skeleton) — canonical Symfony-X project shell
+- [`workbench`](https://github.com/symfony-x/workbench) — maintainer-only development host and proving ground
+- [`recipes`](https://github.com/symfony-x/recipes) — Symfony Flex recipes and installation automation
+- `ui-bundle` — Symfony-X UI bundle and SXUC foundation
+- `ai-mate-extension` — vendor-neutral Symfony-X Mate/MCP development tooling
+- `dashboard-bundle` — future operational UI surface built on the Symfony-X UI layer
+- `standards` — reusable standards, analysis, and validation support
+
+Archived or experimental repositories may be retained for historical reference during the reset.
 
 ---
 
@@ -82,74 +115,253 @@ The priority is to build something durable, coherent, and worth building on.
 
 Symfony-X is being shaped around several core principles.
 
-### Architectural Clarity
+### Package-First Composition
 
-Applications should be composed from explicit parts with understandable boundaries.
+Application capabilities should be added through explicit packages rather than ad hoc project-local code.
 
-### Better Defaults
+A Symfony-X package may provide reusable code, a Symfony bundle, Flex recipe automation, Maker generators, frontend assets, documentation, or Mate/MCP developer tooling.
 
-The starting point should accelerate development without creating long-term disorder.
+The package owns the concern. The application composes the capability.
 
-### Turbo-Driven Web Applications
+### Symfony-Native Boundaries
 
-Symfony-X is especially focused on web applications built around **Turbo-driven interaction patterns**, where responsiveness, progressive enhancement, and server-driven UI work as first-class concerns.
+Symfony-X uses Symfony terminology deliberately.
 
-### Install-Driven Composition
+- **Package** means a Composer-distributed unit.
+- **Bundle** means a reusable Symfony package with runtime framework integration.
+- **UX bundle** means a Symfony bundle that ships frontend assets, controllers, or UI behavior in the Symfony UX style.
+- **Recipe** means Flex automation for installation and wiring.
+- **Component** means an actual UI, Twig, Live, or Stimulus component primitive inside a UI bundle.
 
-Capabilities should be added through intentional installation and wiring, not accumulated through ad hoc drift.
+Symfony-X should not invent new terminology when Symfony already has the right word.
 
-In Symfony-X, new reusable behavior enters through a package, gets installed and wired through a recipe, and is validated inside a real Symfony host application. The `workbench` exists specifically to serve as that validation host. This keeps reusable capability out of application-local code and ensures architectural additions are composable from the start.
+### Install-Driven Application Growth
 
-### Modern Symfony Practices
+Capabilities should be installed intentionally, wired predictably, and documented clearly.
 
-The ecosystem should reflect current Symfony best practices and encourage a clean, maintainable development model.
+Recipes should help automate setup, but they should not hide architecture.
 
-### AI-Aware Development
+A good Symfony-X install path should be inspectable, repeatable, and reversible.
 
-AI should enhance productivity while remaining compatible with explicit architecture, auditability, and developer control.
+### LAST-Stack Defaults
 
-### Long-Term Maintainability
+Symfony-X is especially focused on the modern Symfony LAST stack:
 
-The system should remain understandable and scalable as projects evolve.
+- **Live Components**
+- **AssetMapper**
+- **Stimulus**
+- **Turbo**
+
+The default web application direction is server-driven, progressively enhanced, Turbo-friendly, and compatible with Symfony-native frontend tooling.
+
+### Turbo-Driven UX
+
+Symfony-X favors Turbo-driven web applications where possible.
+
+The basic interaction model is:
+
+> **Turbo handles immediate request/response UX. Mercure handles deferred real-time state propagation.**
+
+That means applications can feel responsive without defaulting to unnecessary frontend complexity.
+
+### AI-Aware, Not AI-Led
+
+Symfony-X assumes developers will increasingly work with AI assistants.
+
+The project’s response is not to let AI freely mutate applications.
+
+Instead:
+
+> **AI reasons. Symfony-X commands mutate.**
+
+Symfony-X AI/Mate tooling should help assistants understand the project, inspect the application, explain architecture, suggest safe commands, and validate package shape.
+
+Freeform code generation should not become the default architecture strategy.
+
+### Doctrine Propagation
+
+Symfony-X Mate tooling is not only about maintainer productivity.
+
+It is also about giving AI assistants a bounded, vendor-neutral doctrine surface:
+
+- terminology
+- package taxonomy
+- bundle vs recipe guidance
+- architecture checks
+- redirection tables
+- install-state inspection
+- safe command suggestions
+- package-shape validation
+
+This helps AI tools work inside Symfony-X constraints instead of inventing their own architecture.
+
+---
+
+## Planned Build Order
+
+The current development order is:
+
+1. `workbench`
+2. `ai-mate-extension` baseline
+3. `ui-bundle` / SXUC baseline
+4. `dashboard-bundle` first usable version
+5. Hermes Agent sandbox experiment
+6. recipe ownership metadata
+7. richer Mate tools
+8. optional `mate-observer` later
+
+This order is intentional.
+
+The workbench comes first because Symfony-X needs a real maintainer host application where packages, recipes, Mate tools, UI layers, and dashboard surfaces can be developed and tested together.
+
+---
+
+## Workbench
+
+`workbench` is the maintainer-only Symfony application used to develop and validate Symfony-X packages.
+
+It is not the user-facing skeleton.
+
+It is not the product template.
+
+It is the proving ground.
+
+The workbench should be used to:
+
+- install Symfony-X packages locally
+- validate bundle behavior
+- test Flex recipe assumptions
+- inspect services, routes, events, assets, and configuration
+- develop Mate/MCP tooling
+- test dashboard and UI package behavior
+- prove package boundaries before recommending them publicly
+
+The skeleton is what users start with.
+
+The workbench is where maintainers prove the system.
+
+---
+
+## AI/Mate Tooling
+
+Symfony-X AI/Mate tooling is intended to be vendor-neutral.
+
+Core documentation should not assume one AI assistant, one model, or one client. Developers may use ChatGPT, Claude, Gemini, Codex, local models, IDE tools, MCP clients, or other systems.
+
+The planned `ai-mate-extension` package should provide Symfony-X-specific guidance and tools without making any single AI vendor part of the architecture.
+
+Vendor-specific adapters may exist separately, but they should not define Symfony-X itself.
+
+---
+
+## UI Direction
+
+The Symfony-X UI direction is centered on `ui-bundle` and SXUC.
+
+SXUC is the Symfony-X UI concept/layer. The package should be named like a Symfony package, not like a vague frontend component library.
+
+The preferred package/repository term is:
+
+> `symfony-x/ui-bundle`
+
+The UI layer should support modern Symfony UX conventions, including:
+
+- AssetMapper
+- Stimulus controllers
+- Turbo defaults
+- Live Components
+- Tailwind-friendly styling
+- optional UI presets or adapters
+- Mercure-ready async UX patterns
+
+The UI layer should remain Symfony-native and package-driven.
+
+---
+
+## Skeleton Direction
+
+The Symfony-X skeleton should stay intentionally small.
+
+It should provide a clean application shell and a memorable first-run experience, not a large prebuilt application.
+
+The default homepage should act as a Symfony-X orientation surface:
+
+> **Welcome to the shell. Now compose the application.**
+
+The core model is:
+
+> **Shell → Capability → Wiring → Ownership → Product**
+
+The skeleton should guide developers toward installing the capability that owns the concern, rather than encouraging copy-paste application growth.
 
 ---
 
 ## Research and Model Development
 
-Symfony-X also includes model and dataset work aimed at improving AI-assisted Symfony development.
+Symfony-X may also include dataset and model work aimed at improving AI-assisted Symfony development.
 
-The related Hugging Face space is:
+This research track is experimental and should support the broader doctrine of the project, not replace it.
 
-- [`symfony-last`](https://huggingface.co/symfony-last) — cutting-edge Symfony datasets and LoRAs being developed for specialized Symfony models grounded in current data
+Useful outputs may include:
 
-This research track complements the broader goal of making Symfony development faster, more reliable, and better aligned with modern AI-assisted workflows.
+- Symfony-focused datasets
+- doctrine snapshots
+- architecture examples
+- package-shape examples
+- AI assistant evaluation data
+- LoRA or model experiments
+- repeatable snapshot formats
+
+Fine-tuned or open-weight models may become useful downstream, but they are not an early dependency of the project.
+
+The first priority is human-readable doctrine, package boundaries, recipes, Mate tools, and repeatable architecture.
+
+Related research space:
+
+- [`symfony-last`](https://huggingface.co/symfony-last) — Symfony-focused datasets and model experiments
 
 ---
 
 ## What Comes Next
 
-As Symfony-X matures, the organization is expected to grow into a broader ecosystem around:
+Symfony-X is expected to grow carefully into a broader package ecosystem around:
 
-- the canonical skeleton
-- installation recipes and package automation
-- shared standards and conventions
-- Turbo-driven UI and experience layers
-- AI-assisted development tooling
-- additional extension packages with clearly scoped responsibilities
+- canonical skeleton setup
+- package and bundle conventions
+- Flex recipe automation
+- recipe ownership metadata
+- UI bundle and SXUC primitives
+- dashboard surfaces
+- standards and validation tooling
+- Symfony-X Mate/MCP tools
+- deterministic generators
+- architecture inspection tools
+- optional sandboxed agent experiments
 
 The goal is not to expand quickly for appearances.
 
-The goal is to expand carefully from a foundation that is structurally sound.
+The goal is to expand from a foundation that is structurally sound.
 
 ---
 
-## Current Repositories
+## Project Posture
 
-- [`skeleton`](https://github.com/symfony-x/skeleton) — canonical starting point
-- [`recipes`](https://github.com/symfony-x/recipes) — installation and wiring automation
-- [`.github`](https://github.com/symfony-x/.github) — architecture, governance, and planning
+Symfony-X is early.
 
-Archived repositories are retained for historical reference during the reset.
+Use it with that understanding.
+
+The current work is about establishing the foundation, proving the package model, and documenting the architectural doctrine before encouraging broad adoption.
+
+Symfony-X should earn trust by being:
+
+- clear
+- practical
+- inspectable
+- Symfony-native
+- package-driven
+- honest about status
+- careful with automation
+- respectful of the Symfony ecosystem
 
 ---
 
@@ -157,7 +369,18 @@ Archived repositories are retained for historical reference during the reset.
 
 To understand the direction of Symfony-X, begin with the documentation in [`.github`](https://github.com/symfony-x/.github).
 
-That repository defines the architectural model, governance, and planning principles guiding the next phase of the organization.
+That repository defines the architecture, terminology, constraints, governance, and planning principles guiding the next phase of the organization.
+
+Suggested reading order:
+
+1. organization profile
+2. architecture overview
+3. terminology
+4. package guidelines
+5. repository taxonomy
+6. command and generation model
+7. AI/Mate strategy
+8. governance and contribution guidance
 
 ---
 
@@ -171,5 +394,6 @@ If the vision resonates with you:
 - **Follow the organization**
 - **Check back soon**
 
-The foundation is being built now.  
+The foundation is being built now.
+
 The ecosystem comes next.
